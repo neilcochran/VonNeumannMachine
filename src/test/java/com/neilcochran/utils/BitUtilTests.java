@@ -55,5 +55,17 @@ public class BitUtilTests {
     void testInvalidBitLengthChecks(int maxBitLength, int toCheck) {
         assertFalse(BitUtils.validateBitLength(toCheck, maxBitLength));
     }
+
+    /**
+     * Test retrieving a valid bit by its index
+     * @param actualBitValue The actual value of the bit at the given index
+     * @param n The input integer
+     * @param bitIndex The index of the bit to retrieve
+     */
+    @ParameterizedTest(name = "Test retrieving the bit at index: {2} of {1} using BitUtil.getKthBit()")
+    @CsvFileSource(resources = "/validBitIndexRetrieval.csv", numLinesToSkip = 1)
+    void testValidBitRetrieval(int actualBitValue, int n, int bitIndex) {
+        assertEquals(actualBitValue, BitUtils.getKthBit(n, bitIndex));
+    }
 }
 

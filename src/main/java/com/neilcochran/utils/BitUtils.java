@@ -30,6 +30,21 @@ public class BitUtils {
     }
 
     /**
+     * Returns the Kth bit of n
+     * @param n The integer input
+     * @param k The bit index to retrieve
+     * @return The Kth bit of n
+     * @throws IllegalArgumentException if k is negative or greater than the number of bits in n
+     */
+    public static int getKthBit(int n, int k) {
+        if(k > getBitLength(n)) {
+            throw new IllegalArgumentException(String.format("Invalid bit index: %d requested for input: %d", k, n));
+        }
+        //Shift the relevant bit all the way to the right and compare it to a constant bit mask of 1
+        return (n >> k) & 1;
+    }
+
+    /**
      * For a given integer n return the int value of just the bits of n between [start, end]
      * @param n The integer to get the bit range value from
      * @param start The index of the bit at the start of the range
@@ -48,21 +63,6 @@ public class BitUtils {
             result += (int)(getKthBit(n, i) == 1 ? Math.pow(2, k) : 0);
         }
         return result;
-    }
-
-    /**
-     * Returns the Kth bit of n
-     * @param n The integer input
-     * @param k The bit index to retrieve
-     * @return The Kth bit of n
-     * @throws IllegalArgumentException if k is negative or greater than the number of bits in n
-     */
-    public static int getKthBit(int n, int k) {
-        if(k > getBitLength(n)) {
-            throw new IllegalArgumentException(String.format("Invalid bit index: %d requested for input: %d", k, n));
-        }
-        //Shift the relevant bit all the way to the right and compare it to a constant bit mask of 1
-        return (n >> k) & 1;
     }
 
     /**
