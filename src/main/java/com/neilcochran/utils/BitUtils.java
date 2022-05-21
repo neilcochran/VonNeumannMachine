@@ -47,20 +47,22 @@ public class BitUtils {
     /**
      * For a given integer n return the int value of just the bits of n between [start, end]
      * @param n The integer to get the bit range value from
-     * @param start The index of the bit at the start of the range
-     * @param end The index of the bit at the end of the range
+     * @param start The index of the bit at the start of the range (inclusive)
+     * @param end The index of the bit at the end of the range (inclusive)
      * @return The integer value of just the bits of n between [start, end]
      * @throws IllegalArgumentException if the bit range is invalid for the given input
      */
     public static int getBitRange(int n, int start, int end) {
         var bitLength = getBitLength(n);
-        if(start < 0 || end <= 0 || bitLength == 0 || start > end || start == end || end > bitLength) {
+        if(start < 0 || end < 0 || start > end || end > bitLength) {
             throw new IllegalArgumentException(String.format("Invalid bit range: [%d, %d] for input: %d", start, end, n));
         }
         var result = 0;
-        //TODO do this with bit shifting/bit math
         for(int k = 0, i = start; i <= end; i++, k++) {
-            result += (int)(getKthBit(n, i) == 1 ? Math.pow(2, k) : 0);
+            //get the bit at the current index. If it's set add 2^k to the result
+            result += getKthBit(n, i) == 1
+                    ? 1 << k //right bit shift to get 2^k
+                    : 0;
         }
         return result;
     }
