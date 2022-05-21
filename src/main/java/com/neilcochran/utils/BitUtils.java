@@ -37,7 +37,7 @@ public class BitUtils {
      * @throws IllegalArgumentException if k is negative or greater than the number of bits in n
      */
     public static int getKthBit(int n, int k) {
-        if(k > getBitLength(n)) {
+        if(k < 0 || k > (getBitLength(n) - 1)) {
             throw new IllegalArgumentException(String.format("Invalid bit index: %d requested for input: %d", k, n));
         }
         //Shift the relevant bit all the way to the right and compare it to a constant bit mask of 1

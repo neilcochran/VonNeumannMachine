@@ -67,5 +67,16 @@ public class BitUtilTests {
     void testValidBitRetrieval(int actualBitValue, int n, int bitIndex) {
         assertEquals(actualBitValue, BitUtils.getKthBit(n, bitIndex));
     }
+
+    /**
+     * Test trying to retrieve an invalid bit index using BitUtil.getKthBit()
+     * @param n The input integer
+     * @param bitIndex The index of the bit to retrieve
+     */
+    @ParameterizedTest(name = "Test retrieving the bit at the invalid index: {1} of {0} using BitUtil.getKthBit()")
+    @CsvFileSource(resources = "/invalidBitIndexRetrieval.csv", numLinesToSkip = 1)
+    void testInvalidBitRetrieval(int n, int bitIndex) {
+        assertThrows(IllegalArgumentException.class, () -> BitUtils.getKthBit(n, bitIndex));
+    }
 }
 
