@@ -1,6 +1,6 @@
 package com.neilcochran.instruction;
 
-import com.neilcochran.VonNeumannMachine;
+import com.neilcochran.components.VonNeumannMachine;
 import com.neilcochran.utils.BitUtils;
 import lombok.Data;
 

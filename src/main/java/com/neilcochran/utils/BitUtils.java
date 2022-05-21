@@ -6,13 +6,17 @@ package com.neilcochran.utils;
 public class BitUtils {
 
     /**
-     * Calculates the number of bits needed to represent the integer
+     * Calculates the number of bits needed to represent a positive integer.
+     * Calculate log2(n) indirectly using log rules or return 1 if the input is 0
      * @param n The input integer
      * @return The number of bits needed to represent the input integer n
+     * @throws IllegalArgumentException If the input integer is negative
      */
     public static int getBitLength(int n) {
-        //calculate "log base 2 of (toValidate)" indirectly by using log rules
-        return (int)(Math.log(n) / Math.log(2));
+        if(n < 0) {
+            throw new IllegalArgumentException("input integer cannot be negative");
+        }
+        return n == 0 ? 1 : (int)((Math.log(n) / Math.log(2))) + 1;
     }
 
     /**

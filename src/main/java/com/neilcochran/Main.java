@@ -1,5 +1,7 @@
 package com.neilcochran;
 
+import com.neilcochran.components.VonNeumannMachine;
+
 /**
  * Create and run a VonNeumannMachine
  */

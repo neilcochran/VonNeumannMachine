@@ -1,9 +1,5 @@
-package com.neilcochran;
+package com.neilcochran.components;
 
-import com.neilcochran.components.ALU;
-import com.neilcochran.components.CPU;
-import com.neilcochran.components.ControlUnit;
-import com.neilcochran.components.RAM;
 import com.neilcochran.components.registers.*;
 import lombok.Data;
 
