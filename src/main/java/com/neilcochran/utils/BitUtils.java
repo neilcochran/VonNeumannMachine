@@ -20,13 +20,13 @@ public class BitUtils {
     }
 
     /**
-     * Check if a given int exceeds the given bitLength when interpreting it in binary
+     * Check if a given int exceeds the given maxBitLength when interpreting it in binary
      * @param toValidate The int whose bit length is to be validated
-     * @param bitLength The maximum allowed number of bits
-     * @return True if the int uses bitLength or less bits, false if it requires more bits than bitLength
+     * @param maxBitLength The maximum allowed number of bits
+     * @return True if the int uses maxBitLength or fewer bits, false if it requires more bits than maxBitLength
      */
-    public static boolean validateBitLength(int toValidate, int bitLength) {
-        return getBitLength(toValidate) <= bitLength;
+    public static boolean validateBitLength(int toValidate, int maxBitLength) {
+        return getBitLength(toValidate) <= maxBitLength;
     }
 
     /**
