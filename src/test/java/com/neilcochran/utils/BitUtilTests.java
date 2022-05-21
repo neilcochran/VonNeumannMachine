@@ -19,7 +19,7 @@ public class BitUtilTests {
      * @param n The input integer to calculate the bit length of
      */
     @ParameterizedTest(name = "Calculate the bit length of {1}")
-    @CsvFileSource(resources = {"/validBitLengths.csv"}, numLinesToSkip = 1)
+    @CsvFileSource(resources = {"/bit-csv/validBitLengths.csv"}, numLinesToSkip = 1)
     void testValidBitLengthCalculations(int expectedBitLength,int n) {
         assertEquals(expectedBitLength, BitUtils.getBitLength(n));
     }
@@ -29,7 +29,7 @@ public class BitUtilTests {
      * @param n The negative input integer
      */
     @ParameterizedTest(name = "Pass invalid (negative) integer: {0} to BitUtil.getBitLength() and ensure it throws an IllegalArgumentException")
-    @CsvFileSource(resources = "/invalidBitLengthInputs.csv", numLinesToSkip = 1)
+    @CsvFileSource(resources = "/bit-csv/invalidBitLengthInputs.csv", numLinesToSkip = 1)
     void testInvalidBitLengthCalculations(int n) {
         assertThrows(IllegalArgumentException.class, () -> BitUtils.getBitLength(n));
     }
@@ -40,7 +40,7 @@ public class BitUtilTests {
      * @param toCheck The number whose bit length will be checked
      */
     @ParameterizedTest(name = "Pass valid input: {1} and max bit length: {0} to BitUtil.validateBitLength()")
-    @CsvFileSource(resources = "/validBitLengths.csv", numLinesToSkip = 1)
+    @CsvFileSource(resources = "/bit-csv/validBitLengths.csv", numLinesToSkip = 1)
     void testValidBitLengthChecks(int maxBitLength, int toCheck) {
         assertTrue(BitUtils.validateBitLength(toCheck, maxBitLength));
     }
@@ -51,7 +51,7 @@ public class BitUtilTests {
      * @param toCheck The number whose bit length will be checked
      */
     @ParameterizedTest(name = "Pass invalid (too big) input {1} and max bit length: {0} to BitUtil.validateBitLength()")
-    @CsvFileSource(resources = "/invalidBitLengths.csv", numLinesToSkip = 1)
+    @CsvFileSource(resources = "/bit-csv/invalidBitLengths.csv", numLinesToSkip = 1)
     void testInvalidBitLengthChecks(int maxBitLength, int toCheck) {
         assertFalse(BitUtils.validateBitLength(toCheck, maxBitLength));
     }
@@ -63,7 +63,7 @@ public class BitUtilTests {
      * @param bitIndex The index of the bit to retrieve
      */
     @ParameterizedTest(name = "Test retrieving the bit at index: {2} of {1} using BitUtil.getKthBit()")
-    @CsvFileSource(resources = "/validBitIndexRetrieval.csv", numLinesToSkip = 1)
+    @CsvFileSource(resources = "/bit-csv/validBitIndexRetrieval.csv", numLinesToSkip = 1)
     void testValidBitRetrieval(int actualBitValue, int n, int bitIndex) {
         assertEquals(actualBitValue, BitUtils.getKthBit(n, bitIndex));
     }
@@ -74,7 +74,7 @@ public class BitUtilTests {
      * @param bitIndex The index of the bit to retrieve
      */
     @ParameterizedTest(name = "Test retrieving the bit at the invalid index: {1} of {0} using BitUtil.getKthBit()")
-    @CsvFileSource(resources = "/invalidBitIndexRetrieval.csv", numLinesToSkip = 1)
+    @CsvFileSource(resources = "/bit-csv/invalidBitIndexRetrieval.csv", numLinesToSkip = 1)
     void testInvalidBitRetrieval(int n, int bitIndex) {
         assertThrows(IllegalArgumentException.class, () -> BitUtils.getKthBit(n, bitIndex));
     }
