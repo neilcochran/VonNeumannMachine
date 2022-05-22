@@ -1,4 +1,4 @@
-package com.neilcochran.utils;
+package com.neilcochran.util;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;

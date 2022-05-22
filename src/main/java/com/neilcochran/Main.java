@@ -1,6 +1,6 @@
 package com.neilcochran;
 
-import com.neilcochran.components.VonNeumannMachine;
+import com.neilcochran.component.VonNeumannMachine;
 
 /**
  * Create and run a VonNeumannMachine
@@ -14,5 +14,6 @@ public class Main {
     public static void main(String[] args) {
         var machine = new VonNeumannMachine();
         machine.run();
+        machine.halt();
     }
 }

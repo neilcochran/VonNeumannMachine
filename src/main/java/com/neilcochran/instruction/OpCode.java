@@ -1,6 +1,6 @@
 package com.neilcochran.instruction;
 
-import com.neilcochran.utils.BitUtils;
+import com.neilcochran.util.BitUtils;
 import lombok.Data;
 
 /**
@@ -8,8 +8,7 @@ import lombok.Data;
  */
 @Data
 public class OpCode {
-    static final int OPCODE_BIT_LENGTH = 4;
-
+    private static final int OPCODE_BIT_LENGTH = 4;
     private final int data;
     private final String name;
 

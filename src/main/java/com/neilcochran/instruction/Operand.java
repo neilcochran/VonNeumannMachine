@@ -1,6 +1,6 @@
 package com.neilcochran.instruction;
 
-import com.neilcochran.utils.BitUtils;
+import com.neilcochran.util.BitUtils;
 import lombok.Data;
 
 /**
