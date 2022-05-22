@@ -66,17 +66,4 @@ public class BitUtils {
         }
         return result;
     }
-
-    /**
-     * Return a string representing the binary sequence of the input integer
-     * @param n The input integer to generate the binary string from
-     * @return A String representing the binary value of the input integer
-     */
-    public static String getBinaryString(int n) {
-        StringBuilder stringBuilder = new StringBuilder();
-        for(var i = 0; i <= getBitLength(n); i++) {
-            stringBuilder.append(getKthBit(n, i));
-        }
-        return stringBuilder.toString();
-    }
 }
