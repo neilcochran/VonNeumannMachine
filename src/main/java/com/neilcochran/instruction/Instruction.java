@@ -2,6 +2,7 @@ package com.neilcochran.instruction;
 
 import com.neilcochran.component.VonNeumannMachine;
 import com.neilcochran.util.BitUtils;
+import com.neilcochran.util.InstructionFormat;
 import lombok.Data;
 
 /**
@@ -12,18 +13,19 @@ public class Instruction {
     private final int fullInstruction;
     private final OpCode opCode;
     private final Operand operand;
+    private final InstructionFormat instructionFormat;
 
     /**
      * Takes in an instruction (int of binary data) and decodes it into the appropriate OpCode and Operand
-     * @param instruction The instruction input
      * @throws IllegalArgumentException if the instruction exceeds the word size
      */
-    public Instruction(int instruction) {
+    public Instruction(int fullInstruction, InstructionFormat instructionFormat) {
         //Ensure the instruction does not exceed our word size
-        if(!BitUtils.validateBitLength(instruction, VonNeumannMachine.WORD_SIZE)) {
-            throw new IllegalArgumentException(String.format("Invalid instruction bit length. The value: %d exceeds the bit length: %d", instruction, VonNeumannMachine.WORD_SIZE));
+        if(!BitUtils.validateBitLength(fullInstruction, VonNeumannMachine.WORD_SIZE)) {
+            throw new IllegalArgumentException(String.format("Invalid instruction bit length. The value: %d exceeds the bit length: %d", fullInstruction, VonNeumannMachine.WORD_SIZE));
         }
-        this.fullInstruction = instruction;
+        this.fullInstruction = fullInstruction;
+        this.instructionFormat = instructionFormat;
         this.opCode = new OpCode(BitUtils.getBitRange(this.fullInstruction, 0, 4));
         this.operand = new Operand(BitUtils.getBitRange(this.fullInstruction, 5, BitUtils.getBitLength(this.fullInstruction)));
     }

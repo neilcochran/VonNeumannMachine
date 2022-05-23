@@ -5,14 +5,21 @@ import com.neilcochran.util.DataSize;
 import lombok.Data;
 
 /**
- * Represents a simple 16 bit Von Neumann Machine with 4 general purpose registers
+ * Represents a simple 32 bit Von Neumann Machine with 16 registers
  */
 @Data
 public class VonNeumannMachine {
 
+    /**
+     * The word size (bits) of the machine
+     */
     public static final int WORD_SIZE = DataSize.WORD.getBitLength();
 
+    /**
+     * The default amount (bytes) of RAM provided for the machine to use
+     */
     private static final int DEFAULT_RAM_BYTES = 65536;
+
     private final Registers registers;
     private final ControlUnit controlUnit;
     private final ALU alu;
@@ -27,7 +34,7 @@ public class VonNeumannMachine {
         registers = new Registers();
         alu = new ALU();
         controlUnit = new ControlUnit(registers, alu);
-        cpu = new CPU(registers, controlUnit, alu);
+        cpu = new CPU(registers, controlUnit, alu, ram);
     }
 
 

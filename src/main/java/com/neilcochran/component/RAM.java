@@ -23,6 +23,7 @@ public class RAM {
         if(totalBytes % VonNeumannMachine.WORD_SIZE != 0) {
            throw new IllegalArgumentException("Invalid RAM bytes size: " + totalBytes + " for the given word size: " + VonNeumannMachine.WORD_SIZE);
         }
+        this.totalBytes = totalBytes;
         this.memory = new int[totalBytes / VonNeumannMachine.WORD_SIZE];
         Arrays.fill(memory, 0);
     }

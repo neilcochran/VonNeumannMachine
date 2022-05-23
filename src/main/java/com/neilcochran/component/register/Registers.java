@@ -2,6 +2,10 @@ package com.neilcochran.component.register;
 
 import lombok.Data;
 
+/**
+ * Represents all (16) of the Register objects available to the machine as well as the CPSR
+ * This includes special use registers (Like the PC, LR, FP) and all general use registers
+ */
 @Data
 public class Registers {
 
@@ -43,6 +47,10 @@ public class Registers {
 
     private final Register[] registers;
 
+    /**
+     * Constructs a new Registers object that holds all the Register objects available to the machine
+     * This includes special use registers and general use registers
+     */
     public Registers() {
         registers = new Register[TOTAL_GENERAL_REGISTERS];
         for(var i = 0; i < TOTAL_GENERAL_REGISTERS; i++) {
@@ -116,5 +124,33 @@ public class Registers {
             throw new IllegalArgumentException(String.format("Invalid register number: %d requested", registerNumber));
         }
         return registers[registerNumber];
+    }
+
+    /**
+     * Increments the current value in the Program Counter (PC) by one full word (8 bytes)
+     * @return The new (post increment) address value of the Program Counter
+     */
+    public int incrementProgramCounter() {
+        var incremented = getPCRegister().getData() + 0b1000;
+        getPCRegister().setData(incremented);
+        return incremented;
+    }
+
+    /**
+     * Returns a JSON string representation of the Registers
+     * @return A JSON string representation of the Registers
+     */
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder("{\n");
+        builder.append("\t\"registers\": [\n");
+        for(var i = 0; i < registers.length; i++) {
+            builder.append("\t\t")
+                    .append(registers[i].toString())
+                    //fence post - avoid trailing comma
+                    .append(i == registers.length - 1 ? "\n" : ",\n");
+        }
+        builder.append("\t]\n}");
+        return builder.toString();
     }
 }

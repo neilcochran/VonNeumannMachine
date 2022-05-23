@@ -14,6 +14,7 @@ public class CPU extends Thread {
     private final Registers registers;
     private final ControlUnit controlUnit;
     private final ALU alu;
+    private final RAM ram;
     private boolean halted = true;
 
     /**
@@ -25,29 +26,36 @@ public class CPU extends Thread {
     public CPU(
             Registers registers,
             ControlUnit controlUnit,
-            ALU alu
+            ALU alu,
+            RAM ram
     ) {
         super("CPU_Thread");
         this.registers = registers;
         this.controlUnit = controlUnit;
         this.alu = alu;
-
+        this.ram = ram;
     }
 
     /**
      * Start the Fetch -> Decode -> Execute loop in a new thread
+     * @throws IndexOutOfBoundsException if the Program Counter reaches the end of memory
      */
     @Override
     public void run() {
         this.halted = false;
         //Continue running the Fetch -> Decode -> Execute loop until the HALT command is executed
         while(!this.halted) {
-            //TODO
+            var pcVal = registers.incrementProgramCounter();
+            System.out.println(registers);
+            if(pcVal >= ram.getTotalBytes()) {
+                this.halted = true;
+                throw new IndexOutOfBoundsException(String.format("The Program Counter has reached the end of memory: %d", pcVal));
+            }
         }
     }
 
     /**
-     * Send a signal to the CPU to halt execution at the beginning of its next cycle. Once halted the thread
+     * Send a signal to the CPU to halt execution at the beginning of its next cycle. Once halted the CPU thread
      * created by calling run() will finish.
      */
     public void halt() {

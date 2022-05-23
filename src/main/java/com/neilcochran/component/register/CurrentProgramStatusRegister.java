@@ -2,6 +2,9 @@ package com.neilcochran.component.register;
 
 import com.neilcochran.util.BitUtils;
 
+/**
+ * Represents the Current Program Status Register (CPSR) which holds various flags/states/statuses
+ */
 public class CurrentProgramStatusRegister extends Register {
 
     /**
