@@ -1,6 +1,7 @@
 package com.neilcochran.instruction.formatGroup;
 
 import com.neilcochran.instruction.Instruction;
+import com.neilcochran.instruction.fields.InstructionFormat;
 
 /**
  * Represents a D-Instruction

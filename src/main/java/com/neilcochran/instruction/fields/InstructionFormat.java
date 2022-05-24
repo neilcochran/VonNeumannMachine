@@ -1,4 +1,4 @@
-package com.neilcochran.instruction.formatGroup;
+package com.neilcochran.instruction.fields;
 
 /**
  * An enum representing the different instruction formats and the bit patterns that define them
