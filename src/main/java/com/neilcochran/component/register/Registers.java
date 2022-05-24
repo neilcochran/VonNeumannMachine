@@ -4,7 +4,7 @@ import lombok.Data;
 
 /**
  * Represents all (16) of the Register objects available to the machine as well as the CPSR
- * This includes special use registers (Like the PC, LR, FP) and all general use registers
+ * This includes special use registers (Like the PC, LR) and all general use registers
  */
 @Data
 public class Registers {
@@ -68,7 +68,7 @@ public class Registers {
     }
 
     /**
-     * A convenience method for getting a reference to the Frame Pointer (FP) register
+     * A convenience method for getting a reference for the Frame Pointer (FP) register
      * @return A reference to the Frame Pointer register
      * @see Registers#FP_REG_INDEX
      */

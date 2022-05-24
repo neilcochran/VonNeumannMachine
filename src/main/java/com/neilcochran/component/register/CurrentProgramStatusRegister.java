@@ -28,6 +28,11 @@ public class CurrentProgramStatusRegister extends Register {
     private static final int V_BIT_INDEX = 28;
 
     /**
+     * The bit index of the 'sticky' Overflow (Q) flag
+     */
+    private static final int Q_BIT_INDEX = 27;
+
+    /**
      * Constructs a new CurrentProgramStatusRegister which holds various flags/states/statuses
      */
     public CurrentProgramStatusRegister() {
@@ -70,5 +75,14 @@ public class CurrentProgramStatusRegister extends Register {
      */
     public int getVBit() {
         return BitUtils.getKthBit(data, V_BIT_INDEX);
+    }
+
+    /**
+     * Returns the 'sticky' Overflow (Q) bit flag
+     * A 'sticky' version of overflow is caused by instructions that generate multiple results
+     * @return The Q flag bit value
+     */
+    public int getQBit() {
+        return BitUtils.getKthBit(data, Q_BIT_INDEX);
     }
 }

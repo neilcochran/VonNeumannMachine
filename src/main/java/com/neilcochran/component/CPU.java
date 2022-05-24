@@ -46,7 +46,7 @@ public class CPU extends Thread {
         //Continue running the Fetch -> Decode -> Execute loop until the HALT command is executed
         while(!this.halted) {
             var pcVal = registers.incrementProgramCounter();
-            System.out.println(registers);
+            System.out.println(registers); //Debug printing
             if(pcVal >= ram.getTotalBytes()) {
                 this.halted = true;
                 throw new IndexOutOfBoundsException(String.format("The Program Counter has reached the end of memory: %d", pcVal));

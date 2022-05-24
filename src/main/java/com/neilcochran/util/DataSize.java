@@ -10,10 +10,18 @@ public enum DataSize {
 
     private final int bitLength;
 
+    /**
+     * Construct a DataSize enum for a given bit length
+     * @param bitLength The bit length of the DataSize
+     */
     DataSize(final int bitLength) {
         this.bitLength = bitLength;
     }
 
+    /**
+     * Get the bit length of the DataSize
+     * @return The bit length of the DataSize
+     */
     public int getBitLength() {
         return bitLength;
     }

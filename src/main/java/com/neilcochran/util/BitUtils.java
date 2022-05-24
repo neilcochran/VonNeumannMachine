@@ -6,16 +6,12 @@ package com.neilcochran.util;
 public class BitUtils {
 
     /**
-     * Calculates the number of bits needed to represent a positive integer.
+     * Calculates the number of bits needed to represent an integer.
      * Calculate log2(n) indirectly using log rules or return 1 if the input is 0
      * @param n The input integer
      * @return The number of bits needed to represent the input integer n
-     * @throws IllegalArgumentException If the input integer is negative
      */
     public static int getBitLength(int n) {
-        if(n < 0) {
-            throw new IllegalArgumentException("input integer cannot be negative");
-        }
         return n == 0 ? 1 : (int)((Math.log(n) / Math.log(2))) + 1;
     }
 
@@ -34,14 +30,42 @@ public class BitUtils {
      * @param n The integer input
      * @param k The bit index to retrieve
      * @return The Kth bit of n
-     * @throws IllegalArgumentException if k is negative or greater than the number of bits in n
      */
     public static int getKthBit(int n, int k) {
-        if(k < 0 || k > (getBitLength(n) - 1)) {
-            throw new IllegalArgumentException(String.format("Invalid bit index: %d requested for input: %d", k, n));
-        }
         //Shift the relevant bit all the way to the right and compare it to a constant bit mask of 1
         return (n >> k) & 1;
+    }
+
+    /**
+     * Check if a bit range is valid for a given number
+     * @param n The number to check the bit range for
+     * @param start The index of the starting bit of the range
+     * @param end The index of the ending bit of the range
+     * @return True if the bit range is valid, false otherwise
+     */
+    public static boolean isValidBitRangeForNumber(int n, int start, int end) {
+        return start < 0 || end < 0 || start > end || end > getBitLength(n);
+    }
+
+    /**
+     * Check if a bit range is valid by itself
+     * @param start The index of the starting bit of the range
+     * @param end The index of the ending bit of the range
+     * @return True if the bit range is valid, false otherwise
+     */
+    public static boolean isValidBitRange(int start, int end) {
+        return start >= 0 || end >= 0 || start < end;
+    }
+
+    /**
+     * Check if a bit range is valid by itself
+     * @param bitRange The BitRange which holds the range (indices) to be checked
+     * @return True if the bit range is valid, false otherwise
+     */
+    public static boolean isValidBitRange(BitRange bitRange) {
+        var start = bitRange.getStartIndex();
+        var end = bitRange.getEndIndex();
+        return start >= 0 || end >= 0 || start < end;
     }
 
     /**
@@ -53,8 +77,7 @@ public class BitUtils {
      * @throws IllegalArgumentException if the bit range is invalid for the given input
      */
     public static int getBitRange(int n, int start, int end) {
-        var bitLength = getBitLength(n);
-        if(start < 0 || end < 0 || start > end || end > bitLength) {
+        if(!isValidBitRangeForNumber(n, start, end)) {
             throw new IllegalArgumentException(String.format("Invalid bit range: [%d, %d] for input: %d", start, end, n));
         }
         var result = 0;
@@ -65,5 +88,16 @@ public class BitUtils {
                     : 0;
         }
         return result;
+    }
+
+    /**
+     * For a given integer n return the int value of just the bits of n between the BitRange's [startIndex, endIndex]
+     * @param n The integer to get the bit range value from
+     * @param bitRange The BitRange which holds the range indices to be retrieved
+     * @return The integer value of just the bits of n between the BitRange's [startIndex, endIndex]
+     * @throws IllegalArgumentException if the bit range is invalid for the given input
+     */
+    public static int getBitRange(int n, BitRange bitRange) {
+        return getBitRange(n, bitRange.getStartIndex(), bitRange.getEndIndex());
     }
 }
