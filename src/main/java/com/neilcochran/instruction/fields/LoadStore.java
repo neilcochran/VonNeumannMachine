@@ -1,13 +1,12 @@
 package com.neilcochran.instruction.fields;
 
-import com.neilcochran.util.BitRange;
 import com.neilcochran.util.BitUtils;
 import lombok.Data;
 
 @Data
 public class LoadStore {
-    private static final BitRange L_BIT_RANGE = new BitRange(0,0); //TODO RANGE
-    private static final BitRange U_BIT_RANGE = new BitRange(0,0); //TODO RANGE
+    private static final int L_BIT_INDEX = 20;
+    private static final int U_BIT_INDEX = 23;
 
     private final int bits;
     private final int loadStoreBit;
@@ -15,7 +14,7 @@ public class LoadStore {
 
     public LoadStore(int bits) {
         this.bits = bits;
-        this.loadStoreBit = BitUtils.getBitRange(bits, L_BIT_RANGE);
-        this.offsetAddSubBit = BitUtils.getBitRange(bits, U_BIT_RANGE);
+        this.loadStoreBit = BitUtils.getKthBit(bits, L_BIT_INDEX);
+        this.offsetAddSubBit = BitUtils.getKthBit(bits, U_BIT_INDEX);
     }
 }

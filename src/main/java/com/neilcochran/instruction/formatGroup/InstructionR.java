@@ -17,7 +17,7 @@ public class InstructionR extends OpCodeInstructions {
     private static final int STATE_FLAG_INDEX =  20;
     private static final BitRange RN_OPERAND_RANGE = new BitRange(16, 19);
     private static final BitRange RD_OPERAND_RANGE = new BitRange(12, 15);
-    private static final BitRange SHIFT_RANGE = new BitRange(4, 11);
+    private static final BitRange SHIFT_RANGE = new BitRange(5, 11);
     private static final BitRange RM_OPERAND_RANGE = new BitRange(0, 3);
 
     private final int stateFlagBit;
@@ -42,6 +42,6 @@ public class InstructionR extends OpCodeInstructions {
 
     @Override
     public String toString() {
-        return String.format("InstructionR(instruction=%s condition=%s OpCode=%s, RN=%s RD=%s RM=%s Shift=%s)", getBinaryString(), condition, opCode.getName(), RN, RD, RM, shift);
+        return String.format("InstructionR(instruction=%s condition=%s OpCode=%s, RN=%d RD=%d RM=%d Shift=%s)", getBinaryString(), condition, opCode.getName(), RN, RD, RM, shift);
     }
 }

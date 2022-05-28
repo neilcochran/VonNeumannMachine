@@ -1,22 +1,22 @@
 package com.neilcochran.instruction.fields;
 
+import com.neilcochran.util.BitRange;
 import com.neilcochran.util.BitUtils;
 import lombok.Data;
 
 
 @Data
 public class Shift {
-    private static final int SHIFT_TYPE_BIT_LENGTH = 4;
+    private static final BitRange SHIFT_TYPE_RANGE = new BitRange(0, 1);
+    private static final BitRange SHIFT_AMOUNT_RANGE = new BitRange(2, 6);
+
     private final ShiftType shiftType;
     private final int shiftAmountBits; //0-31
 
 
-    public Shift(int shiftAmountBits) {
-        if(BitUtils.getBitLength(shiftAmountBits) > SHIFT_TYPE_BIT_LENGTH) {
-           throw new IllegalArgumentException(String.format("Invalid shift type bits: %s exceeded the maximum bit length: %d", Integer.toBinaryString(shiftAmountBits), SHIFT_TYPE_BIT_LENGTH));
-        }
-        this.shiftType = ShiftType.fromBits(shiftAmountBits);
-        this.shiftAmountBits = shiftAmountBits;
+    public Shift(int shiftBits) {
+        this.shiftType = ShiftType.fromBits(BitUtils.getBitRange(shiftBits, SHIFT_TYPE_RANGE));
+        this.shiftAmountBits = BitUtils.getBitRange(shiftBits, SHIFT_AMOUNT_RANGE);
     }
 
 }
