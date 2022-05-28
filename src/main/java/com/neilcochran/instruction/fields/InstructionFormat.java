@@ -1,5 +1,6 @@
 package com.neilcochran.instruction.fields;
 
+
 /**
  * An enum representing the different instruction formats and the bit patterns that define them
  */
@@ -40,6 +41,6 @@ public enum InstructionFormat {
                 return instructionFormat;
             }
         }
-        throw new IllegalArgumentException(String.format("Invalid instruction format: %d did not match any known instruction format", formatBits));
+        throw new IllegalArgumentException(String.format("Invalid instruction format: %s did not match any known instruction format", Integer.toBinaryString(formatBits)));
     }
 }

@@ -1,8 +1,12 @@
 package com.neilcochran.component;
 
 import com.neilcochran.component.register.Registers;
+import com.neilcochran.instruction.Instruction;
+import com.neilcochran.util.DataSize;
 import lombok.Getter;
 import lombok.Setter;
+
+import static com.neilcochran.component.ControlUnit.decodeInstruction;
 
 /**
  * Represents the Central Processing Unit (CPU) which extends the Thread class in order to be able to run in a non-blocking manner
@@ -45,8 +49,12 @@ public class CPU extends Thread {
         this.halted = false;
         //Continue running the Fetch -> Decode -> Execute loop until the HALT command is executed
         while(!this.halted) {
-            var pcVal = registers.incrementProgramCounter();
-            System.out.println(registers); //Debug printing
+            var pcVal = registers.getPCRegister().getData();
+            //TODO disallow direct memory access and make PC load it's value into a Memory Address Register (MAR) and then have the actual instruction loaded into Memory Data Register (MDR)?
+            var rawInstruction = ram.loadData(pcVal, DataSize.WORD);
+            registers.incrementProgramCounter();
+            Instruction instruction = decodeInstruction(rawInstruction);
+            controlUnit.executeInstruction(instruction);
             if(pcVal >= ram.getTotalBytes()) {
                 this.halted = true;
                 throw new IndexOutOfBoundsException(String.format("The Program Counter has reached the end of memory: %d", pcVal));

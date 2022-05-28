@@ -5,7 +5,6 @@ import org.junit.jupiter.params.provider.CsvFileSource;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
@@ -24,15 +23,6 @@ public class BitUtilTests {
         assertEquals(expectedBitLength, BitUtils.getBitLength(n));
     }
 
-    /**
-     * Test passing an invalid (negative) integer to BitUtil.getBitLength()
-     * @param n The negative input integer
-     */
-    @ParameterizedTest(name = "Pass invalid (negative) integer: {0} to BitUtil.getBitLength()")
-    @CsvFileSource(resources = "/bit-csv/invalidBitLengthInputs.csv", numLinesToSkip = 1)
-    void testInvalidBitLengthCalculations(int n) {
-        assertThrows(IllegalArgumentException.class, () -> BitUtils.getBitLength(n));
-    }
 
     /**
      * Test passing a valid integer and max bit length to BitUtil.validateBitLength()
@@ -68,16 +58,6 @@ public class BitUtilTests {
         assertEquals(actualBitValue, BitUtils.getKthBit(n, bitIndex));
     }
 
-    /**
-     * Test trying to retrieve an invalid bit index using BitUtil.getKthBit()
-     * @param n The input integer
-     * @param bitIndex The index of the bit to retrieve
-     */
-    @ParameterizedTest(name = "Test retrieving the bit at the invalid index: {1} of {0} using BitUtil.getKthBit()")
-    @CsvFileSource(resources = "/bit-csv/invalidBitIndexRetrieval.csv", numLinesToSkip = 1)
-    void testInvalidBitRetrieval(int n, int bitIndex) {
-        assertThrows(IllegalArgumentException.class, () -> BitUtils.getKthBit(n, bitIndex));
-    }
 
     /**
      * Test retrieving a valid bit range
@@ -90,18 +70,6 @@ public class BitUtilTests {
     @CsvFileSource(resources = "/bit-csv/validBitRangeRetrieval.csv", numLinesToSkip = 1)
     void testValidBitRangeRetrieval(int actualResult, int n, int start, int end) {
         assertEquals(actualResult, BitUtils.getBitRange(n, start, end));
-    }
-
-    /**
-     * Test retrieving an invalid bit range
-     * @param n The input integer from which the range will be extracted
-     * @param start The start index of the bit range
-     * @param end The end index of the bit range
-     */
-    @ParameterizedTest(name = "Test retrieving the invalid bit range: [{1}, {2}] of: {0}")
-    @CsvFileSource(resources = "/bit-csv/invalidBitRangeRetrieval.csv", numLinesToSkip = 1)
-    void testInvalidBitRangeRetrieval(int n, int start, int end) {
-        assertThrows(IllegalArgumentException.class, () -> BitUtils.getBitRange(n, start, end));
     }
 }
 

@@ -2,6 +2,13 @@ package com.neilcochran.component;
 
 import com.neilcochran.component.register.Registers;
 import com.neilcochran.instruction.Instruction;
+import com.neilcochran.instruction.OpCodeInstructions;
+import com.neilcochran.instruction.fields.InstructionFormat;
+import com.neilcochran.instruction.formatGroup.InstructionB;
+import com.neilcochran.instruction.formatGroup.InstructionD;
+import com.neilcochran.instruction.formatGroup.InstructionI;
+import com.neilcochran.instruction.formatGroup.InstructionR;
+import com.neilcochran.instruction.formatGroup.InstructionX;
 import com.neilcochran.util.BitUtils;
 
 /**
@@ -15,19 +22,85 @@ public record ControlUnit(Registers registers, ALU alu) {
     /**
      * Execute the current instruction, which is located in the instruction register
      */
-    public void executeCurrentInstruction() {}
+    public void executeInstruction(Instruction instruction) {
+        switch (instruction.getInstructionFormat()) {
+            case R -> executeInstructionR((InstructionR) instruction);
+            case I -> executeInstructionI((InstructionI) instruction);
+            case D -> executeInstructionD((InstructionD) instruction);
+            case X -> executeInstructionX((InstructionX) instruction);
+            case B -> executeInstructionB((InstructionB) instruction);
+        }
+    }
 
     /**
-     * Decode the current instruction and return a full Instruction object
+     * Decode the current instruction into the correct Instruction type.
      * @param instruction The input instruction
      * @return An Instruction object representing the decoded instruction
      * @throws IllegalArgumentException if the instruction is invalid
      */
-    public static Instruction decodeInstruction(int instruction) {
+    public static Instruction decodeInstruction(long instruction) {
         if(!BitUtils.validateBitLength(instruction, VonNeumannMachine.WORD_SIZE)) {
             throw new IllegalArgumentException("Invalid instruction bit length: " + BitUtils.getBitLength(instruction));
         }
-        //TODO impl
-        return null;
+        var instructionFormat = InstructionFormat.fromFormatBits(BitUtils.getBitRange(instruction, Instruction.FORMAT_RANGE));
+        return switch(instructionFormat) {
+            case R -> (InstructionR) decodeInstructionOpCode(new InstructionR(instruction));
+            case I -> (InstructionI) decodeInstructionOpCode(new InstructionI(instruction));
+            case D -> new InstructionD(instruction);
+            case X -> new InstructionX(instruction);
+            case B -> new InstructionB(instruction);
+        };
+    }
+
+    public static OpCodeInstructions decodeInstructionOpCode(OpCodeInstructions opCodeInstructions) {
+        opCodeInstructions.getOpCode().setName(getOpCodeName(opCodeInstructions.getOpCode().getBits()));
+        return opCodeInstructions;
+    }
+
+    private static String getOpCodeName(int opCode) {
+        return switch(opCode) {
+            case 0b0000 -> "AND";
+            case 0b0001 -> "EOR";
+            case 0b0010 -> "SUB";
+            case 0b0011 -> "RSB";
+            case 0b0100 -> "ADD";
+            case 0b0101 -> "ADC";
+            case 0b0110 -> "SBC";
+            case 0b0111 -> "RSC";
+            case 0b1000 -> "TST";
+            case 0b1001 -> "TEQ";
+            case 0b1010 -> "CMP";
+            case 0b1011 -> "CMN";
+            case 0b1100 -> "ORR";
+            case 0b1101 -> "MOV";
+            case 0b1110 -> "BIC";
+            case 0b1111 -> "MVN";
+            default -> throw new IllegalArgumentException("Invalid OpCode: " + Integer.toBinaryString(opCode));
+        };
+    }
+
+    private void executeInstructionR(InstructionR instructionR) {
+        //TODO
+        System.out.println("executing R: " + instructionR);
+    }
+
+    private void executeInstructionI(InstructionI instructionI) {
+        //TODO
+        System.out.println("executing I: " + instructionI);
+    }
+
+    private void executeInstructionD(InstructionD instructionD) {
+        //TODO
+        System.out.println("executing D: " + instructionD);
+    }
+
+    private void executeInstructionX(InstructionX instructionX) {
+        //TODO
+        System.out.println("executing X: " + instructionX);
+    }
+
+    private void executeInstructionB(InstructionB instructionB) {
+        //TODO
+        System.out.println("executing B: " + instructionB);
     }
 }

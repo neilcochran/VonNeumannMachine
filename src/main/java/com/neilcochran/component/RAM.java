@@ -10,7 +10,7 @@ import java.util.Arrays;
  */
 @Data
 public class RAM {
-    private int[] memory;
+    private long[] memory;
     private int totalBytes;
 
     /**
@@ -24,11 +24,11 @@ public class RAM {
            throw new IllegalArgumentException("Invalid RAM bytes size: " + totalBytes + " for the given word size: " + VonNeumannMachine.WORD_SIZE);
         }
         this.totalBytes = totalBytes;
-        this.memory = new int[totalBytes / VonNeumannMachine.WORD_SIZE];
+        this.memory = new long[totalBytes / VonNeumannMachine.WORD_SIZE];
         Arrays.fill(memory, 0);
     }
 
-    public int loadData(int byteAddress, DataSize dataSize) {
+    public long loadData(int byteAddress, DataSize dataSize) {
         if(!isValidByteAddress(byteAddress)) {
             throw new IllegalArgumentException(String.format("Invalid byte address: %d", byteAddress));
         }
@@ -39,13 +39,13 @@ public class RAM {
         };
     }
 
-    public void storeData(int byteAddress, DataSize dataSize, int data) {
+    public void storeData(int byteAddress, DataSize dataSize, long data) {
         if(!isValidByteAddress(byteAddress)) {
             throw new IllegalArgumentException(String.format("Invalid byte address: %d", byteAddress));
         }
         switch (dataSize) {
-            case BYTE -> storeByte(byteAddress, data);
-            case HALF_WORD -> storeHalfWord(byteAddress, data);
+            case BYTE -> storeByte(byteAddress, (int) data);
+            case HALF_WORD -> storeHalfWord(byteAddress, (int) data);
             case WORD -> storeWord(byteAddress, data);
         }
     }
@@ -54,7 +54,7 @@ public class RAM {
 
     private void storeHalfWord(int byteAddress, int data) {}
 
-    private void storeWord(int byteAddress, int data) {}
+    private void storeWord(int byteAddress, long data) {}
 
 
     private int loadByte(int byteAddress) {
@@ -67,12 +67,21 @@ public class RAM {
         return -1;
     }
 
-    private int loadWord(int byteAddress) {
-        //TODO implement
-        return -1;
+    private long loadWord(int byteAddress) {
+        var memoryIndex = (byteAddress * 4 ) / DataSize.WORD.getBitLength();
+        return memory[memoryIndex];
     }
 
     private boolean isValidByteAddress(int byteAddress) {
         return byteAddress >= 0 && byteAddress < totalBytes;
+    }
+
+    public void loadProgramData(long[] programData) {
+        if(programData.length > memory.length) {
+            throw new IllegalArgumentException("Cannot load a program that is bigger than memory");
+        }
+        for(var i = 0; i < programData.length; i++) {
+            memory[i] = programData[i];
+        }
     }
 }

@@ -2,8 +2,6 @@ package com.neilcochran.component.register;
 
 import lombok.Data;
 
-import org.json.JSONObject;
-
 /**
  * Represents a Register with a given name
  */
@@ -31,18 +29,5 @@ public class Register {
     public Register(String name, String alias) {
         this.name = name;
         this.alias = alias;
-    }
-
-    /**
-     * Returns a JSON string representation of the Register
-     * @return A JSON string representation of the Register
-     */
-    @Override
-    public String toString() {
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("name", name);
-        jsonObject.putOpt("alias", alias);
-        jsonObject.put("data", data);
-        return jsonObject.toString();
     }
 }

@@ -17,7 +17,7 @@ public class BitRange {
      * @throws IllegalArgumentException If the range is invalid
      */
     public BitRange(int startIndex, int endIndex) {
-        if(!BitUtils.isValidBitRange(startIndex, endIndex)) {
+       if(!BitUtils.isValidBitRange(startIndex, endIndex)) {
             throw new IllegalArgumentException(String.format("Invalid bit range: [%d, %d]", startIndex, endIndex));
         }
         this.startIndex = startIndex;

@@ -3,17 +3,8 @@ package com.neilcochran.instruction.formatGroup;
 import com.neilcochran.instruction.Instruction;
 import com.neilcochran.instruction.fields.InstructionFormat;
 
-/**
- * Represents a B-Instruction
- */
 public class InstructionB extends Instruction {
-
-    /**
-     * Takes in an B-Instruction and decodes it
-     * @param instruction The full instruction
-     * @throws IllegalArgumentException if the instruction is not a valid B-Instruction
-     */
-    public InstructionB(int instruction) {
+    public InstructionB(long instruction) {
         super(instruction, InstructionFormat.B);
     }
 }

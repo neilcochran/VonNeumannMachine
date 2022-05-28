@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"com.neilcochran"},{"l":"com.neilcochran.components"},{"l":"com.neilcochran.components.registers"},{"l":"com.neilcochran.instruction"},{"l":"com.neilcochran.utils"}];updateSearchResults();

@@ -18,21 +18,24 @@ public enum Condition {
     AL(0b1110, "Always"),
     NV(0b1111, "NO VALUE - RESERVED");
 
-    private final int formatBits;
+    private final int bits;
     private final String description;
 
     Condition(int formatBits, String description) {
-        this.formatBits = formatBits;
+        this.bits = formatBits;
         this.description = description;
     }
 
-    public int getFormatBits() {
-        return formatBits;
+    public int getBits() {
+        return bits;
     }
 
+    public String getDescription() {
+        return description;
+    }
     public static Condition fromFormatBits(int formatBits) {
         for(Condition condition : values()) {
-            if(condition.formatBits == formatBits) {
+            if(condition.bits == formatBits) {
                 return condition;
             }
         }
