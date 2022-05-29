@@ -1,7 +1,7 @@
 package com.neilcochran.instruction;
 
-import com.neilcochran.instruction.fields.InstructionFormat;
-import com.neilcochran.instruction.fields.LoadStore;
+import com.neilcochran.instruction.field.InstructionFormat;
+import com.neilcochran.instruction.field.LoadStore;
 import com.neilcochran.util.BitRange;
 import com.neilcochran.util.BitUtils;
 import lombok.Getter;

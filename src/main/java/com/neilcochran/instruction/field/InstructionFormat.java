@@ -1,4 +1,4 @@
-package com.neilcochran.instruction.fields;
+package com.neilcochran.instruction.field;
 
 
 /**

@@ -1,8 +1,8 @@
 package com.neilcochran.instruction.formatGroup;
 
 import com.neilcochran.instruction.LoadStoreInstruction;
-import com.neilcochran.instruction.fields.InstructionFormat;
-import com.neilcochran.instruction.fields.Shift;
+import com.neilcochran.instruction.field.InstructionFormat;
+import com.neilcochran.instruction.field.Shift;
 import com.neilcochran.util.BitRange;
 import com.neilcochran.util.BitUtils;
 

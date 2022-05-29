@@ -1,4 +1,4 @@
-package com.neilcochran.instruction.fields;
+package com.neilcochran.instruction.field;
 
 import com.neilcochran.util.BitUtils;
 import lombok.Data;

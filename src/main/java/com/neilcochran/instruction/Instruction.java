@@ -1,8 +1,8 @@
 package com.neilcochran.instruction;
 
 import com.neilcochran.component.VonNeumannMachine;
-import com.neilcochran.instruction.fields.Condition;
-import com.neilcochran.instruction.fields.InstructionFormat;
+import com.neilcochran.instruction.field.Condition;
+import com.neilcochran.instruction.field.InstructionFormat;
 import com.neilcochran.util.BitRange;
 import com.neilcochran.util.BitUtils;
 import lombok.Data;

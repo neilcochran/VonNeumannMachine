@@ -3,7 +3,7 @@ package com.neilcochran.component;
 import com.neilcochran.component.register.Registers;
 import com.neilcochran.instruction.Instruction;
 import com.neilcochran.instruction.OpCodeInstructions;
-import com.neilcochran.instruction.fields.InstructionFormat;
+import com.neilcochran.instruction.field.InstructionFormat;
 import com.neilcochran.instruction.formatGroup.InstructionB;
 import com.neilcochran.instruction.formatGroup.InstructionD;
 import com.neilcochran.instruction.formatGroup.InstructionI;

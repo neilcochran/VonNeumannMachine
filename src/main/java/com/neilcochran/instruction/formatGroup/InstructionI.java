@@ -1,8 +1,8 @@
 package com.neilcochran.instruction.formatGroup;
 
 import com.neilcochran.instruction.OpCodeInstructions;
-import com.neilcochran.instruction.fields.InstructionFormat;
-import com.neilcochran.instruction.fields.RotateConstant;
+import com.neilcochran.instruction.field.InstructionFormat;
+import com.neilcochran.instruction.field.RotateConstant;
 import com.neilcochran.util.BitRange;
 import com.neilcochran.util.BitUtils;
 import lombok.Getter;
