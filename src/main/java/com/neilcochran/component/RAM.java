@@ -1,5 +1,7 @@
 package com.neilcochran.component;
 
+import com.neilcochran.util.BitRange;
+import com.neilcochran.util.BitUtils;
 import com.neilcochran.util.DataSize;
 import lombok.Data;
 
@@ -10,8 +12,12 @@ import java.util.Arrays;
  */
 @Data
 public class RAM {
-    private long[] memory;
-    private int totalBytes;
+    private static BitRange WORD_RANGE = new BitRange(0, DataSize.WORD.getBitLength() - 1);
+    private static BitRange HALF_WORD_RANGE = new BitRange(0, DataSize.HALF_WORD.getBitLength() - 1);
+    private static BitRange BYTE_RANGE = new BitRange(0, DataSize.BYTE.getBitLength() - 1);
+
+    private final long[] memory;
+    private final int totalBytes;
 
     /**
      * Represents RAM. Initialize the indicated bytes of RAM for a given word size
@@ -56,20 +62,20 @@ public class RAM {
 
     private void storeWord(int byteAddress, long data) {}
 
-
     private int loadByte(int byteAddress) {
-        //TODO implement
-        return -1;
+        return BitUtils.getBitRange(memory[calculateMemoryIndex(byteAddress)], 0, DataSize.BYTE.getBitLength() - 1);
     }
 
     private int loadHalfWord(int byteAddress) {
-        //TODO implement
-        return -1;
+        return BitUtils.getBitRange(memory[calculateMemoryIndex(byteAddress)], 0, DataSize.HALF_WORD.getBitLength() - 1);
     }
 
     private long loadWord(int byteAddress) {
-        var memoryIndex = (byteAddress * 4 ) / DataSize.WORD.getBitLength();
-        return memory[memoryIndex];
+        return memory[calculateMemoryIndex(byteAddress)];
+    }
+
+    private int calculateMemoryIndex(int byteAddress) {
+        return (byteAddress * 4 ) / DataSize.WORD.getBitLength();
     }
 
     private boolean isValidByteAddress(int byteAddress) {
@@ -80,8 +86,6 @@ public class RAM {
         if(programData.length > memory.length) {
             throw new IllegalArgumentException("Cannot load a program that is bigger than memory");
         }
-        for(var i = 0; i < programData.length; i++) {
-            memory[i] = programData[i];
-        }
+        System.arraycopy(programData, 0, memory, 0, programData.length);
     }
 }
