@@ -19,9 +19,13 @@ public class InstructionB extends Instruction {
     public InstructionB(long instruction) {
         super(instruction, InstructionFormat.B);
         linkRegisterFlagBit = BitUtils.getKthBit(instruction, L_FLAG_INDEX);
-        //When this value is uesed it will be right shifted by 2 (so multiplied by 4) and then added to the PC
+        //When this value is used it will be right shifted by 2 (so multiplied by 4) and then added to the PC
         //This means that although it is a 24bit constant is will be used as a 26bit constant (where the 2 LSBs are always 0 due to our right shifts)
         imm24 = BitUtils.getBitRange(instruction, IMM12_RANGE);
     }
 
+    @Override
+    public String toString() {
+        return String.format("InstructionB(instruction=%s condition=%s linkRegisterFlagBit=%d, imm24=%d)", getBinaryString(), condition, linkRegisterFlagBit, imm24);
+    }
 }
