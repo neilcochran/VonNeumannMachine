@@ -4,7 +4,7 @@ import com.neilcochran.component.register.Registers;
 import com.neilcochran.instruction.Instruction;
 import com.neilcochran.instruction.OpCodeInstructions;
 import com.neilcochran.instruction.field.InstructionFormat;
-import com.neilcochran.instruction.formatGroup.InstructionB;
+import com.neilcochran.instruction.formatGroup.B.InstructionB;
 import com.neilcochran.instruction.formatGroup.InstructionD;
 import com.neilcochran.instruction.formatGroup.InstructionI;
 import com.neilcochran.instruction.formatGroup.InstructionR;
@@ -99,8 +99,15 @@ public record ControlUnit(Registers registers, ALU alu) {
         System.out.println("executing X: " + instructionX);
     }
 
+    //only 1 B format branch (there is an R type branch encoded as TEQ w State=1
     private void executeInstructionB(InstructionB instructionB) {
-        //TODO
         System.out.println("executing B: " + instructionB);
+        //L bit indicates if we should store PC+4 (already incremented in LR
+        if(instructionB.getLinkRegisterFlagBit() == 1) {
+            registers.getLinkRegister().setData(registers.getPCRegister().getData());
+        }
+        //bit shift right 2 (so lower 2 LSBs always 0s) and add to PC
+        var imm26 = (instructionB.getImm24() << 2);
+        registers.getPCRegister().setData(imm26 + registers.getPCRegister().getData());
     }
 }

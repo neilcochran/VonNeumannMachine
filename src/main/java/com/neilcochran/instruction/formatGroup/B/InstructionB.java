@@ -1,4 +1,4 @@
-package com.neilcochran.instruction.formatGroup;
+package com.neilcochran.instruction.formatGroup.B;
 
 import com.neilcochran.instruction.Instruction;
 import com.neilcochran.instruction.field.InstructionFormat;

@@ -80,8 +80,6 @@ public class RAM {
         if(programData.length > memory.length) {
             throw new IllegalArgumentException("Cannot load a program that is bigger than memory");
         }
-        for(var i = 0; i < programData.length; i++) {
-            memory[i] = programData[i];
-        }
+        System.arraycopy(programData, 0, memory, 0, programData.length);
     }
 }

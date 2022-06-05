@@ -60,6 +60,10 @@ public class Instruction {
     }
 
     public String getBinaryString() {
-        return Long.toBinaryString(instruction).substring(32);
+        var padLen = 32 - BitUtils.getBitLength(instruction);
+        if(padLen <= 0) {
+            return Long.toBinaryString(instruction).substring(32);
+        }
+        return "0".repeat(padLen) + Long.toBinaryString(instruction);
     }
 }
