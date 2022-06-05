@@ -1,6 +1,8 @@
 package com.neilcochran;
 
 import com.neilcochran.component.VonNeumannMachine;
+import com.neilcochran.util.BitUtils;
+import com.neilcochran.util.DataSize;
 
 /**
  * Create and run a VonNeumannMachine

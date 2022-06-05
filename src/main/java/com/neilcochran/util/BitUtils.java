@@ -1,5 +1,7 @@
 package com.neilcochran.util;
 
+import javax.xml.crypto.Data;
+
 /**
  * A collection of static helper utilities
  */
@@ -77,5 +79,20 @@ public class BitUtils {
      */
     public static int getBitRange(long n, BitRange bitRange) {
         return getBitRange(n, bitRange.getStartIndex(), bitRange.getEndIndex());
+    }
+
+    //TODO replace Integer/Long#toBinaryString usage since this handles both & supports padding
+    public static String getBinaryString(long data, DataSize dataSize, boolean leftPad) {
+        if(dataSize == DataSize.WORD) {
+            return Long.toBinaryString(data).substring(32);
+        } else {
+            var binaryString = Integer.toBinaryString((int) data);
+            if(leftPad) {
+                StringBuilder stringBuilder = new StringBuilder(dataSize.getBitLength());
+                stringBuilder.append("0".repeat(dataSize.getBitLength() - BitUtils.getBitLength(data)));
+                binaryString = stringBuilder.append(binaryString).toString();
+            }
+            return binaryString;
+        }
     }
 }
