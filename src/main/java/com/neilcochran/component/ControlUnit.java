@@ -1,10 +1,12 @@
 package com.neilcochran.component;
 
 import com.neilcochran.component.register.Registers;
+import com.neilcochran.instruction.Command;
 import com.neilcochran.instruction.Instruction;
 import com.neilcochran.instruction.OpCodeInstructions;
 import com.neilcochran.instruction.field.InstructionFormat;
 import com.neilcochran.instruction.formatGroup.B.InstructionB;
+import com.neilcochran.instruction.formatGroup.B.command.BranchCommand;
 import com.neilcochran.instruction.formatGroup.InstructionD;
 import com.neilcochran.instruction.formatGroup.InstructionI;
 import com.neilcochran.instruction.formatGroup.InstructionR;
@@ -18,19 +20,6 @@ import com.neilcochran.util.BitUtils;
 
  */
 public record ControlUnit(Registers registers, ALU alu) {
-
-    /**
-     * Execute the current instruction, which is located in the instruction register
-     */
-    public void executeInstruction(Instruction instruction) {
-        switch (instruction.getInstructionFormat()) {
-            case R -> executeInstructionR((InstructionR) instruction);
-            case I -> executeInstructionI((InstructionI) instruction);
-            case D -> executeInstructionD((InstructionD) instruction);
-            case X -> executeInstructionX((InstructionX) instruction);
-            case B -> executeInstructionB((InstructionB) instruction);
-        }
-    }
 
     /**
      * Decode the current instruction into the correct Instruction type.
@@ -57,6 +46,16 @@ public record ControlUnit(Registers registers, ALU alu) {
         return opCodeInstructions;
     }
 
+    public Command getInstructionCommand(Instruction instruction) {
+        return switch (instruction.getInstructionFormat()) {
+            case R -> getInstructionRCommand((InstructionR) instruction);
+            case I -> getInstructionICommand((InstructionI) instruction);
+            case D -> getInstructionDCommand((InstructionD) instruction);
+            case X -> getInstructionXCommand((InstructionX) instruction);
+            case B -> getInstructionBCommand((InstructionB) instruction);
+        };
+    }
+
     private static String getOpCodeName(int opCode) {
         return switch(opCode) {
             case 0b0000 -> "AND";
@@ -79,35 +78,28 @@ public record ControlUnit(Registers registers, ALU alu) {
         };
     }
 
-    private void executeInstructionR(InstructionR instructionR) {
+    private Command getInstructionRCommand(InstructionR instructionR) {
         //TODO
-        System.out.println("executing R: " + instructionR);
+        return null;
     }
 
-    private void executeInstructionI(InstructionI instructionI) {
+    private Command getInstructionICommand(InstructionI instructionI) {
         //TODO
-        System.out.println("executing I: " + instructionI);
+        return null;
     }
 
-    private void executeInstructionD(InstructionD instructionD) {
+    private Command getInstructionDCommand(InstructionD instructionD) {
         //TODO
-        System.out.println("executing D: " + instructionD);
+        return null;
     }
 
-    private void executeInstructionX(InstructionX instructionX) {
+    private Command getInstructionXCommand(InstructionX instructionX) {
         //TODO
-        System.out.println("executing X: " + instructionX);
+        return null;
     }
 
     //only 1 B format branch (there is an R type branch encoded as TEQ w State=1
-    private void executeInstructionB(InstructionB instructionB) {
-        System.out.println("executing B: " + instructionB);
-        //L bit indicates if we should store PC+4 (already incremented in LR
-        if(instructionB.getLinkRegisterFlagBit() == 1) {
-            registers.getLinkRegister().setData(registers.getPCRegister().getData());
-        }
-        //bit shift right 2 (so lower 2 LSBs always 0s) and add to PC
-        var imm26 = (instructionB.getImm24() << 2);
-        registers.getPCRegister().setData(imm26 + registers.getPCRegister().getData());
+    private Command getInstructionBCommand(InstructionB instructionB) {
+        return new BranchCommand(instructionB, registers);
     }
 }

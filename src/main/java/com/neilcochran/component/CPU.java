@@ -1,6 +1,7 @@
 package com.neilcochran.component;
 
 import com.neilcochran.component.register.Registers;
+import com.neilcochran.instruction.Command;
 import com.neilcochran.instruction.Instruction;
 import com.neilcochran.util.DataSize;
 import lombok.Getter;
@@ -54,7 +55,8 @@ public class CPU extends Thread {
             var rawInstruction = ram.loadData(pcVal, DataSize.WORD);
             registers.incrementProgramCounter();
             Instruction instruction = decodeInstruction(rawInstruction);
-            controlUnit.executeInstruction(instruction);
+            Command command = controlUnit.getInstructionCommand(instruction);
+            command.executeCommand();
             if(pcVal >= ram.getTotalBytes()) {
                 this.halted = true;
                 throw new IndexOutOfBoundsException(String.format("The Program Counter has reached the end of memory: %d", pcVal));

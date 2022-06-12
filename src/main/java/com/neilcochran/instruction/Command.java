@@ -1,5 +1,11 @@
 package com.neilcochran.instruction;
 
-public interface Command {
-    void executeCommand(Instruction instruction);
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+@Data
+@AllArgsConstructor
+public abstract class Command {
+    protected Instruction instruction;
+    public abstract void executeCommand();
 }
