@@ -13,7 +13,7 @@ public class OpCodeInstructions extends Instruction {
     public static final BitRange OPCODE_RANGE = new BitRange(21, 24);
     protected final OpCode opCode;
 
-    public OpCodeInstructions(long instruction, InstructionFormat instructionFormat) {
+    public OpCodeInstructions(int instruction, InstructionFormat instructionFormat) {
         super(instruction, instructionFormat);
         //make sure we got a valid instruction format for a OpCodeInstruction (super() has to be first call otherwise validation would come first)
         if(instructionFormat != InstructionFormat.R && instructionFormat != InstructionFormat.I) {

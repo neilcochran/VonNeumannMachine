@@ -5,6 +5,7 @@ import com.neilcochran.instruction.field.Condition;
 import com.neilcochran.instruction.field.InstructionFormat;
 import com.neilcochran.util.BitRange;
 import com.neilcochran.util.BitUtils;
+import com.neilcochran.util.DataSize;
 import lombok.Data;
 
 /**
@@ -12,7 +13,7 @@ import lombok.Data;
  */
 @Data
 public class Instruction {
-    protected final long instruction; //must be long since we're using 32 bit instructions (unsigned) which is out of 32 bit int's signed range
+    protected final int instruction;
     protected final Condition condition;
     protected final InstructionFormat instructionFormat;
     public static final BitRange CONDITION_RANGE = new BitRange(28, 31);
@@ -22,7 +23,7 @@ public class Instruction {
      * Takes in an instruction (int of binary data) and decodes it into the appropriate OpCode and Operand
      * @throws IllegalArgumentException if the instruction exceeds the word size
      */
-    public Instruction(long instruction, InstructionFormat instructionFormat) {
+    public Instruction(int instruction, InstructionFormat instructionFormat) {
         //Ensure the instruction does not exceed our word size
         if(!BitUtils.validateBitLength(instruction, VonNeumannMachine.WORD_SIZE)) {
             throw new IllegalArgumentException(String.format("Invalid instruction bit length. The value: %d exceeds the bit length: %d", instruction, VonNeumannMachine.WORD_SIZE));
@@ -46,7 +47,7 @@ public class Instruction {
      * @param instruction The instruction to determine the InstructionFormat of
      * @return The InstructionFormat field of the given instruction
      */
-    public static InstructionFormat parseInstructionFormat(long instruction) {
+    public static InstructionFormat parseInstructionFormat(int instruction) {
         return InstructionFormat.fromFormatBits(BitUtils.getBitRange(instruction, FORMAT_RANGE));
     }
 
@@ -55,15 +56,11 @@ public class Instruction {
      * @param instruction The instruction to determine the Condition field of
      * @return The Condition field of the given instruction
      */
-    public static Condition parseInstructionCondition(long instruction) {
+    public static Condition parseInstructionCondition(int instruction) {
         return Condition.fromFormatBits(BitUtils.getBitRange(instruction, CONDITION_RANGE));
     }
 
     public String getBinaryString() {
-        var padLen = 32 - BitUtils.getBitLength(instruction);
-        if(padLen <= 0) {
-            return Long.toBinaryString(instruction).substring(32);
-        }
-        return "0".repeat(padLen) + Long.toBinaryString(instruction);
+        return BitUtils.getBinaryString(instruction, DataSize.WORD, true);
     }
 }
