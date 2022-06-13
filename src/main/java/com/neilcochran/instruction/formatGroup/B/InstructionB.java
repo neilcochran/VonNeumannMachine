@@ -16,7 +16,7 @@ public class InstructionB extends Instruction {
     private final int linkRegisterFlagBit;
     private final int imm24;
 
-    public InstructionB(long instruction) {
+    public InstructionB(int instruction) {
         super(instruction, InstructionFormat.B);
         linkRegisterFlagBit = BitUtils.getKthBit(instruction, L_FLAG_INDEX);
         //When this value is used it will be right shifted by 2 (so multiplied by 4) and then added to the PC

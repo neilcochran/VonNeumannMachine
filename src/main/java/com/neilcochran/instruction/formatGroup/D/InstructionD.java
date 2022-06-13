@@ -1,4 +1,4 @@
-package com.neilcochran.instruction.formatGroup;
+package com.neilcochran.instruction.formatGroup.D;
 
 import com.neilcochran.instruction.LoadStoreInstruction;
 import com.neilcochran.instruction.field.InstructionFormat;
@@ -22,7 +22,7 @@ public class InstructionD extends LoadStoreInstruction {
      * @param instruction The full instruction
      * @throws IllegalArgumentException if the instruction is not a valid D-Instruction
      */
-    public InstructionD(long instruction) {
+    public InstructionD(int instruction) {
         super(instruction, InstructionFormat.D);
         imm12 = BitUtils.getBitRange(instruction, IMMEDIATE_CONSTANT_RANGE);
     }

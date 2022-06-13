@@ -1,4 +1,4 @@
-package com.neilcochran.instruction.formatGroup;
+package com.neilcochran.instruction.formatGroup.X;
 
 import com.neilcochran.instruction.LoadStoreInstruction;
 import com.neilcochran.instruction.field.InstructionFormat;
@@ -21,7 +21,7 @@ public class InstructionX extends LoadStoreInstruction {
      * @param instruction The full instruction
      * @throws IllegalArgumentException if the instruction is not a valid X-Instruction
      */
-    public InstructionX(long instruction) {
+    public InstructionX(int instruction) {
         super(instruction, InstructionFormat.X);
         shift = new Shift(BitUtils.getBitRange(instruction, SHIFT_RANGE));
         RM = BitUtils.getBitRange(instruction, RM_RANGE);

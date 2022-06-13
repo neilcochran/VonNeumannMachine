@@ -7,10 +7,10 @@ import com.neilcochran.instruction.OpCodeInstructions;
 import com.neilcochran.instruction.field.InstructionFormat;
 import com.neilcochran.instruction.formatGroup.B.InstructionB;
 import com.neilcochran.instruction.formatGroup.B.command.BranchCommand;
-import com.neilcochran.instruction.formatGroup.InstructionD;
-import com.neilcochran.instruction.formatGroup.InstructionI;
-import com.neilcochran.instruction.formatGroup.InstructionR;
-import com.neilcochran.instruction.formatGroup.InstructionX;
+import com.neilcochran.instruction.formatGroup.D.InstructionD;
+import com.neilcochran.instruction.formatGroup.I.InstructionI;
+import com.neilcochran.instruction.formatGroup.R.InstructionR;
+import com.neilcochran.instruction.formatGroup.X.InstructionX;
 import com.neilcochran.util.BitUtils;
 
 /**
@@ -27,7 +27,7 @@ public record ControlUnit(Registers registers, ALU alu) {
      * @return An Instruction object representing the decoded instruction
      * @throws IllegalArgumentException if the instruction is invalid
      */
-    public static Instruction decodeInstruction(long instruction) {
+    public static Instruction decodeInstruction(int instruction) {
         if(!BitUtils.validateBitLength(instruction, VonNeumannMachine.WORD_SIZE)) {
             throw new IllegalArgumentException("Invalid instruction bit length: " + BitUtils.getBitLength(instruction));
         }

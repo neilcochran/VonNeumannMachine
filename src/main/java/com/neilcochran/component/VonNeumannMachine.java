@@ -54,7 +54,7 @@ public class VonNeumannMachine {
         this.cpu.halt();
     }
 
-    public void loadProgram(long[] programData) {
+    public void loadProgram(int[] programData) {
         ram.loadProgramData(programData);
     }
 }

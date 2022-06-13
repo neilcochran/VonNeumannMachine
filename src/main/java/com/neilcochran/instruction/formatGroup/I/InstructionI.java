@@ -1,4 +1,4 @@
-package com.neilcochran.instruction.formatGroup;
+package com.neilcochran.instruction.formatGroup.I;
 
 import com.neilcochran.instruction.OpCodeInstructions;
 import com.neilcochran.instruction.field.InstructionFormat;
@@ -30,7 +30,7 @@ public class InstructionI extends OpCodeInstructions {
      * @param instruction The full instruction
      * @throws IllegalArgumentException if the instruction is not a valid I-Instruction
      */
-    public InstructionI(long instruction) {
+    public InstructionI(int instruction) {
         super(instruction, InstructionFormat.I);
         this.stateFlagBit = BitUtils.getKthBit(instruction, STATE_FLAG_INDEX);
         this.RN = BitUtils.getBitRange(instruction, RN_OPERAND_RANGE);

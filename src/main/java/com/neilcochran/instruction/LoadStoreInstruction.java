@@ -18,7 +18,7 @@ public class LoadStoreInstruction extends Instruction {
     protected final int RN;
     protected final int RD;
 
-    public LoadStoreInstruction(long instruction, InstructionFormat instructionFormat) {
+    public LoadStoreInstruction(int instruction, InstructionFormat instructionFormat) {
         super(instruction, instructionFormat);
         //make sure we got a valid instruction format for a LoadStoreInstruction (super() has to be first call otherwise validation would come first)
         if(instructionFormat != InstructionFormat.D && instructionFormat != InstructionFormat.X) {
