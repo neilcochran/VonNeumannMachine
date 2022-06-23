@@ -1,7 +1,5 @@
 package com.neilcochran.util;
 
-import javax.xml.crypto.Data;
-
 /**
  * A collection of static helper utilities
  */
@@ -38,6 +36,9 @@ public class BitUtils {
         return (n >> k) & 1;
     }
 
+    public static int calculateRotate(int rotate, int constant) {
+        return Integer.rotateRight(constant, 2 * rotate) | Integer.rotateLeft(constant, 32 - (2 * rotate));
+    }
     /**
      * Check if a bit range is valid by itself
      * @param start The index of the starting bit of the range

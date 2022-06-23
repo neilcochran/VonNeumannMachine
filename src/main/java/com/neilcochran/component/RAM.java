@@ -55,7 +55,7 @@ public class RAM {
     }
 
     private int calculateMemoryIndex(int byteAddress) {
-        return (byteAddress * 4 ) / DataSize.WORD.getBitLength();
+        return (byteAddress * 8 ) / DataSize.WORD.getBitLength();
     }
 
     private boolean isValidByteAddress(int byteAddress) {

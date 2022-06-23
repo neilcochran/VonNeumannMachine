@@ -1,7 +1,6 @@
 package com.neilcochran.component;
 
-import com.neilcochran.component.register.Registers;
-import com.neilcochran.instruction.Command;
+import com.neilcochran.component.register.RegisterFile;
 import com.neilcochran.instruction.Instruction;
 import com.neilcochran.util.DataSize;
 import lombok.Getter;
@@ -16,7 +15,7 @@ import static com.neilcochran.component.ControlUnit.decodeInstruction;
 @Setter //Don't use @Data since we want to call super() ourselves with a specific value (the thread name)
 public class CPU extends Thread {
 
-    private final Registers registers;
+    private final RegisterFile registerFile;
     private final ControlUnit controlUnit;
     private final ALU alu;
     private final RAM ram;
@@ -24,18 +23,18 @@ public class CPU extends Thread {
 
     /**
      * Creates a new CPU
-     * @param registers A reference to the registers
+     * @param registerFile A reference to the registers
      * @param controlUnit A reference to the Control Unit
      * @param alu A reference to the Arithmetic Logic Unit
      */
     public CPU(
-            Registers registers,
+            RegisterFile registerFile,
             ControlUnit controlUnit,
             ALU alu,
             RAM ram
     ) {
         super("CPU_Thread");
-        this.registers = registers;
+        this.registerFile = registerFile;
         this.controlUnit = controlUnit;
         this.alu = alu;
         this.ram = ram;
@@ -50,16 +49,14 @@ public class CPU extends Thread {
         this.halted = false;
         //Continue running the Fetch -> Decode -> Execute loop until the HALT command is executed
         while(!this.halted) {
-            var pcVal = registers.getPCRegister().getData();
             //TODO disallow direct memory access and make PC load it's value into a Memory Address Register (MAR) and then have the actual instruction loaded into Memory Data Register (MDR)?
-            var rawInstruction = ram.loadData(pcVal, DataSize.WORD);
-            registers.incrementProgramCounter();
+            var rawInstruction = ram.loadData(registerFile.getPCRegister().getData(), DataSize.WORD);
+            registerFile.incrementProgramCounter();
             Instruction instruction = decodeInstruction(rawInstruction);
-            Command command = controlUnit.getInstructionCommand(instruction);
-            command.executeCommand();
-            if(pcVal >= ram.getTotalBytes()) {
+            controlUnit.executeInstruction(instruction);
+            if(registerFile.getPCRegister().getData() >= ram.getTotalBytes()) {
                 this.halted = true;
-                throw new IndexOutOfBoundsException(String.format("The Program Counter has reached the end of memory: %d", pcVal));
+                throw new IndexOutOfBoundsException(String.format("The Program Counter has reached the end of memory: %d", registerFile.getPCRegister().getData()));
             }
         }
     }

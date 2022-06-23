@@ -9,16 +9,16 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class OpCodeInstructions extends Instruction {
+public class OpCodeInstruction extends Instruction {
     public static final BitRange OPCODE_RANGE = new BitRange(21, 24);
     protected final OpCode opCode;
 
-    public OpCodeInstructions(int instruction, InstructionFormat instructionFormat) {
+    public OpCodeInstruction(int instruction, InstructionFormat instructionFormat) {
         super(instruction, instructionFormat);
         //make sure we got a valid instruction format for a OpCodeInstruction (super() has to be first call otherwise validation would come first)
         if(instructionFormat != InstructionFormat.R && instructionFormat != InstructionFormat.I) {
             throw new IllegalArgumentException("OpCodeInstruction received an invalid InstructionFormat of: %s. InstructionFormat must be R or I");
         }
-        this.opCode = new OpCode(BitUtils.getBitRange(instruction, OPCODE_RANGE));
+        this.opCode = OpCode.fromBits(BitUtils.getBitRange(instruction, OPCODE_RANGE));
     }
 }

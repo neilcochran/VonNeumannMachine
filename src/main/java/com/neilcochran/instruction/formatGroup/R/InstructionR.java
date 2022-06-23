@@ -1,6 +1,6 @@
 package com.neilcochran.instruction.formatGroup.R;
 
-import com.neilcochran.instruction.OpCodeInstructions;
+import com.neilcochran.instruction.OpCodeInstruction;
 import com.neilcochran.instruction.field.InstructionFormat;
 import com.neilcochran.instruction.field.Shift;
 import com.neilcochran.util.BitRange;
@@ -13,7 +13,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class InstructionR extends OpCodeInstructions {
+public class InstructionR extends OpCodeInstruction {
     private static final int STATE_FLAG_INDEX =  20;
     private static final BitRange RN_OPERAND_RANGE = new BitRange(16, 19);
     private static final BitRange RD_OPERAND_RANGE = new BitRange(12, 15);
@@ -42,6 +42,6 @@ public class InstructionR extends OpCodeInstructions {
 
     @Override
     public String toString() {
-        return String.format("InstructionR(instruction=%s condition=%s OpCode=%s, RN=%d RD=%d RM=%d Shift=%s)", getBinaryString(), condition, opCode.getName(), RN, RD, RM, shift);
+        return String.format("InstructionR(instruction=%s condition=%s OpCode=%s, RN=%d RD=%d RM=%d Shift=%s)", getBinaryString(), condition, opCode, RN, RD, RM, shift);
     }
 }

@@ -1,25 +1,25 @@
 package com.neilcochran.instruction.formatGroup.B.command;
 
-import com.neilcochran.component.register.Registers;
+import com.neilcochran.component.register.RegisterFile;
 import com.neilcochran.instruction.Command;
 import com.neilcochran.instruction.formatGroup.B.InstructionB;
 
-public class BranchCommand extends Command {
-    private final Registers registers;
+public class BRC extends Command {
+    private final RegisterFile registerFile;
 
-    public BranchCommand(InstructionB instructionB, Registers registers) {
+    public BRC(InstructionB instructionB, RegisterFile registerFile) {
         super(instructionB);
-        this.registers = registers;
+        this.registerFile = registerFile;
     }
     @Override
     public void executeCommand() {
         InstructionB instructionB = (InstructionB) instruction;
         //L bit indicates if we should store PC+4 (already incremented in LR
         if(instructionB.getLinkRegisterFlagBit() == 1) {
-            registers.getLinkRegister().setData(registers.getPCRegister().getData());
+            registerFile.getLinkRegister().setData(registerFile.getPCRegister().getData());
         }
         //bit shift right 2 (so lower 2 LSBs always 0s) and add to PC
         var imm26 = (instructionB.getImm24() << 2);
-        registers.getPCRegister().setData(imm26 + registers.getPCRegister().getData());
+        registerFile.getPCRegister().setData(imm26 + registerFile.getPCRegister().getData());
     }
 }

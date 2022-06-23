@@ -8,11 +8,11 @@ import lombok.Data;
  * This includes special use registers (Like the PC, LR) and all general use registers
  */
 @Data
-public class Registers {
+public class RegisterFile {
 
     /**
      * The total amount of registers (Note: this excludes the CPSR)
-     * @see Registers#CPSR
+     * @see RegisterFile#CPSR
      */
     private static final int TOTAL_GENERAL_REGISTERS = 16;
 
@@ -52,7 +52,7 @@ public class Registers {
      * Constructs a new Registers object that holds all the Register objects available to the machine
      * This includes special use registers and general use registers
      */
-    public Registers() {
+    public RegisterFile() {
         registers = new Register[TOTAL_GENERAL_REGISTERS];
         for(var i = 0; i < TOTAL_GENERAL_REGISTERS; i++) {
             String alias = null;
@@ -71,7 +71,7 @@ public class Registers {
     /**
      * A convenience method for getting a reference for the Frame Pointer (FP) register
      * @return A reference to the Frame Pointer register
-     * @see Registers#FP_REG_INDEX
+     * @see RegisterFile#FP_REG_INDEX
      */
     public Register getFramePointerRegister() {
         return getRegister(FP_REG_INDEX);
@@ -80,7 +80,7 @@ public class Registers {
     /**
      * A convenience method for getting a reference to the Intra Procedural Call (IP) register
      * @return A reference to the Intra Procedural Call register
-     * @see Registers#IP_REG_INDEX
+     * @see RegisterFile#IP_REG_INDEX
      */
     public Register getIntraProceduralCallRegister() {
         return getRegister(IP_REG_INDEX);
@@ -89,7 +89,7 @@ public class Registers {
     /**
      * A convenience method for getting a reference to the Stack Pointer (SP) register
      * @return A reference to the Stack Pointer register
-     * @see Registers#SP_REG_INDEX
+     * @see RegisterFile#SP_REG_INDEX
      */
     public Register getStackPointerRegister() {
         return getRegister(SP_REG_INDEX);
@@ -98,7 +98,7 @@ public class Registers {
     /**
      * A convenience method for getting a reference to the Link Register (LR)
      * @return A reference to the Link Register
-     * @see Registers#LR_REG_INDEX
+     * @see RegisterFile#LR_REG_INDEX
      */
     public Register getLinkRegister() {
         return getRegister(LR_REG_INDEX);
@@ -108,7 +108,7 @@ public class Registers {
     /**
      * A convenience method for getting a reference to the Program Counter (PC) register
      * @return A reference to the Program Counter register
-     * @see Registers#PC_REG_INDEX
+     * @see RegisterFile#PC_REG_INDEX
      */
     public Register getPCRegister() {
         return getRegister(PC_REG_INDEX);
@@ -128,11 +128,11 @@ public class Registers {
     }
 
     /**
-     * Increments the current value in the Program Counter (PC) by one full word (8 bytes)
+     * Increments the current value in the Program Counter (PC) by one full word (4 bytes)
      * @return The new (post increment) address value of the Program Counter
      */
     public int incrementProgramCounter() {
-        var incremented = getPCRegister().getData() + 0b1000;
+        var incremented = getPCRegister().getData() + 0b100;
         getPCRegister().setData(incremented);
         return incremented;
     }

@@ -1,6 +1,6 @@
 package com.neilcochran.component;
 
-import com.neilcochran.component.register.Registers;
+import com.neilcochran.component.register.RegisterFile;
 import com.neilcochran.util.DataSize;
 import lombok.Data;
 
@@ -20,7 +20,7 @@ public class VonNeumannMachine {
      */
     private static final int DEFAULT_RAM_BYTES = 65536;
 
-    private final Registers registers;
+    private final RegisterFile registerFile;
     private final ControlUnit controlUnit;
     private final ALU alu;
     private final CPU cpu;
@@ -31,10 +31,10 @@ public class VonNeumannMachine {
      */
     public VonNeumannMachine() {
         ram = new RAM(DEFAULT_RAM_BYTES);
-        registers = new Registers();
-        alu = new ALU();
-        controlUnit = new ControlUnit(registers, alu);
-        cpu = new CPU(registers, controlUnit, alu, ram);
+        registerFile = new RegisterFile();
+        alu = new ALU(registerFile);
+        controlUnit = new ControlUnit(registerFile, alu);
+        cpu = new CPU(registerFile, controlUnit, alu, ram);
     }
 
 
