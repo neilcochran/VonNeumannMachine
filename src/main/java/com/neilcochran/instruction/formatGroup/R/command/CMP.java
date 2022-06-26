@@ -17,6 +17,11 @@ public class CMP extends Command {
     @Override
     public void executeCommand() {
         InstructionR cpmInstruction = (InstructionR) instruction;
-        int operand2 = ALU.calculateBarrelShift(cpmInstruction);
+        //get the value held in the register indicated by RN
+        int operand1 = registerFile.getRegister(cpmInstruction.getRN()).getData();
+        //perform barrel shift for operand2
+        int operand2 = ALU.calculateBarrelShift(cpmInstruction, registerFile);
+        //perform subtraction unsigned so C bit is also set
+        ALU.subtract(operand1, operand2, registerFile.getPSR());
     }
 }

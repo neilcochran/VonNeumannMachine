@@ -36,6 +36,21 @@ public class BitUtils {
         return (n >> k) & 1;
     }
 
+    public static int clearKthBit(int n, int k) {
+        return setKthBit(n, k, true);
+    }
+
+    public static int setKthBit(int n, int k) {
+        return setKthBit(n, k, false);
+    }
+
+    private static int setKthBit(int n, int k, boolean clearBit) {
+        if(clearBit) {
+            return n & ~(1 << k);
+        }
+        return n | (1 << k);
+    }
+
     public static int calculateRotate(int rotate, int constant) {
         return Integer.rotateRight(constant, 2 * rotate) | Integer.rotateLeft(constant, 32 - (2 * rotate));
     }

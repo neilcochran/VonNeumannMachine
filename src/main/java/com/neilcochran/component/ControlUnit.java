@@ -1,9 +1,11 @@
 package com.neilcochran.component;
 
+import com.neilcochran.component.register.ProgramStatusRegister;
 import com.neilcochran.component.register.RegisterFile;
 import com.neilcochran.instruction.Instruction;
 import com.neilcochran.instruction.LoadStoreInstruction;
 import com.neilcochran.instruction.OpCodeInstruction;
+import com.neilcochran.instruction.field.Condition;
 import com.neilcochran.instruction.field.InstructionFormat;
 import com.neilcochran.instruction.formatGroup.B.InstructionB;
 import com.neilcochran.instruction.formatGroup.B.command.BRC;
@@ -43,11 +45,34 @@ public record ControlUnit(RegisterFile registerFile, ALU alu) {
 
     //Determine if CU or ALU will execute the instruction
     public void executeInstruction(Instruction instruction) {
-        switch(instruction.getInstructionFormat()) {
-            case R, I -> alu.executeInstruction((OpCodeInstruction) instruction);
-            case D, X -> executeInstruction((LoadStoreInstruction) instruction);
-            case B -> executeInstruction((InstructionB) instruction);
+        //Check the instruction condition against the current PSR flags to determine if it should be executed or not
+        if(evaluateCondition(instruction.getCondition(), registerFile.getPSR())) {
+            switch(instruction.getInstructionFormat()) {
+                case R, I -> alu.executeInstruction((OpCodeInstruction) instruction);
+                case D, X -> executeInstruction((LoadStoreInstruction) instruction);
+                case B -> executeInstruction((InstructionB) instruction);
+            }
         }
+    }
+
+    private static boolean evaluateCondition(Condition condition, ProgramStatusRegister PSR) {
+        return switch (condition) {
+            case EQ -> PSR.getZBit() == 1;
+            case NE -> PSR.getZBit() == 0;
+            case CS -> PSR.getCBit() == 1;
+            case CC -> PSR.getCBit() == 0;
+            case MI -> PSR.getNBit() == 1;
+            case PL -> PSR.getNBit() == 0;
+            case VS -> PSR.getVBit() == 1;
+            case VC -> PSR.getVBit() == 0;
+            case HI -> (PSR.getCBit() == 1) && (PSR.getZBit() == 0);
+            case LS -> (PSR.getCBit() == 0) || (PSR.getZBit() == 1);
+            case GE -> PSR.getNBit() == PSR.getVBit();
+            case LT -> PSR.getNBit() != PSR.getVBit();
+            case GT -> (PSR.getZBit() == 0) && (PSR.getNBit() == PSR.getVBit());
+            case LE -> (PSR.getZBit() == 1) || (PSR.getNBit() != PSR.getVBit());
+            case AL -> true;
+        };
     }
 
     private void executeInstruction(LoadStoreInstruction instruction) {

@@ -4,15 +4,15 @@ import lombok.Data;
 
 
 /**
- * Represents all (16) of the Register objects available to the machine as well as the CPSR
+ * Represents all (16) of the Register objects available to the machine as well as the PSR
  * This includes special use registers (Like the PC, LR) and all general use registers
  */
 @Data
 public class RegisterFile {
 
     /**
-     * The total amount of registers (Note: this excludes the CPSR)
-     * @see RegisterFile#CPSR
+     * The total amount of registers (Note: this excludes the PSR)
+     * @see RegisterFile#PSR
      */
     private static final int TOTAL_GENERAL_REGISTERS = 16;
 
@@ -42,9 +42,9 @@ public class RegisterFile {
     private static final int PC_REG_INDEX = 15;
 
     /**
-     * Current Program State Register CPSR is a special (non-indexed) register for holding different state/status flags
+     * Program State Register PSR is a special (non-indexed) register for holding different state/status flags
      */
-    private static final Register CPSR = new CurrentProgramStatusRegister();
+    private static final ProgramStatusRegister PSR = new ProgramStatusRegister();
 
     private final Register[] registers;
 
@@ -68,6 +68,9 @@ public class RegisterFile {
         }
     }
 
+    public ProgramStatusRegister getPSR() {
+        return PSR;
+    }
     /**
      * A convenience method for getting a reference for the Frame Pointer (FP) register
      * @return A reference to the Frame Pointer register

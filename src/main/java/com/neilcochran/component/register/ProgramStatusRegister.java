@@ -3,40 +3,40 @@ package com.neilcochran.component.register;
 import com.neilcochran.util.BitUtils;
 
 /**
- * Represents the Current Program Status Register (CPSR) which holds various flags/states/statuses
+ * Represents the Program Status Register (PSR) which holds various flags/states/statuses
  */
-public class CurrentProgramStatusRegister extends Register {
+public class ProgramStatusRegister extends Register {
 
     /**
      * The bit index of the Negative Condition (N) flag
      */
-    private static final int N_BIT_INDEX = 31;
+    public static final int N_BIT_INDEX = 31;
 
     /**
      * The bit index of the Zero Condition (Z) flag
      */
-    private static final int Z_BIT_INDEX = 30;
+    public static final int Z_BIT_INDEX = 30;
 
     /**
      * The bit index of the Carry Condition (C) flag
      */
-    private static final int C_BIT_INDEX = 29;
+    public static final int C_BIT_INDEX = 29;
 
     /**
      * The bit index of the Overflow (V) flag
      */
-    private static final int V_BIT_INDEX = 28;
+    public static final int V_BIT_INDEX = 28;
 
     /**
      * The bit index of the 'sticky' Overflow (Q) flag
      */
-    private static final int Q_BIT_INDEX = 27;
+    public static final int Q_BIT_INDEX = 27;
 
     /**
-     * Constructs a new CurrentProgramStatusRegister which holds various flags/states/statuses
+     * Constructs a new ProgramStatusRegister which holds various flags/states/statuses
      */
-    public CurrentProgramStatusRegister() {
-        super("CPSR");
+    public ProgramStatusRegister() {
+        super("PSR");
     }
 
     /**

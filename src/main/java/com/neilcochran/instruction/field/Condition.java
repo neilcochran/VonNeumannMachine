@@ -15,8 +15,7 @@ public enum Condition {
     LT(0b1011, "Less than (signed)"),
     GT(0b1100, "Greater than (signed)"),
     LE(0b1101, "Less than or equal (signed)"),
-    AL(0b1110, "Always"),
-    NV(0b1111, "NO VALUE - RESERVED");
+    AL(0b1110, "Always");
 
     private final int bits;
     private final String description;
