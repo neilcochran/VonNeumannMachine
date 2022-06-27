@@ -7,7 +7,9 @@ import com.neilcochran.instruction.OpCodeInstruction;
 import com.neilcochran.instruction.field.Shift;
 import com.neilcochran.instruction.formatGroup.I.InstructionI;
 import com.neilcochran.instruction.formatGroup.R.InstructionR;
+import com.neilcochran.instruction.formatGroup.R.command.CMN;
 import com.neilcochran.instruction.formatGroup.R.command.CMP;
+import com.neilcochran.instruction.formatGroup.R.command.MOV;
 import com.neilcochran.util.BitUtils;
 import lombok.Data;
 
@@ -110,6 +112,8 @@ public class ALU {
     private Command getRCommand(InstructionR instruction) {
         return switch (instruction.getOpCode()) {
             case CMP -> new CMP(instruction, registerFile);
+            case CMN -> new CMN(instruction, registerFile);
+            case MOV -> new MOV(instruction, registerFile);
             default -> throw new IllegalArgumentException("Invalid OpCode name for R Command: " + instruction.getOpCode());
         };
     }
