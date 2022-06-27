@@ -10,8 +10,8 @@ import com.neilcochran.instruction.field.InstructionFormat;
 import com.neilcochran.instruction.formatGroup.B.InstructionB;
 import com.neilcochran.instruction.formatGroup.B.command.BRC;
 import com.neilcochran.instruction.formatGroup.D.InstructionD;
-import com.neilcochran.instruction.formatGroup.I.InstructionI;
-import com.neilcochran.instruction.formatGroup.R.InstructionR;
+import com.neilcochran.instruction.formatGroup.R_I.InstructionI;
+import com.neilcochran.instruction.formatGroup.R_I.InstructionR;
 import com.neilcochran.instruction.formatGroup.X.InstructionX;
 import com.neilcochran.util.BitUtils;
 

@@ -11,7 +11,14 @@ import lombok.Setter;
 @Setter
 public class OpCodeInstruction extends Instruction {
     public static final BitRange OPCODE_RANGE = new BitRange(21, 24);
+    private static final int STATE_FLAG_INDEX =  20;
+    private static final BitRange RN_OPERAND_RANGE = new BitRange(16, 19);
+    private static final BitRange RD_OPERAND_RANGE = new BitRange(12, 15);
+
     protected final OpCode opCode;
+    protected final int stateFlagBit;
+    protected final int RN;
+    protected final int RD;
 
     public OpCodeInstruction(int instruction, InstructionFormat instructionFormat) {
         super(instruction, instructionFormat);
@@ -20,5 +27,8 @@ public class OpCodeInstruction extends Instruction {
             throw new IllegalArgumentException("OpCodeInstruction received an invalid InstructionFormat of: %s. InstructionFormat must be R or I");
         }
         this.opCode = OpCode.fromBits(BitUtils.getBitRange(instruction, OPCODE_RANGE));
+        this.stateFlagBit = BitUtils.getKthBit(instruction, STATE_FLAG_INDEX);
+        this.RN = BitUtils.getBitRange(instruction, RN_OPERAND_RANGE);
+        this.RD = BitUtils.getBitRange(instruction, RD_OPERAND_RANGE);
     }
 }

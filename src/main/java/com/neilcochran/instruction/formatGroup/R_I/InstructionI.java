@@ -1,4 +1,4 @@
-package com.neilcochran.instruction.formatGroup.I;
+package com.neilcochran.instruction.formatGroup.R_I;
 
 import com.neilcochran.instruction.OpCodeInstruction;
 import com.neilcochran.instruction.field.InstructionFormat;
@@ -14,15 +14,9 @@ import lombok.Setter;
 @Getter
 @Setter
 public class InstructionI extends OpCodeInstruction {
-    private static final int STATE_FLAG_INDEX =  20;
-    private static final BitRange RN_OPERAND_RANGE = new BitRange(16, 19);
-    private static final BitRange RD_OPERAND_RANGE = new BitRange(12, 15);
     private static final BitRange IMMEDIATE_ROTATE_RANGE = new BitRange(8, 11);
     private static final BitRange IMMEDIATE_CONSTANT_RANGE = new BitRange(0, 7);
 
-    private final int stateFlagBit;
-    private final int RN;
-    private final int RD;
     private final RotateConstant rotateConstant;
 
     /**
@@ -32,15 +26,11 @@ public class InstructionI extends OpCodeInstruction {
      */
     public InstructionI(int instruction) {
         super(instruction, InstructionFormat.I);
-        this.stateFlagBit = BitUtils.getKthBit(instruction, STATE_FLAG_INDEX);
-        this.RN = BitUtils.getBitRange(instruction, RN_OPERAND_RANGE);
-        this.RD = BitUtils.getBitRange(instruction, RD_OPERAND_RANGE);
         this.rotateConstant = new RotateConstant(BitUtils.getBitRange(instruction, IMMEDIATE_ROTATE_RANGE), BitUtils.getBitRange(instruction, IMMEDIATE_CONSTANT_RANGE));
     }
 
     @Override
     public String toString() {
         return String.format("InstructionI(instruction=%s condition=%s OpCode=%s, RN=%d RD=%d rotateConstant=%s)", getBinaryString(), condition, opCode, RN, RD, rotateConstant);
-
     }
 }

@@ -1,4 +1,4 @@
-package com.neilcochran.instruction.formatGroup.R;
+package com.neilcochran.instruction.formatGroup.R_I;
 
 import com.neilcochran.instruction.OpCodeInstruction;
 import com.neilcochran.instruction.field.InstructionFormat;
@@ -14,15 +14,9 @@ import lombok.Setter;
 @Getter
 @Setter
 public class InstructionR extends OpCodeInstruction {
-    private static final int STATE_FLAG_INDEX =  20;
-    private static final BitRange RN_OPERAND_RANGE = new BitRange(16, 19);
-    private static final BitRange RD_OPERAND_RANGE = new BitRange(12, 15);
     private static final BitRange SHIFT_RANGE = new BitRange(5, 11);
     private static final BitRange RM_OPERAND_RANGE = new BitRange(0, 3);
 
-    private final int stateFlagBit;
-    private final int RN;
-    private final int RD;
     private final Shift shift;
     private final int RM;
 
@@ -33,9 +27,6 @@ public class InstructionR extends OpCodeInstruction {
      */
     public InstructionR(int instruction) {
         super(instruction,  InstructionFormat.R);
-        this.stateFlagBit = BitUtils.getKthBit(instruction, STATE_FLAG_INDEX);
-        this.RN = BitUtils.getBitRange(instruction, RN_OPERAND_RANGE);
-        this.RD = BitUtils.getBitRange(instruction, RD_OPERAND_RANGE);
         this.shift = new Shift(BitUtils.getBitRange(instruction, SHIFT_RANGE));
         this.RM = BitUtils.getBitRange(instruction, RM_OPERAND_RANGE);
     }

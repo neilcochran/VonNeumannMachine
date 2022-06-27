@@ -5,11 +5,10 @@ import com.neilcochran.component.register.RegisterFile;
 import com.neilcochran.instruction.Command;
 import com.neilcochran.instruction.OpCodeInstruction;
 import com.neilcochran.instruction.field.Shift;
-import com.neilcochran.instruction.formatGroup.I.InstructionI;
-import com.neilcochran.instruction.formatGroup.R.InstructionR;
-import com.neilcochran.instruction.formatGroup.R.command.CMN;
-import com.neilcochran.instruction.formatGroup.R.command.CMP;
-import com.neilcochran.instruction.formatGroup.R.command.MOV;
+import com.neilcochran.instruction.formatGroup.R_I.InstructionR;
+import com.neilcochran.instruction.formatGroup.R_I.command.CMN;
+import com.neilcochran.instruction.formatGroup.R_I.command.CMP;
+import com.neilcochran.instruction.formatGroup.R_I.command.MOV;
 import com.neilcochran.util.BitUtils;
 import lombok.Data;
 
@@ -21,15 +20,7 @@ public class ALU {
     private final RegisterFile registerFile;
 
     public void executeInstruction(OpCodeInstruction instruction) {
-        Command command = switch (instruction.getInstructionFormat()) {
-            case R -> getRCommand((InstructionR) instruction);
-            case I -> getICommand((InstructionI) instruction);
-            default -> throw new IllegalArgumentException("Invalid instruction format: " + instruction.getInstructionFormat());
-        };
-        if(command == null) {
-            throw new IllegalArgumentException("ALU produced an invalid null command");
-        }
-        command.executeCommand();
+        getCommand(instruction).executeCommand();
     }
 
     public static int calculateBarrelShift(InstructionR instructionR, RegisterFile registerFile) {
@@ -37,8 +28,7 @@ public class ALU {
         //get the value held in the register pointed to by RM
         int regData = registerFile.getRegister(regNum).getData();
         Shift shift = instructionR.getShift();
-        //TODO (?) detect if shift produces a Carry (overflow) and set C flag if it does, otherwise clear C flag
-        //OR is the range on the available shift bits always within range? if so no check needed.
+        //TODO Can update the C flag during the shift calculation
         return switch (shift.getShiftType()) {
             case LOGICAL_LEFT -> regData << shift.getShiftAmountBits();
             case LOGICAL_RIGHT -> regData >> shift.getShiftAmountBits();
@@ -75,14 +65,14 @@ public class ALU {
             //when x & y have different signs and the sign of the result is different from the sign of x then an
             //overflow has occurred
             if (((x ^ y) & (x ^ res)) < 0) {
-                PSR.setData(BitUtils.setKthBit(PSR.getData(), ProgramStatusRegister.V_BIT_INDEX));
+                PSR.setVBit();
                 //sub uses inverted C bit: set to 0 if overflow
-                PSR.setData(BitUtils.clearKthBit(PSR.getData(), ProgramStatusRegister.C_BIT_INDEX));
+                PSR.clearCBit();
             }
             else {
-                PSR.setData(BitUtils.clearKthBit(PSR.getData(), ProgramStatusRegister.V_BIT_INDEX));
+                PSR.clearVBit();
                 //sub uses inverted C bit: set to 1 when no overflow
-                PSR.setData(BitUtils.setKthBit(PSR.getData(), ProgramStatusRegister.C_BIT_INDEX));
+                PSR.setCBit();
             }
             setNZFlags(res, PSR);
         }
@@ -90,26 +80,26 @@ public class ALU {
     }
 
     //Set the N and Z flags
-    private static void setNZFlags(int data, ProgramStatusRegister PSR) {
+    public static void setNZFlags(int data, ProgramStatusRegister PSR) {
         if(data < 0) {
             //set N flag
-            PSR.setData(BitUtils.setKthBit(PSR.getData(), ProgramStatusRegister.N_BIT_INDEX));
+            PSR.setNBit();
         }
         else {
             //clear N flag
-            PSR.setData(BitUtils.clearKthBit(PSR.getData(), ProgramStatusRegister.N_BIT_INDEX));
+            PSR.clearNBit();
             if(data == 0) {
                 //set Z flag
-                PSR.setData(BitUtils.setKthBit(PSR.getData(), ProgramStatusRegister.Z_BIT_INDEX));
+                PSR.setZBit();
             }
             else {
                 //clear Z flag
-                PSR.setData(BitUtils.clearKthBit(PSR.getData(), ProgramStatusRegister.Z_BIT_INDEX));
+                PSR.clearZBit();
             }
         }
     }
 
-    private Command getRCommand(InstructionR instruction) {
+    private Command getCommand(OpCodeInstruction instruction) {
         return switch (instruction.getOpCode()) {
             case CMP -> new CMP(instruction, registerFile);
             case CMN -> new CMN(instruction, registerFile);
@@ -117,9 +107,4 @@ public class ALU {
             default -> throw new IllegalArgumentException("Invalid OpCode name for R Command: " + instruction.getOpCode());
         };
     }
-
-    private Command getICommand(InstructionI instruction) {
-        return null;
-    }
-
 }

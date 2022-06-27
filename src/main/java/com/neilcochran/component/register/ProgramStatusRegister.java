@@ -48,12 +48,28 @@ public class ProgramStatusRegister extends Register {
         return BitUtils.getKthBit(data, N_BIT_INDEX);
     }
 
+    public void setNBit() {
+        data = BitUtils.setKthBit(data, ProgramStatusRegister.N_BIT_INDEX);
+    }
+
+    public void clearNBit() {
+        data = BitUtils.clearKthBit(data, ProgramStatusRegister.N_BIT_INDEX);
+    }
+
     /**
      * Return the Zero Condition (Z) bit flag which is set to 1 if the result of the last flag-setting instruction was zero, and to 0 otherwise.
      * @return The Z flag bit value
      */
     public int getZBit() {
         return BitUtils.getKthBit(data, Z_BIT_INDEX);
+    }
+
+    public void setZBit() {
+        data = BitUtils.setKthBit(data, ProgramStatusRegister.Z_BIT_INDEX);
+    }
+
+    public void clearZBit() {
+        data = BitUtils.clearKthBit(data, ProgramStatusRegister.Z_BIT_INDEX);
     }
 
     /**
@@ -68,6 +84,14 @@ public class ProgramStatusRegister extends Register {
         return BitUtils.getKthBit(data, C_BIT_INDEX);
     }
 
+    public void setCBit() {
+        data = BitUtils.setKthBit(data, ProgramStatusRegister.C_BIT_INDEX);
+    }
+
+    public void clearCBit() {
+        data = BitUtils.clearKthBit(data, ProgramStatusRegister.C_BIT_INDEX);
+    }
+
     /**
      * Returns the Overflow Condition (V) bit flag
      * An overflow occurs if the result of an add, subtract, or compare is greater than or equal to 2^31, or less than 2^31
@@ -77,6 +101,14 @@ public class ProgramStatusRegister extends Register {
         return BitUtils.getKthBit(data, V_BIT_INDEX);
     }
 
+    public void setVBit() {
+        data = BitUtils.setKthBit(data, ProgramStatusRegister.V_BIT_INDEX);
+    }
+
+    public void clearVBit() {
+        data = BitUtils.clearKthBit(data, ProgramStatusRegister.V_BIT_INDEX);
+    }
+
     /**
      * Returns the 'sticky' Overflow (Q) bit flag
      * A 'sticky' version of overflow is caused by instructions that generate multiple results
@@ -84,5 +116,13 @@ public class ProgramStatusRegister extends Register {
      */
     public int getQBit() {
         return BitUtils.getKthBit(data, Q_BIT_INDEX);
+    }
+
+    public void setQBit() {
+        data = BitUtils.setKthBit(data, ProgramStatusRegister.Q_BIT_INDEX);
+    }
+
+    public void clearQBit() {
+        data = BitUtils.clearKthBit(data, ProgramStatusRegister.Q_BIT_INDEX);
     }
 }
