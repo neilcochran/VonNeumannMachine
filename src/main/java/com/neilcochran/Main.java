@@ -13,8 +13,8 @@ public class Main {
      */
     public static void main(String[] args) {
         int[] programData = {
-                // MOVS R1, #3
-                0b11100011101100000001000000000000
+                //MVNS R1, #1
+                0b11100011111100000001000000000001
         };
         var machine = new VonNeumannMachine();
         machine.loadProgram(programData);
