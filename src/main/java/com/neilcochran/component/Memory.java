@@ -7,22 +7,22 @@ import lombok.Data;
 import java.util.Arrays;
 
 /**
- * Represents Random Access Memory (RAM)
+ * Represents Memory
  */
 @Data
-public class RAM {
+public class Memory {
     private final int[] memory;
     private final int totalBytes;
 
     /**
-     * Represents RAM. Initialize the indicated bytes of RAM for a given word size
-     * @param totalBytes The total bytes of RAM to be allocated
+     * Represents memory. Initialize the indicated bytes of memory for a given word size
+     * @param totalBytes The total bytes of memory to be allocated
      * @throws IllegalArgumentException if the totalBytes is not a valid number for the word size
      * @see VonNeumannMachine#WORD_SIZE
      */
-    public RAM(int totalBytes) {
+    public Memory(int totalBytes) {
         if(totalBytes % VonNeumannMachine.WORD_SIZE != 0) {
-           throw new IllegalArgumentException("Invalid RAM bytes size: " + totalBytes + " for the given word size: " + VonNeumannMachine.WORD_SIZE);
+           throw new IllegalArgumentException("Invalid memory bytes size: " + totalBytes + " for the given word size: " + VonNeumannMachine.WORD_SIZE);
         }
         this.totalBytes = totalBytes;
         this.memory = new int[totalBytes / VonNeumannMachine.WORD_SIZE];

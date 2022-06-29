@@ -19,6 +19,7 @@ import lombok.Data;
 @Data
 public class ALU {
     private final RegisterFile registerFile;
+    private final ProgramStatusRegister PSR;
 
     public void executeInstruction(OpCodeInstruction instruction) {
         getCommand(instruction).executeCommand();
@@ -102,10 +103,10 @@ public class ALU {
 
     private Command getCommand(OpCodeInstruction instruction) {
         return switch (instruction.getOpCode()) {
-            case CMP -> new CMP(instruction, registerFile);
-            case CMN -> new CMN(instruction, registerFile);
-            case MOV -> new MOV(instruction, registerFile);
-            case MVN -> new MVN(instruction, registerFile);
+            case CMP -> new CMP(instruction, registerFile, PSR);
+            case CMN -> new CMN(instruction, registerFile, PSR);
+            case MOV -> new MOV(instruction, registerFile, PSR);
+            case MVN -> new MVN(instruction, registerFile, PSR);
             default -> throw new IllegalArgumentException("Invalid OpCode name for R Command: " + instruction.getOpCode());
         };
     }

@@ -1,6 +1,8 @@
 package com.neilcochran.component;
 
+import com.neilcochran.component.register.MemoryDataRegister;
 import com.neilcochran.component.register.ProgramStatusRegister;
+import com.neilcochran.component.register.Register;
 import com.neilcochran.component.register.RegisterFile;
 import com.neilcochran.instruction.Instruction;
 import com.neilcochran.instruction.LoadStoreInstruction;
@@ -14,14 +16,34 @@ import com.neilcochran.instruction.formatGroup.R_I.InstructionI;
 import com.neilcochran.instruction.formatGroup.R_I.InstructionR;
 import com.neilcochran.instruction.formatGroup.X.InstructionX;
 import com.neilcochran.util.BitUtils;
+import com.neilcochran.util.DataSize;
 
-/**
- * Represents a ControlUnit which orchestrates the decoding and execution steps
- * @param registerFile A reference to the registers
- * @param alu A reference to the Arithmetic Logic Unit
+public class ControlUnit {
 
- */
-public record ControlUnit(RegisterFile registerFile, ALU alu) {
+    public final Register memoryAddressRegister;
+    public final MemoryDataRegister memoryDataRegister;
+    public final Register instructionRegister;
+    private final RegisterFile registerFile;
+    private final ALU alu;
+    private final ProgramStatusRegister PSR;
+
+    public ControlUnit(RegisterFile registerFile, ALU alu, ProgramStatusRegister PSR, Memory memory) {
+        this.registerFile = registerFile;
+        this.alu = alu;
+        this.PSR = PSR;
+        memoryAddressRegister = new Register("MAR", "MAR");
+        memoryDataRegister = new MemoryDataRegister(memoryAddressRegister, memory);
+        instructionRegister = new Register("IR", "IR");
+    }
+
+    public void loadInstructionRegister() {
+        //PC -> MAR
+        memoryAddressRegister.setData(registerFile.getPCRegister().getData());
+        //MAR -> data -> MDR
+        memoryDataRegister.loadData(DataSize.WORD);
+        //MDR -> IR
+        instructionRegister.setData(memoryDataRegister.getData());
+    }
 
     /**
      * Decode the current instruction into the correct Instruction type.
@@ -44,9 +66,11 @@ public record ControlUnit(RegisterFile registerFile, ALU alu) {
     }
 
     //Determine if CU or ALU will execute the instruction
-    public void executeInstruction(Instruction instruction) {
+    public void executeInstruction() {
+        //decode the instruction
+        var instruction = decodeInstruction(instructionRegister.getData());
         //Check the instruction condition against the current PSR flags to determine if it should be executed or not
-        if(evaluateCondition(instruction.getCondition(), registerFile.getPSR())) {
+        if(evaluateCondition(instruction.getCondition(), PSR)) {
             switch(instruction.getInstructionFormat()) {
                 case R, I -> alu.executeInstruction((OpCodeInstruction) instruction);
                 case D, X -> executeInstruction((LoadStoreInstruction) instruction);
@@ -82,5 +106,17 @@ public record ControlUnit(RegisterFile registerFile, ALU alu) {
     private void executeInstruction(InstructionB instruction) {
         BRC brc = new BRC(instruction, registerFile);
         brc.executeCommand();
+    }
+
+    public Register getMemoryAddressRegister() {
+        return memoryAddressRegister;
+    }
+
+    public MemoryDataRegister getMemoryDataRegister() {
+        return memoryDataRegister;
+    }
+
+    public Register getInstructionRegister() {
+        return instructionRegister;
     }
 }

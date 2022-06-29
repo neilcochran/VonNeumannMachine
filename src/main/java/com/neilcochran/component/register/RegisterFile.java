@@ -41,11 +41,6 @@ public class RegisterFile {
      */
     private static final int PC_REG_INDEX = 15;
 
-    /**
-     * Program State Register PSR is a special (non-indexed) register for holding different state/status flags
-     */
-    private static final ProgramStatusRegister PSR = new ProgramStatusRegister();
-
     private final Register[] registers;
 
     /**
@@ -68,9 +63,6 @@ public class RegisterFile {
         }
     }
 
-    public ProgramStatusRegister getPSR() {
-        return PSR;
-    }
     /**
      * A convenience method for getting a reference for the Frame Pointer (FP) register
      * @return A reference to the Frame Pointer register

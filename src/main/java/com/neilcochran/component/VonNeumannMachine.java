@@ -1,5 +1,6 @@
 package com.neilcochran.component;
 
+import com.neilcochran.component.register.ProgramStatusRegister;
 import com.neilcochran.component.register.RegisterFile;
 import com.neilcochran.util.DataSize;
 import lombok.Data;
@@ -16,7 +17,7 @@ public class VonNeumannMachine {
     public static final int WORD_SIZE = DataSize.WORD.getBitLength();
 
     /**
-     * The default amount (bytes) of RAM provided for the machine to use
+     * The default amount (bytes) of memory provided for the machine to use
      */
     private static final int DEFAULT_RAM_BYTES = 65536;
 
@@ -24,17 +25,18 @@ public class VonNeumannMachine {
     private final ControlUnit controlUnit;
     private final ALU alu;
     private final CPU cpu;
-    private final RAM ram;
+    private final Memory memory;
 
     /**
-     * Creates a 32 bit Von Neumann Machine with 65536 bytes (64k) of RAM and 16 registers
+     * Creates a 32 bit Von Neumann Machine with 65536 bytes (64k) of memory and 16 registers
      */
     public VonNeumannMachine() {
-        ram = new RAM(DEFAULT_RAM_BYTES);
+        memory = new Memory(DEFAULT_RAM_BYTES);
         registerFile = new RegisterFile();
-        alu = new ALU(registerFile);
-        controlUnit = new ControlUnit(registerFile, alu);
-        cpu = new CPU(registerFile, controlUnit, alu, ram);
+        var PSR = new ProgramStatusRegister();
+        alu = new ALU(registerFile, PSR);
+        controlUnit = new ControlUnit(registerFile, alu, PSR, memory);
+        cpu = new CPU(registerFile, controlUnit);
     }
 
 
@@ -55,6 +57,6 @@ public class VonNeumannMachine {
     }
 
     public void loadProgram(int[] programData) {
-        ram.loadProgramData(programData);
+        memory.loadProgramData(programData);
     }
 }

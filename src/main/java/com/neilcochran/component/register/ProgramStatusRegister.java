@@ -36,7 +36,7 @@ public class ProgramStatusRegister extends Register {
      * Constructs a new ProgramStatusRegister which holds various flags/states/statuses
      */
     public ProgramStatusRegister() {
-        super("PSR");
+        super("PSR", "PSR");
     }
 
     /**
