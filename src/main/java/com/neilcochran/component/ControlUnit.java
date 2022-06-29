@@ -6,7 +6,6 @@ import com.neilcochran.component.register.Register;
 import com.neilcochran.component.register.RegisterFile;
 import com.neilcochran.instruction.Instruction;
 import com.neilcochran.instruction.LoadStoreInstruction;
-import com.neilcochran.instruction.OpCodeInstruction;
 import com.neilcochran.instruction.field.Condition;
 import com.neilcochran.instruction.field.InstructionFormat;
 import com.neilcochran.instruction.formatGroup.B.InstructionB;
@@ -45,41 +44,45 @@ public class ControlUnit {
         instructionRegister.setData(memoryDataRegister.getData());
     }
 
-    /**
-     * Decode the current instruction into the correct Instruction type.
-     * @param instruction The input instruction
-     * @return An Instruction object representing the decoded instruction
-     * @throws IllegalArgumentException if the instruction is invalid
-     */
-    public static Instruction decodeInstruction(int instruction) {
-        if(!BitUtils.validateBitLength(instruction, VonNeumannMachine.WORD_SIZE)) {
-            throw new IllegalArgumentException("Invalid instruction bit length: " + BitUtils.getBitLength(instruction));
-        }
-        var instructionFormat = InstructionFormat.fromFormatBits(BitUtils.getBitRange(instruction, Instruction.FORMAT_RANGE));
-        return switch(instructionFormat) {
-            case R -> new InstructionR(instruction);
-            case I -> new InstructionI(instruction);
-            case D -> new InstructionD(instruction);
-            case X -> new InstructionX(instruction);
-            case B -> new InstructionB(instruction);
-        };
-    }
-
     //Determine if CU or ALU will execute the instruction
     public void executeInstruction() {
-        //decode the instruction
-        var instruction = decodeInstruction(instructionRegister.getData());
-        //Check the instruction condition against the current PSR flags to determine if it should be executed or not
-        if(evaluateCondition(instruction.getCondition(), PSR)) {
-            switch(instruction.getInstructionFormat()) {
-                case R, I -> alu.executeInstruction((OpCodeInstruction) instruction);
-                case D, X -> executeInstruction((LoadStoreInstruction) instruction);
-                case B -> executeInstruction((InstructionB) instruction);
+        var instruction = instructionRegister.getData();
+        var instructionFormat = InstructionFormat.fromFormatBits(BitUtils.getBitRange(instruction, Instruction.FORMAT_RANGE));
+        switch(instructionFormat) {
+            case R -> {
+                var instructionR = new InstructionR(instruction);
+                if(evaluateInstructionCondition(instructionR.getCondition())){
+                    alu.executeInstruction(instructionR);
+                }
+            }
+            case I -> {
+                var instructionI = new InstructionI(instruction);
+                if(evaluateInstructionCondition(instructionI.getCondition())){
+                    alu.executeInstruction(instructionI);
+                }
+            }
+            case D -> {
+                var instructionD = new InstructionD(instruction);
+                if(evaluateInstructionCondition(instructionD.getCondition())) {
+                    executeInstruction(instructionD);
+                }
+            }
+            case X -> {
+                var instructionX = new InstructionX(instruction);
+                if(evaluateInstructionCondition(instructionX.getCondition())) {
+                    executeInstruction(instructionX);
+                }
+            }
+            case B -> {
+                var instructionB = new InstructionB(instruction);
+                if(evaluateInstructionCondition(instructionB.getCondition())) {
+                    executeInstruction(instructionB);
+                }
             }
         }
     }
 
-    private static boolean evaluateCondition(Condition condition, ProgramStatusRegister PSR) {
+    private boolean evaluateInstructionCondition(Condition condition) {
         return switch (condition) {
             case EQ -> PSR.getZBit() == 1;
             case NE -> PSR.getZBit() == 0;
