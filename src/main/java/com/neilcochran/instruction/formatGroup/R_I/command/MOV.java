@@ -2,29 +2,24 @@ package com.neilcochran.instruction.formatGroup.R_I.command;
 
 import com.neilcochran.component.ALU;
 import com.neilcochran.component.register.ProgramStatusRegister;
-import com.neilcochran.component.register.Register;
 import com.neilcochran.component.register.RegisterFile;
-import com.neilcochran.instruction.Command;
 import com.neilcochran.instruction.OpCodeInstruction;
-import com.neilcochran.util.CommandUtil;
 
-public class MOV extends Command {
+public class MOV extends CommandRI {
 
-    private final RegisterFile registerFile;
     private final ProgramStatusRegister PSR;
 
     public MOV(OpCodeInstruction instruction, RegisterFile registerFile, ProgramStatusRegister PSR) {
-        super(instruction);
-        this.registerFile = registerFile;
+        super(instruction, registerFile);
         this.PSR = PSR;
     }
 
     @Override
     public void executeCommand() {
-        OpCodeInstruction movInstruction = (OpCodeInstruction) instruction;
+        var movInstruction = (OpCodeInstruction) instruction;
         //TODO enforce register Rd restrictions (mostly around PC/LR)
-        Register RD = registerFile.getRegister(movInstruction.getRD());
-        int operand2 = CommandUtil.getOpCodeInstructionOperand2(movInstruction, registerFile);
+        var RD = registerFile.getRegister(movInstruction.getRD());
+        var operand2 = calculateOperand2();
         RD.setData(operand2);
         //if S flag set, update N & Z flags (C flag may have been set during barrel shift)
         if(movInstruction.getStateFlagBit() == 1) {

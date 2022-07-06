@@ -9,19 +9,19 @@ import com.neilcochran.instruction.LoadStoreInstruction;
 import com.neilcochran.instruction.field.Condition;
 import com.neilcochran.instruction.field.InstructionFormat;
 import com.neilcochran.instruction.formatGroup.B.InstructionB;
-import com.neilcochran.instruction.formatGroup.B.command.BRC;
-import com.neilcochran.instruction.formatGroup.D.InstructionD;
+import com.neilcochran.instruction.formatGroup.B.command.BR;
+import com.neilcochran.instruction.formatGroup.D_X.InstructionD;
+import com.neilcochran.instruction.formatGroup.D_X.InstructionX;
 import com.neilcochran.instruction.formatGroup.R_I.InstructionI;
 import com.neilcochran.instruction.formatGroup.R_I.InstructionR;
-import com.neilcochran.instruction.formatGroup.X.InstructionX;
 import com.neilcochran.util.BitUtils;
 import com.neilcochran.util.DataSize;
 
 public class ControlUnit {
 
-    public final Register memoryAddressRegister;
-    public final MemoryDataRegister memoryDataRegister;
-    public final Register instructionRegister;
+    private final Register memoryAddressRegister;
+    private final MemoryDataRegister memoryDataRegister;
+    private final Register instructionRegister;
     private final RegisterFile registerFile;
     private final ALU alu;
     private final ProgramStatusRegister PSR;
@@ -107,8 +107,8 @@ public class ControlUnit {
     }
 
     private void executeInstruction(InstructionB instruction) {
-        BRC brc = new BRC(instruction, registerFile);
-        brc.executeCommand();
+        BR br = new BR(instruction, registerFile);
+        br.executeCommand();
     }
 
     public Register getMemoryAddressRegister() {

@@ -10,6 +10,7 @@ public class Register {
 
     protected final String name;
     protected final String alias;
+    //TODO have setData use bit logic like Memory#storeData()
     protected int data = 0b0;
 
     /**

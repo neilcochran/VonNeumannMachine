@@ -1,4 +1,4 @@
-package com.neilcochran.instruction.formatGroup.X;
+package com.neilcochran.instruction.formatGroup.D_X;
 
 import com.neilcochran.instruction.LoadStoreInstruction;
 import com.neilcochran.instruction.field.InstructionFormat;

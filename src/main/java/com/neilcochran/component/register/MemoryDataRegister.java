@@ -14,8 +14,13 @@ public class MemoryDataRegister extends Register {
         this.memory = memory;
     }
 
-    //populate the register with the data located at the address currently held in the memory address register
+    //load the register with the data located at the address currently held in the memory address register
     public void loadData(DataSize dataSize) {
         this.data = memory.loadData(memoryAddressRegister.getData(), dataSize);
+    }
+
+    //store this register's data in memory at the address held in the MAR
+    public void storeData(DataSize dataSize) {
+        memory.storeData(memoryAddressRegister.getData(), dataSize, getData());
     }
 }

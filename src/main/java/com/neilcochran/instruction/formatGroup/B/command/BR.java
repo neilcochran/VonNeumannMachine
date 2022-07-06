@@ -4,12 +4,10 @@ import com.neilcochran.component.register.RegisterFile;
 import com.neilcochran.instruction.Command;
 import com.neilcochran.instruction.formatGroup.B.InstructionB;
 
-public class BRC extends Command {
-    private final RegisterFile registerFile;
+public class BR extends Command {
 
-    public BRC(InstructionB instructionB, RegisterFile registerFile) {
-        super(instructionB);
-        this.registerFile = registerFile;
+    public BR(InstructionB instruction, RegisterFile registerFile) {
+        super(instruction, registerFile);
     }
     @Override
     public void executeCommand() {
