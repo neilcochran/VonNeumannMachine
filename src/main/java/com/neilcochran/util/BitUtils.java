@@ -108,4 +108,12 @@ public class BitUtils {
         }
         return binaryString;
     }
+
+    public static boolean bitToBool(int bit) {
+        return switch (bit) {
+            case 0 -> false;
+            case 1 -> true;
+            default -> throw new IllegalArgumentException("Bit values can only be 0 or 1 but encountered: " + bit);
+        };
+    }
 }

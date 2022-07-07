@@ -8,10 +8,13 @@ import com.neilcochran.instruction.Instruction;
 import com.neilcochran.instruction.LoadStoreInstruction;
 import com.neilcochran.instruction.field.Condition;
 import com.neilcochran.instruction.field.InstructionFormat;
+import com.neilcochran.instruction.field.Shift;
 import com.neilcochran.instruction.formatGroup.B.InstructionB;
 import com.neilcochran.instruction.formatGroup.B.command.BR;
 import com.neilcochran.instruction.formatGroup.D_X.InstructionD;
 import com.neilcochran.instruction.formatGroup.D_X.InstructionX;
+import com.neilcochran.instruction.formatGroup.D_X.command.LDR;
+import com.neilcochran.instruction.formatGroup.D_X.command.STR;
 import com.neilcochran.instruction.formatGroup.R_I.InstructionI;
 import com.neilcochran.instruction.formatGroup.R_I.InstructionR;
 import com.neilcochran.util.BitUtils;
@@ -33,6 +36,26 @@ public class ControlUnit {
         memoryAddressRegister = new Register("MAR", "MAR");
         memoryDataRegister = new MemoryDataRegister(memoryAddressRegister, memory);
         instructionRegister = new Register("IR", "IR");
+    }
+
+    public static int calculateBarrelShift(InstructionR instructionR, RegisterFile registerFile) {
+        return calculateBarrelShift(instructionR.getRM(), instructionR.getShift(), registerFile);
+    }
+
+    public static int calculateBarrelShift(InstructionX instructionX, RegisterFile registerFile) {
+        return calculateBarrelShift(instructionX.getRM(), instructionX.getShift(), registerFile);
+    }
+
+    private static int calculateBarrelShift(int RM, Shift shift, RegisterFile registerFile) {
+        //get the value held in the register pointed to by RM
+        int regData = registerFile.getRegister(RM).getData();
+        //TODO Can update the C flag during the shift calculation
+        return switch (shift.getShiftType()) {
+            case LOGICAL_LEFT -> regData << shift.getShiftAmountBits();
+            case LOGICAL_RIGHT -> regData >> shift.getShiftAmountBits();
+            case ARITHMETIC_RIGHT -> regData >>> shift.getShiftAmountBits();
+            case ROTATE_RIGHT -> BitUtils.calculateRotate(shift.getShiftAmountBits(), regData);
+        };
     }
 
     public void loadInstructionRegister() {
@@ -92,6 +115,7 @@ public class ControlUnit {
             case PL -> PSR.getNBit() == 0;
             case VS -> PSR.getVBit() == 1;
             case VC -> PSR.getVBit() == 0;
+            //TODO use bit boolean logic here (like & vs &&)
             case HI -> (PSR.getCBit() == 1) && (PSR.getZBit() == 0);
             case LS -> (PSR.getCBit() == 0) || (PSR.getZBit() == 1);
             case GE -> PSR.getNBit() == PSR.getVBit();
@@ -103,12 +127,15 @@ public class ControlUnit {
     }
 
     private void executeInstruction(LoadStoreInstruction instruction) {
-        //todo get command and execute in CU (here)
+        //check if loading (L==1) or storing (L==0)
+        (BitUtils.bitToBool(instruction.getLoadStoreBit())
+                ? new LDR(instruction, registerFile, this)
+                : new STR(instruction, registerFile, this)
+        ).executeCommand();
     }
 
     private void executeInstruction(InstructionB instruction) {
-        BR br = new BR(instruction, registerFile);
-        br.executeCommand();
+        new BR(instruction, registerFile).executeCommand();
     }
 
     public Register getMemoryAddressRegister() {

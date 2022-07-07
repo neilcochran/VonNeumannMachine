@@ -1,6 +1,6 @@
 package com.neilcochran.instruction.formatGroup.R_I.command;
 
-import com.neilcochran.component.ALU;
+import com.neilcochran.component.ControlUnit;
 import com.neilcochran.component.register.RegisterFile;
 import com.neilcochran.instruction.Command;
 import com.neilcochran.instruction.OpCodeInstruction;
@@ -15,7 +15,7 @@ public abstract class CommandRI extends Command {
 
     protected int calculateOperand2() {
         return switch (instruction.getInstructionFormat()) {
-            case R -> ALU.calculateBarrelShift(((InstructionR) instruction), registerFile);
+            case R -> ControlUnit.calculateBarrelShift(((InstructionR) instruction), registerFile);
             case I ->  ((InstructionI) instruction).getRotateConstant().getResult();
             default -> throw new IllegalArgumentException("Invalid instruction format: " + instruction.getInstructionFormat());
         };

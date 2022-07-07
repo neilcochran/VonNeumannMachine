@@ -25,20 +25,6 @@ public class ALU {
         getCommand(instruction).executeCommand();
     }
 
-    public static int calculateBarrelShift(InstructionR instructionR, RegisterFile registerFile) {
-        int regNum = instructionR.getRM();
-        //get the value held in the register pointed to by RM
-        int regData = registerFile.getRegister(regNum).getData();
-        Shift shift = instructionR.getShift();
-        //TODO Can update the C flag during the shift calculation
-        return switch (shift.getShiftType()) {
-            case LOGICAL_LEFT -> regData << shift.getShiftAmountBits();
-            case LOGICAL_RIGHT -> regData >> shift.getShiftAmountBits();
-            case ARITHMETIC_RIGHT -> regData >>> shift.getShiftAmountBits();
-            case ROTATE_RIGHT -> BitUtils.calculateRotate(shift.getShiftAmountBits(), regData);
-        };
-    }
-
     public static int add(int x, int y, ProgramStatusRegister PSR) {
         int res = x + y;
         if(PSR != null) {

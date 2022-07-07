@@ -22,6 +22,6 @@ public class STR extends CommandDX {
         //set the value to store in MDR
         MDR.setData(RD.getData());
         //MDR stores the value in memory
-        MDR.storeData(strInstruction.getLoadStore().getDataSize());
+        MDR.storeData(strInstruction.getDataSize());
     }
 }

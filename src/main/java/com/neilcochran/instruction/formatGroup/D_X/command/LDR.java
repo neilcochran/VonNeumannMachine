@@ -20,7 +20,7 @@ public class LDR extends CommandDX {
         //set the calculated address in the MAR
         MAR.setData(operand2);
         //MDR loads the data pointed to by MAR
-        MDR.loadData(ldrInstruction.getLoadStore().getDataSize());
+        MDR.loadData(ldrInstruction.getDataSize());
         //set result in RD
         RD.setData(MDR.getData());
     }

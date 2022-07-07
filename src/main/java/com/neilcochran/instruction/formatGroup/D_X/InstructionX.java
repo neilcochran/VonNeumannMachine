@@ -5,10 +5,14 @@ import com.neilcochran.instruction.field.InstructionFormat;
 import com.neilcochran.instruction.field.Shift;
 import com.neilcochran.util.BitRange;
 import com.neilcochran.util.BitUtils;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * Represents an X-Instruction
  */
+@Getter
+@Setter
 public class InstructionX extends LoadStoreInstruction {
     private static final BitRange SHIFT_RANGE = new BitRange(5, 11);
     private static final BitRange RM_RANGE = new BitRange(0, 3);
@@ -29,7 +33,6 @@ public class InstructionX extends LoadStoreInstruction {
 
     @Override
     public String toString() {
-        return String.format("InstructionD(instruction=%s condition=%s U=%d L=%d RN=%d RD=%d shift=%s RM=%d)", getBinaryString(), condition, loadStore.getLoadStoreBit(), loadStore.getOffsetAddSubBit(), RN, RD, shift, RM);
-
+        return String.format("InstructionD(instruction=%s condition=%s U=%d L=%d RN=%d RD=%d shift=%s RM=%d)", getBinaryString(), condition, getLoadStoreBit(), getOffsetAddSubBit(), RN, RD, shift, RM);
     }
 }
