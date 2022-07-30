@@ -3,6 +3,8 @@ package com.neilcochran.component;
 import com.neilcochran.util.BitUtils;
 import com.neilcochran.util.DataSize;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Arrays;
 
@@ -12,7 +14,7 @@ import java.util.Arrays;
 @Data
 public class Memory {
     private final int[] memory;
-    private final int totalBytes;
+    public final int totalBytes;
 
     /**
      * Represents byte addressable memory. Initialize the indicated bytes of memory for a given word size
@@ -35,14 +37,8 @@ public class Memory {
      * @return The data at byteAddress in memory for the given dataSize
      */
     public int loadData(int byteAddress, DataSize dataSize) {
-        if(!isValidByteAddress(byteAddress)) {
-            throw new IllegalArgumentException(String.format("Invalid byte address: %d", byteAddress));
-        }
-        int memIndex = calculateMemoryIndex(byteAddress);
-        int offset = memIndex * 32;
-        int start = (byteAddress * DataSize.BYTE.getBitLength()) - offset;
-        int end = (start + dataSize.getBitLength() - 1);
-        return BitUtils.getBitRange(memory[memIndex], start, end);
+        var address = new Address(byteAddress, dataSize);
+        return BitUtils.getBitRange(memory[address.getMemoryIndex()], address.getBitStartIndex(), address.getBitEndIndex());
     }
 
     /**
@@ -52,39 +48,29 @@ public class Memory {
      * @param data The data to be stored
      */
     public void storeData(int byteAddress, DataSize dataSize, int data) {
-        if(!isValidByteAddress(byteAddress)) {
-            throw new IllegalArgumentException(String.format("Invalid byte address: %d", byteAddress));
+        var address = new Address(byteAddress, dataSize);
+        var targetMem = memory[address.getMemoryIndex()];
+        for(var i = address.getBitStartIndex(); i < address.getBitEndIndex(); i++) {
+            //get the target bit
+            var bit = BitUtils.getKthBit(data,i - address.getBitStartIndex());
+            //set the target bit in target memory
+            targetMem = BitUtils.bitToBool(bit) ? BitUtils.setKthBit(targetMem, i) : BitUtils.clearKthBit(targetMem, i);
         }
-        var memIndex = calculateMemoryIndex(byteAddress);
-        var targetMem = memory[memIndex];
-        //get the target bit range
-        var targetBits = BitUtils.getBitRange(targetMem, 0, dataSize.getBitLength() - 1);
-        //create a 1s complement bit mask of the target bits
-        var clearMask = ~targetBits;
-        //AND the target memory with the bit mask to clear the relevant bits
-        targetMem &= clearMask;
-        //OR the target memory with the data to be stored
-        targetMem |= data;
         //update memory
-        memory[memIndex] = targetMem;
-    }
+        memory[address.getMemoryIndex()] = targetMem;
+        //        //TODO use bit masking logic to clear/set bits instead of looping. Broken WIP below
+        //        //get the target bit range
+        //        var targetBits = BitUtils.getBitRange(targetMem, start, end);
+        //        //var targetBits = BitUtils.getBitRange(targetMem, 0, dataSize.getBitLength() - 1);
+        //        //create a 1s complement bit mask of the target bits
+        //        var clearMask = ~targetBits;
+        //        //AND the target memory with the bit mask to clear the relevant bits
+        //        targetMem &= clearMask;
+        //        //OR the target memory with the data to be stored
+        //        targetMem |= data;
+        //        //update memory
+        //        memory[memIndex] = targetMem;
 
-    /**
-     * For a given byteAddress calculate the corresponding memory array index
-     * @param byteAddress The byte address to be converted into an array index
-     * @return The memory array index for the given byteAddress
-     */
-    private int calculateMemoryIndex(int byteAddress) {
-        return (byteAddress * 8 ) / DataSize.WORD.getBitLength();
-    }
-
-    /**
-     * Validates a given byte address. A byte address is invalid if it is negative, or greater than the total number of bytes
-     * @param byteAddress The byte address to validate
-     * @return true if the byte address is valid, false otherwise
-     */
-    private boolean isValidByteAddress(int byteAddress) {
-        return byteAddress >= 0 && byteAddress < totalBytes;
     }
 
     /**
@@ -96,5 +82,53 @@ public class Memory {
             throw new IllegalArgumentException("Cannot load a program that is bigger than memory");
         }
         System.arraycopy(programData, 0, memory, 0, programData.length);
+    }
+
+    /**
+     * Represents an Address in memory.
+     * Memory is an array of 32-bit integers (words) that supports byte addressing. Thus, additional calculated address information is needed.
+     */
+    @Getter
+    @Setter
+    private class Address {
+        private final int byteAddress;
+        private final int memoryIndex;
+        private final int bitOffset;
+        private final int bitStartIndex;
+        private final int bitEndIndex;
+
+        /**
+         * Constructs an Address for the given byte address and DataSize
+         * @param byteAddress The target byte address
+         * @param dataSize The target DataSize
+         */
+        public Address(int byteAddress, DataSize dataSize) {
+            if(!isValidByteAddress(byteAddress)) {
+                throw new IllegalArgumentException("Invalid byte address: " + byteAddress);
+            }
+            this.byteAddress = byteAddress;
+            this.memoryIndex = calculateMemoryIndex(this.byteAddress);
+            this.bitOffset = this.memoryIndex * DataSize.WORD.getBitLength();
+            this.bitStartIndex = (this.byteAddress * DataSize.BYTE.getBitLength()) - bitOffset;
+            this.bitEndIndex = bitStartIndex + dataSize.getBitLength() - 1;
+        }
+
+        /**
+         * For a given byteAddress calculate the corresponding memory array index
+         * @param byteAddress The byte address to be converted into an array index
+         * @return The memory array index for the given byteAddress
+         */
+        private int calculateMemoryIndex(int byteAddress) {
+            return (byteAddress * 8 ) / DataSize.WORD.getBitLength();
+        }
+
+        /**
+         * Validates a given byte address. A byte address is invalid if it is negative, or greater than the total number of bytes
+         * @param byteAddress The byte address to validate
+         * @return true if the byte address is valid, false otherwise
+         */
+        private boolean isValidByteAddress(int byteAddress) {
+            return byteAddress >= 0 && byteAddress < totalBytes;
+        }
     }
 }
