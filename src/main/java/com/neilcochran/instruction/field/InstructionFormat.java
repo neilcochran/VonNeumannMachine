@@ -5,10 +5,30 @@ package com.neilcochran.instruction.field;
  * An enum representing the different instruction formats and the bit patterns that define them
  */
 public enum InstructionFormat {
+
+    /**
+     * R Instruction format group
+     */
     R(0b000),
+
+    /**
+     * I Instruction format group
+     */
     I(0b001),
+
+    /**
+     * D Instruction format group
+     */
     D(0b010),
+
+    /**
+     * X Instruction format group
+     */
     X(0b011),
+
+    /**
+     * B Instruction format group
+     */
     B(0b101);
 
     private final int formatBits;

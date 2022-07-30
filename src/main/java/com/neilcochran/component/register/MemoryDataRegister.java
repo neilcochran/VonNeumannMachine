@@ -26,8 +26,8 @@ public class MemoryDataRegister extends Register {
 
     /**
      * Loads the register with the data located at the address currently held in the memory address register (MAR)
-     * @param dataSize The `DataSize` being loaded from memory
-     * @param signExtend A flag indicating if the value should be sign extended (`true`) or zero padded (`false`)
+     * @param dataSize The DataSize being loaded from memory
+     * @param signExtend A flag indicating if the value should be sign extended (true) or zero padded (false)
      */
     public void loadData(DataSize dataSize, boolean signExtend) {
         int loadedValue = memory.loadData(memoryAddressRegister.getData(), dataSize);
@@ -45,16 +45,16 @@ public class MemoryDataRegister extends Register {
 
     /**
      * Store the register's data in memory at the address held in the Memory Address Register (MAR)
-     * @param dataSize The `DataSize` of the value to be stored
+     * @param dataSize The DataSize of the value to be stored
      */
     public void storeData(DataSize dataSize) {
         memory.storeData(memoryAddressRegister.getData(), dataSize, getData());
     }
 
     /**
-     * Sign extend an integer `value` to fit the given `dataSize`
+     * Sign extend an integer value to fit the given dataSize
      * @param value The integer to be sign extended
-     * @param dataSize The target `DataSize`
+     * @param dataSize The target DataSize
      * @return The resulting sign extended integer
      */
     private static int signExtend(int value, DataSize dataSize) {
@@ -63,9 +63,9 @@ public class MemoryDataRegister extends Register {
     }
 
     /**
-     * Zero pad an integer `value` to fit the given `dataSize`
+     * Zero pad an integer value to fit the given dataSize
      * @param value The integer to be zero padded
-     * @param dataSize The target `DataSize`
+     * @param dataSize The target DataSize
      * @return The resulting zero padded integer
      */
     private static int zeroPad(int value, DataSize dataSize) {

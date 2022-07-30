@@ -26,7 +26,7 @@ public class Shift {
     private final int shiftAmountBits;
 
     /**
-     * Constructs a new Shift from the given `shiftBits`
+     * Constructs a new Shift from the given shiftBits
      * @param shiftBits The integer that encodes for the given Shift
      */
     public Shift(int shiftBits) {

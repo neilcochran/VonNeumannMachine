@@ -33,11 +33,11 @@ public class ControlUnit {
     private final ProgramStatusRegister PSR;
 
     /**
-     * Constructs a `ControlUnit`
-     * @param registerFile A reference to the machine's `RegisterFile`
-     * @param alu A reference to the machine's `ALU`
-     * @param PSR A reference to the machine's `PSR`
-     * @param memory A reference to the machine's `Memory`
+     * Constructs a ControlUnit
+     * @param registerFile A reference to the machine's RegisterFile
+     * @param alu A reference to the machine's ALU
+     * @param PSR A reference to the machine's PSR
+     * @param memory A reference to the machine's Memory
      */
     public ControlUnit(RegisterFile registerFile, ALU alu, ProgramStatusRegister PSR, Memory memory) {
         this.registerFile = registerFile;
@@ -49,9 +49,9 @@ public class ControlUnit {
     }
 
     /**
-     * Calculates the barrel shift for a given `InstructionR`'s second operand
+     * Calculates the barrel shift for a given InstructionR's second operand
      * @param instructionR The instruction to perform the barrel shift on
-     * @param registerFile A reference to the machine's `RegisterFile`
+     * @param registerFile A reference to the machine's RegisterFile
      * @return The calculated result of the barrel shift
      */
     public static int calculateBarrelShift(InstructionR instructionR, RegisterFile registerFile) {
@@ -59,9 +59,9 @@ public class ControlUnit {
     }
 
     /**
-     * Calculates the barrel shift for a given `InstructionX`'s second operand
+     * Calculates the barrel shift for a given InstructionX's second operand
      * @param instructionX The instruction to perform the barrel shift on
-     * @param registerFile A reference to the machine's `RegisterFile`
+     * @param registerFile A reference to the machine's RegisterFile
      * @return The calculated result of the barrel shift
      */
     public static int calculateBarrelShift(InstructionX instructionX, RegisterFile registerFile) {
@@ -69,11 +69,11 @@ public class ControlUnit {
     }
 
     /**
-     * Calculate a barrel shift on the value held in the register pointed to in `RM`
+     * Calculate a barrel shift on the value held in the register pointed to in RM
      * @param RM The register that holds the value to perform the barrel shift on
      * @param shift The shift to be performed
-     * @param registerFile A reference to the machine's `RegisterFile`
-     * @return The calculated result of performing the indicated `shift` on the value held in the register pointed to by `RM`
+     * @param registerFile A reference to the machine's RegisterFile
+     * @return The calculated result of performing the indicated shift on the value held in the register pointed to by RM
      */
     private static int calculateBarrelShift(int RM, Shift shift, RegisterFile registerFile) {
         //get the value held in the register pointed to by RM
@@ -102,8 +102,8 @@ public class ControlUnit {
     }
 
     /**
-     * Decode the instruction currently held in the `instructionRegister`. Mathematics and logical instructions will be passed to the ALU for execution,
-     * while all other instructions will be executed here by the `ControlUnit`
+     * Decode the instruction currently held in the instructionRegister. Mathematics and logical instructions will be passed to the ALU for execution,
+     * while all other instructions will be executed here by the ControlUnit
      */
     public void decodeAndExecuteInstruction() {
         var instruction = instructionRegister.getData();
@@ -143,9 +143,9 @@ public class ControlUnit {
     }
 
     /**
-     * Evaluate the given `condition` based on the current bit flag values held in the `ProgramStatusRegister`
+     * Evaluate the given condition based on the current bit flag values held in the ProgramStatusRegister
      * @param condition The logical condition to be evaluated
-     * @return The boolean result of evaluating the `condition` against the current bit flag values held in the `ProgramStatusRegister`
+     * @return The boolean result of evaluating the condition against the current bit flag values held in the ProgramStatusRegister
      */
     private boolean evaluateInstructionCondition(Condition condition) {
         return switch (condition) {
@@ -169,8 +169,8 @@ public class ControlUnit {
     }
 
     /**
-     * Decode and execute the given `LoadStoreInstruction`
-     * @param instruction The `LoadStoreInstruction` to be decoded and executed
+     * Decode and execute the given LoadStoreInstruction
+     * @param instruction The LoadStoreInstruction to be decoded and executed
      */
     private void decodeAndExecuteInstruction(LoadStoreInstruction instruction) {
         //check if loading (L==1) or storing (L==0)
@@ -181,32 +181,32 @@ public class ControlUnit {
     }
 
     /**
-     * Decode and execute the given `InstructionB`
-     * @param instruction The `InstructionB` to be decoded and executed
+     * Decode and execute the given InstructionB
+     * @param instruction The InstructionB to be decoded and executed
      */
     private void decodeAndExecuteInstruction(InstructionB instruction) {
         new BR(instruction, registerFile).executeCommand();
     }
 
     /**
-     * Returns a reference to the `memoryAddressRegister`
-     * @return A reference to the `memoryAddressRegister`
+     * Returns a reference to the memoryAddressRegister
+     * @return A reference to the memoryAddressRegister
      */
     public Register getMemoryAddressRegister() {
         return memoryAddressRegister;
     }
 
     /**
-     * Returns a reference to the `memoryDataRegister`
-     * @return A reference to the `memoryDataRegister`
+     * Returns a reference to the memoryDataRegister
+     * @return A reference to the memoryDataRegister
      */
     public MemoryDataRegister getMemoryDataRegister() {
         return memoryDataRegister;
     }
 
     /**
-     * Returns a reference to the `instructionRegister`
-     * @return A reference to the `instructionRegister`
+     * Returns a reference to the instructionRegister
+     * @return A reference to the instructionRegister
      */
     public Register getInstructionRegister() {
         return instructionRegister;

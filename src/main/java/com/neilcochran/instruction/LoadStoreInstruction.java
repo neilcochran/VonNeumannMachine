@@ -27,7 +27,7 @@ public class LoadStoreInstruction extends Instruction {
     private static final int U_BIT_INDEX = 23;
 
     /**
-     * The bit range that encodes the `DataSize` to be loaded/stored
+     * The bit range that encodes the DataSize to be loaded/stored
      * @see com.neilcochran.instruction.LoadStoreInstruction#dataSize
      */
     private static final BitRange DATA_SIZE_RANGE = new BitRange(21, 22);
@@ -62,13 +62,20 @@ public class LoadStoreInstruction extends Instruction {
     //indicate signed/unsigned: sign extended (1) or zero extended (0)
     private final int signBit;
 
+    /**
+     * The RN register number
+     */
     protected final int RN;
+
+    /**
+     * The RD register number
+     */
     protected final int RD;
 
     /**
-     * Constructs a new LoadStoreInstruction of the given `instructionFormat` from the `instruction` integer
-     * @param instruction The integer that encodes for the given `Instruction`
-     * @param instructionFormat The `InstructionFormat` of the `Instruction`
+     * Constructs a new LoadStoreInstruction of the given instructionFormat from the instruction integer
+     * @param instruction The integer that encodes for the given Instruction
+     * @param instructionFormat The InstructionFormat of the Instruction
      */
     public LoadStoreInstruction(int instruction, InstructionFormat instructionFormat) {
         super(instruction, instructionFormat);

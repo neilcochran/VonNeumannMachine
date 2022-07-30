@@ -16,7 +16,7 @@ import lombok.Setter;
 public class InstructionR extends OpCodeInstruction {
 
     /**
-     * The bit range that encodes the `Shift`
+     * The bit range that encodes the Shift
      * @see com.neilcochran.instruction.formatGroup.R_I.InstructionR#shift
      */
     private static final BitRange SHIFT_RANGE = new BitRange(5, 11);
@@ -32,8 +32,8 @@ public class InstructionR extends OpCodeInstruction {
 
     /**
      * Constructs an InstructionR from an integer that encodes for an instruction of the R format group
-     * @param instruction The integer that encodes for the given `InstructionR`
-     * @throws IllegalArgumentException if the instruction is not a valid `InstructionR`
+     * @param instruction The integer that encodes for the given InstructionR
+     * @throws IllegalArgumentException if the instruction is not a valid InstructionR
      */
     public InstructionR(int instruction) {
         super(instruction,  InstructionFormat.R);
@@ -42,8 +42,8 @@ public class InstructionR extends OpCodeInstruction {
     }
 
     /**
-     * Get a string representation of the `InstructionR` instance
-     * @return A string representation of the `InstructionR` instance
+     * Get a string representation of the InstructionR instance
+     * @return A string representation of the InstructionR instance
      */
     @Override
     public String toString() {

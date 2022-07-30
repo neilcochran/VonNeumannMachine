@@ -26,15 +26,26 @@ public class Instruction {
      */
     public static final BitRange FORMAT_RANGE = new BitRange(25, 27);
 
+    /**
+     * The integer that codes for the instruction
+     */
     protected final int instruction;
+
+    /**
+     * The instruction condition to be evaluated during execution
+     */
     protected final Condition condition;
+
+    /**
+     * The format group of the instruction
+     */
     protected final InstructionFormat instructionFormat;
 
 
     /**
-     * Constructs an Instruction of the given `instructionFormat` from the `instruction` integer
-     * @param instruction The integer that encodes for the given `Instruction`
-     * @param instructionFormat The `InstructionFormat` of the `Instruction`
+     * Constructs an Instruction of the given instructionFormat from the instruction integer
+     * @param instruction The integer that encodes for the given Instruction
+     * @param instructionFormat The InstructionFormat of the Instruction
      * @throws IllegalArgumentException if the instruction is encoding is invalid
      */
     public Instruction(int instruction, InstructionFormat instructionFormat) {
@@ -57,18 +68,18 @@ public class Instruction {
     }
 
     /**
-     * Parse the instruction and determine its `InstructionFormat`
-     * @param instruction The instruction to determine the `InstructionFormat` of
-     * @return The `InstructionFormat` field of the given `Instruction`
+     * Parse the instruction and determine its InstructionFormat
+     * @param instruction The instruction to determine the InstructionFormat of
+     * @return The InstructionFormat field of the given Instruction
      */
     public static InstructionFormat parseInstructionFormat(int instruction) {
         return InstructionFormat.fromFormatBits(BitUtils.getBitRange(instruction, FORMAT_RANGE));
     }
 
     /**
-     * Parse the instruction and determine its `Condition` field
-     * @param instruction The instruction to determine the `Condition` field of
-     * @return The `Condition` field of the given instruction
+     * Parse the instruction and determine its Condition field
+     * @param instruction The instruction to determine the Condition field of
+     * @return The Condition field of the given instruction
      */
     public static Condition parseInstructionCondition(int instruction) {
         return Condition.fromFormatBits(BitUtils.getBitRange(instruction, CONDITION_RANGE));

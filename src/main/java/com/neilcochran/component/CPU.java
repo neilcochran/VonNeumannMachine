@@ -17,8 +17,8 @@ public class CPU extends Thread {
 
     /**
      * Constructs a new CPU (Central Processing Unit) to be run in a new thread
-     * @param registerFile A reference to the machine's `RegisterFile`
-     * @param controlUnit A reference to the machine's `ControlUnit`
+     * @param registerFile A reference to the machine's RegisterFile
+     * @param controlUnit A reference to the machine's ControlUnit
      */
     public CPU(
             RegisterFile registerFile,

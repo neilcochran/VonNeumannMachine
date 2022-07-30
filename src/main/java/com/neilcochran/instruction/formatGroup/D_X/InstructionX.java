@@ -16,7 +16,7 @@ import lombok.Setter;
 public class InstructionX extends LoadStoreInstruction {
 
     /**
-     * The bit range that encodes the `Shift`
+     * The bit range that encodes the Shift
      * @see com.neilcochran.instruction.formatGroup.D_X.InstructionX#shift
      */
     private static final BitRange SHIFT_RANGE = new BitRange(5, 11);
@@ -32,8 +32,8 @@ public class InstructionX extends LoadStoreInstruction {
 
     /**
      * Constructs an InstructionX from an integer that encodes for an instruction of the X format group
-     * @param instruction The integer that encodes for the given `InstructionX`
-     * @throws IllegalArgumentException if the instruction is not a valid `InstructionX`
+     * @param instruction The integer that encodes for the given InstructionX
+     * @throws IllegalArgumentException if the instruction is not a valid InstructionX
      */
     public InstructionX(int instruction) {
         super(instruction, InstructionFormat.X);
@@ -42,8 +42,8 @@ public class InstructionX extends LoadStoreInstruction {
     }
 
     /**
-     * Get a string representation of the `InstructionX` instance
-     * @return A string representation of the `InstructionX` instance
+     * Get a string representation of the InstructionX instance
+     * @return A string representation of the InstructionX instance
      */
     @Override
     public String toString() {

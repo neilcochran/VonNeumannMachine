@@ -20,19 +20,19 @@ public class ALU {
     private final ProgramStatusRegister PSR;
 
     /**
-     * Executes the given `instruction` command
-     * @param instruction The `OpCodeInstruction` whose command is to be executed
+     * Executes the given instruction command
+     * @param instruction The OpCodeInstruction whose command is to be executed
      */
     public void executeInstruction(OpCodeInstruction instruction) {
         getCommand(instruction).executeCommand();
     }
 
     /**
-     * Add `x` and `y`. If the `PSR` parameter is not null, any relevant condition flags will be set
+     * Add x and y. If the PSR parameter is not null, any relevant condition flags will be set
      * @param x The first integer to be added
      * @param y The second integer to be added
-     * @param PSR The `ProgramStatusRegister` which will have relevant condition flags set (if it is provided)
-     * @return The result of `x + y`
+     * @param PSR The ProgramStatusRegister which will have relevant condition flags set (if it is provided)
+     * @return The result of x + y
      */
     public static int add(int x, int y, ProgramStatusRegister PSR) {
         int res = x + y;
@@ -56,12 +56,12 @@ public class ALU {
     }
 
     /**
-     * Subtract `x` and `y`. If the `PSR` parameter is not null, any relevant condition flags will be set.
+     * Subtract x and y. If the PSR parameter is not null, any relevant condition flags will be set.
      * Note: Like ARM, this uses an "inverted carry flag" for subtraction. This means C is set to 0 if the subtraction produced unsigned underflow, and to 1 otherwise
      * @param x The integer to be subtracted from
      * @param y The integer to be subtracted
-     * @param PSR The `ProgramStatusRegister` which will have relevant condition flags set (if it is provided)
-     * @return The result of `x - y`
+     * @param PSR The ProgramStatusRegister which will have relevant condition flags set (if it is provided)
+     * @return The result of x - y
      */
     public static int subtract(int x, int y, ProgramStatusRegister PSR) {
         int res = x - y;
@@ -84,9 +84,9 @@ public class ALU {
     }
 
     /**
-     * For the given integer `data`, set the `PSR` N and Z flags
+     * For the given integer data, set the PSR N and Z flags
      * @param data The integer to be evaluated
-     * @param PSR A reference to the `PSR` (Program Status Register)
+     * @param PSR A reference to the PSR (Program Status Register)
      */
     public static void setNZFlags(int data, ProgramStatusRegister PSR) {
         if(data < 0) {
@@ -108,9 +108,9 @@ public class ALU {
     }
 
     /**
-     * For a given `OpCodeInstruction` retrieve its `Command`
-     * @param instruction The instruction whose `Command` is to be retrieved
-     * @return The `Command` associated with the given `instruction`
+     * For a given OpCodeInstruction retrieve its Command
+     * @param instruction The instruction whose Command is to be retrieved
+     * @return The Command associated with the given instruction
      */
     private Command getCommand(OpCodeInstruction instruction) {
         return switch (instruction.getOpCode()) {

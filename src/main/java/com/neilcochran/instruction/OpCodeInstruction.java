@@ -38,15 +38,30 @@ public class OpCodeInstruction extends Instruction {
      */
     private static final BitRange RD_OPERAND_RANGE = new BitRange(12, 15);
 
+    /**
+     * The instruction's OpCode
+     */
     protected final OpCode opCode;
+
+    /**
+     * The state flag (S) bit
+     */
     protected final int stateFlagBit;
+
+    /**
+     * The RN register number
+     */
     protected final int RN;
+
+    /**
+     * The RD register number
+     */
     protected final int RD;
 
     /**
-     * Constructs a new OpCodeInstruction of the given `instructionFormat` from the `instruction` integer
-     * @param instruction The integer that encodes for the given `Instruction`
-     * @param instructionFormat The `InstructionFormat` of the `Instruction`
+     * Constructs a new OpCodeInstruction of the given instructionFormat from the instruction integer
+     * @param instruction The integer that encodes for the given Instruction
+     * @param instructionFormat The InstructionFormat of the Instruction
      */
     public OpCodeInstruction(int instruction, InstructionFormat instructionFormat) {
         super(instruction, instructionFormat);

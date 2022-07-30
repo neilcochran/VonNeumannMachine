@@ -6,16 +6,16 @@ import com.neilcochran.component.register.RegisterFile;
 import com.neilcochran.instruction.OpCodeInstruction;
 
 /**
- * Represents the `MOV` command which is used to move data to a register
+ * Represents the MOV command which is used to move data to a register
  */
 public class MOV extends CommandRI {
 
     private final ProgramStatusRegister PSR;
 
     /**
-     * Constructs a MOV command from the given `OpCodeInstruction`
-     * @param instruction The `OpCodeInstruction` to construct the command from
-     * @param registerFile A reference to the machine's `RegisterFile`
+     * Constructs a MOV command from the given OpCodeInstruction
+     * @param instruction The OpCodeInstruction to construct the command from
+     * @param registerFile A reference to the machine's RegisterFile
      * @param PSR A reference the machine's Program Status Register (PSR)
      */
     public MOV(OpCodeInstruction instruction, RegisterFile registerFile, ProgramStatusRegister PSR) {
@@ -24,7 +24,7 @@ public class MOV extends CommandRI {
     }
 
     /**
-     * Execute the `MOV` command which will move operand2 into `RD`.
+     * Execute the MOV command which will move operand2 into RD.
      * If the state flag (S) is set then the relevant Program Status Register (PSR) flags will be updated
      */
     @Override

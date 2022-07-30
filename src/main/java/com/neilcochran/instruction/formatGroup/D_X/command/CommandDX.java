@@ -9,17 +9,20 @@ import com.neilcochran.instruction.formatGroup.D_X.InstructionX;
 import com.neilcochran.util.BitUtils;
 
 /**
- * An abstract class representing a common D & X format group Command
+ * An abstract class representing a common D and X format group Command
  */
 public abstract class CommandDX extends Command {
 
+    /**
+     * A reference to the machine's ControlUnit
+     */
     protected final ControlUnit controlUnit;
 
     /**
-     * Constructs a new CommandDX from a `LoadStoreInstruction` with references to the needed machine components
-     * @param instruction The `LoadStoreInstruction` to construct the command from
-     * @param registerFile A reference to the machine's `RegisterFile`
-     * @param controlUnit A reference to the machine's `ControlUnit`
+     * Constructs a new CommandDX from a LoadStoreInstruction with references to the needed machine components
+     * @param instruction The LoadStoreInstruction to construct the command from
+     * @param registerFile A reference to the machine's RegisterFile
+     * @param controlUnit A reference to the machine's ControlUnit
      */
     public CommandDX(LoadStoreInstruction instruction, RegisterFile registerFile, ControlUnit controlUnit) {
         super(instruction, registerFile);

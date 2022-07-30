@@ -8,9 +8,20 @@ import lombok.Data;
 @Data
 public class Register {
 
+    /**
+     * The name of the register
+     */
     protected final String name;
+
+    /**
+     * An alias for the register (for instance: 'LR' is the alias for the 'Link Register')
+     */
     protected final String alias;
+
     //TODO have setData use bit logic like Memory#storeData()
+    /**
+     * The data value held in the register
+     */
     protected int data = 0b0;
 
     /**

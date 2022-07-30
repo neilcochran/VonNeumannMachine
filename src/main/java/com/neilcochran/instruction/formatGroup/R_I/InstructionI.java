@@ -16,13 +16,13 @@ import lombok.Setter;
 public class InstructionI extends OpCodeInstruction {
 
     /**
-     * The bit range that encodes the rotate portion of the `RotateConstant`
+     * The bit range that encodes the rotate portion of the RotateConstant
      * @see com.neilcochran.instruction.formatGroup.R_I.InstructionI#rotateConstant
      */
     private static final BitRange IMMEDIATE_ROTATE_RANGE = new BitRange(8, 11);
 
     /**
-     * The bit range that encodes the constant portion of the `RotateConstant`
+     * The bit range that encodes the constant portion of the RotateConstant
      * @see com.neilcochran.instruction.formatGroup.R_I.InstructionI#rotateConstant
      */
     private static final BitRange IMMEDIATE_CONSTANT_RANGE = new BitRange(0, 7);
@@ -31,8 +31,8 @@ public class InstructionI extends OpCodeInstruction {
 
     /**
      * Constructs an InstructionI from an integer that encodes for an instruction of the I format group
-     * @param instruction The integer that encodes for the given `InstructionI`
-     * @throws IllegalArgumentException if the instruction is not a valid `InstructionI`
+     * @param instruction The integer that encodes for the given InstructionI
+     * @throws IllegalArgumentException if the instruction is not a valid InstructionI
      */
     public InstructionI(int instruction) {
         super(instruction, InstructionFormat.I);
@@ -40,8 +40,8 @@ public class InstructionI extends OpCodeInstruction {
     }
 
     /**
-     * Get a string representation of the `InstructionI` instance
-     * @return A string representation of the `InstructionI` instance
+     * Get a string representation of the InstructionI instance
+     * @return A string representation of the InstructionI instance
      */
     @Override
     public String toString() {

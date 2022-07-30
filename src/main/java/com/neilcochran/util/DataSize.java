@@ -5,8 +5,20 @@ package com.neilcochran.util;
  */
 public enum DataSize {
     //TODO add DOUBLE(64) support
+
+    /**
+     * A 32 bit word
+     */
     WORD(32),
+
+    /**
+     * A 16 bit half word
+     */
     HALF_WORD(16),
+
+    /**
+     * A byte (8 bits)
+     */
     BYTE(8);
 
     private final int bitLength;

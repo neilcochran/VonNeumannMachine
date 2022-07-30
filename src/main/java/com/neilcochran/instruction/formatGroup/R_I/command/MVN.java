@@ -6,16 +6,16 @@ import com.neilcochran.component.register.RegisterFile;
 import com.neilcochran.instruction.OpCodeInstruction;
 
 /**
- * Represents the `MVN` command which is used to negate and then move data to a register
+ * Represents the MVN command which is used to negate and then move data to a register
  */
 public class MVN extends CommandRI {
 
     private final ProgramStatusRegister PSR;
 
     /**
-     * Constructs a MVN command from the given `OpCodeInstruction`
-     * @param instruction The `OpCodeInstruction` to construct the command from
-     * @param registerFile A reference to the machine's `RegisterFile`
+     * Constructs a MVN command from the given OpCodeInstruction
+     * @param instruction The OpCodeInstruction to construct the command from
+     * @param registerFile A reference to the machine's RegisterFile
      * @param PSR A reference the machine's Program Status Register (PSR)
      */
     public MVN(OpCodeInstruction instruction, RegisterFile registerFile, ProgramStatusRegister PSR) {
@@ -24,7 +24,7 @@ public class MVN extends CommandRI {
     }
 
     /**
-     * Execute the `MVN` command which will first negate operand2 before moving it into `RD`
+     * Execute the MVN command which will first negate operand2 before moving it into RD
      * If the state flag (S) is set then the relevant Program Status Register (PSR) flags will be updated
      */
     @Override

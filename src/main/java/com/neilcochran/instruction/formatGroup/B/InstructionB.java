@@ -15,7 +15,7 @@ import lombok.Setter;
 public class InstructionB extends Instruction {
 
     /**
-     * The bit index of the link register flag which denotes if the current program counter value should be saved in the link register
+     * The bit index of the link register flag which denotes if the current program counter value should be saved in the link register (LR)
      * @see com.neilcochran.instruction.formatGroup.B.InstructionB#linkRegisterFlagBit
      */
     private static final int L_FLAG_INDEX = 24;
@@ -31,8 +31,8 @@ public class InstructionB extends Instruction {
 
     /**
      * Constructs an InstructionB from an integer that encodes for an instruction of the B format group
-     * @param instruction The integer that encodes for the given `InstructionB`
-     * @throws IllegalArgumentException if the instruction is not a valid `InstructionB`
+     * @param instruction The integer that encodes for the given InstructionB
+     * @throws IllegalArgumentException if the instruction is not a valid InstructionB
      */
     public InstructionB(int instruction) {
         super(instruction, InstructionFormat.B);
@@ -43,8 +43,8 @@ public class InstructionB extends Instruction {
     }
 
     /**
-     * Get a string representation of the `InstructionB` instance
-     * @return A string representation of the `InstructionB` instance
+     * Get a string representation of the InstructionB instance
+     * @return A string representation of the InstructionB instance
      */
     @Override
     public String toString() {

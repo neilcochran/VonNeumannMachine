@@ -16,13 +16,13 @@ import lombok.Setter;
 public class InstructionD extends LoadStoreInstruction {
 
     /**
-     * The bit range that encodes the rotate portion of the `RotateConstant`
+     * The bit range that encodes the rotate portion of the RotateConstant
      * @see com.neilcochran.instruction.formatGroup.D_X.InstructionD#rotateConstant
      */
     private static final BitRange IMMEDIATE_ROTATE_RANGE = new BitRange(8, 11);
 
     /**
-     * The bit range that denotes the constant portion of the `RotateConstant`
+     * The bit range that denotes the constant portion of the RotateConstant
      * @see com.neilcochran.instruction.formatGroup.D_X.InstructionD#rotateConstant
      */
     private static final BitRange IMMEDIATE_CONSTANT_RANGE = new BitRange(0, 7);
@@ -31,8 +31,8 @@ public class InstructionD extends LoadStoreInstruction {
 
     /**
      * Constructs an InstructionD from an integer that encodes for an instruction of the D format group
-     * @param instruction The integer that encodes for the given `InstructionD`
-     * @throws IllegalArgumentException if the instruction is not a valid `InstructionD`
+     * @param instruction The integer that encodes for the given InstructionD
+     * @throws IllegalArgumentException if the instruction is not a valid InstructionD
      */
     public InstructionD(int instruction) {
         super(instruction, InstructionFormat.D);
@@ -40,8 +40,8 @@ public class InstructionD extends LoadStoreInstruction {
     }
 
     /**
-     * Get a string representation of the `InstructionD` instance
-     * @return A string representation of the `InstructionD` instance
+     * Get a string representation of the InstructionD instance
+     * @return A string representation of the InstructionD instance
      */
     @Override
     public String toString() {

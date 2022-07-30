@@ -29,10 +29,10 @@ public class Memory {
     }
 
     /**
-     * Fetch the data at `byteAddress` in memory for the given `dataSize`
+     * Fetch the data at byteAddress in memory for the given dataSize
      * @param byteAddress The byte address of the target data in memory
      * @param dataSize The size of the data to be fetched
-     * @return The data at `byteAddress` in memory for the given `dataSize`
+     * @return The data at byteAddress in memory for the given dataSize
      */
     public int loadData(int byteAddress, DataSize dataSize) {
         if(!isValidByteAddress(byteAddress)) {
@@ -42,7 +42,7 @@ public class Memory {
     }
 
     /**
-     * Store `data` in memory at `byteAddress` in the indicated `dataSize`
+     * Store data in memory at byteAddress in the indicated dataSize
      * @param byteAddress The target byte address in memory
      * @param dataSize The size of the data to be stored
      * @param data The data to be stored
@@ -66,9 +66,9 @@ public class Memory {
     }
 
     /**
-     * For a given `byteAddress` calculate the corresponding memory array index
+     * For a given byteAddress calculate the corresponding memory array index
      * @param byteAddress The byte address to be converted into an array index
-     * @return The memory array index for the given `byteAddress`
+     * @return The memory array index for the given byteAddress
      */
     private int calculateMemoryIndex(int byteAddress) {
         return (byteAddress * 8 ) / DataSize.WORD.getBitLength();
@@ -77,7 +77,7 @@ public class Memory {
     /**
      * Validates a given byte address. A byte address is invalid if it is negative, or greater than the total number of bytes
      * @param byteAddress The byte address to validate
-     * @return `true` if the byte address is valid, `false` otherwise
+     * @return true if the byte address is valid, false otherwise
      */
     private boolean isValidByteAddress(int byteAddress) {
         return byteAddress >= 0 && byteAddress < totalBytes;
