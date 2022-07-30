@@ -38,7 +38,11 @@ public class Memory {
         if(!isValidByteAddress(byteAddress)) {
             throw new IllegalArgumentException(String.format("Invalid byte address: %d", byteAddress));
         }
-        return BitUtils.getBitRange(memory[calculateMemoryIndex(byteAddress)], 0, dataSize.getBitLength() - 1);
+        int memIndex = calculateMemoryIndex(byteAddress);
+        int offset = memIndex * 32;
+        int start = (byteAddress * DataSize.BYTE.getBitLength()) - offset;
+        int end = (start + dataSize.getBitLength() - 1);
+        return BitUtils.getBitRange(memory[memIndex], start, end);
     }
 
     /**

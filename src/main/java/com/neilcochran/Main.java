@@ -14,11 +14,10 @@ public class Main {
     public static void main(String[] args) {
         int[] programData = {
             //Format D
-            //LDR R1 R0 + #256
             //  AL    D  S U DS L RN   RD   Imm12
-            //0b1110 010 1 0 11 1 0000 0001 000000001000,
-            0b11100101011100000001000000001000,
-            0b00000000000000000000000000011111
+            //0b1110 010 1 0 11 1 0000 0001 000000000100,
+            0b11100101011100000111000000000111, //LDRB R7 R0 + 7
+            0b00000100000000110000001000000001 //1@4 2@5 3@6 4@7
         };
         var machine = new VonNeumannMachine();
         machine.loadProgram(programData);

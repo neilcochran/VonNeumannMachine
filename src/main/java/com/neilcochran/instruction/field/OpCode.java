@@ -10,6 +10,9 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public enum OpCode {
+
+    //TODO add/confirm all OpCode javadoc names
+
     /**
      * And
      */
