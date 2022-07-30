@@ -8,15 +8,28 @@ import com.neilcochran.instruction.formatGroup.D_X.InstructionD;
 import com.neilcochran.instruction.formatGroup.D_X.InstructionX;
 import com.neilcochran.util.BitUtils;
 
+/**
+ * An abstract class representing a common D & X format group Command
+ */
 public abstract class CommandDX extends Command {
 
     protected final ControlUnit controlUnit;
 
+    /**
+     * Constructs a new CommandDX from a `LoadStoreInstruction` with references to the needed machine components
+     * @param instruction The `LoadStoreInstruction` to construct the command from
+     * @param registerFile A reference to the machine's `RegisterFile`
+     * @param controlUnit A reference to the machine's `ControlUnit`
+     */
     public CommandDX(LoadStoreInstruction instruction, RegisterFile registerFile, ControlUnit controlUnit) {
         super(instruction, registerFile);
         this.controlUnit = controlUnit;
     }
 
+    /**
+     * Calculate the "flexible second operand"
+     * @return the calculated second operand value
+     */
     protected int calculateOperand2() {
         LoadStoreInstruction loadStoreInstruction = (LoadStoreInstruction) instruction;
         //get the initial value for operand2. After we will check to see if we are further modifying it (as an offset)

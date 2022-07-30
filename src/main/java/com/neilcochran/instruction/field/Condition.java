@@ -1,5 +1,8 @@
 package com.neilcochran.instruction.field;
 
+/**
+ * An enum representing all supported 4 bit condition codes
+ */
 public enum Condition {
     EQ(0b0000, "Equals"),
     NE(0b0001, "Not equals"),
@@ -17,24 +20,39 @@ public enum Condition {
     LE(0b1101, "Less than or equal (signed)"),
     AL(0b1110, "Always");
 
-    private final int bits;
+    private final int formatBits;
     private final String description;
 
     Condition(int formatBits, String description) {
-        this.bits = formatBits;
+        this.formatBits = formatBits;
         this.description = description;
     }
 
-    public int getBits() {
-        return bits;
+    /**
+     * Get the integer `formatBits` representing the condition
+     * @return The integer `formatBits` representing the condition
+     */
+    public int getFormatBits() {
+        return formatBits;
     }
 
+    /**
+     * Get the description of the condition
+     * @return The description of the condition
+     */
     public String getDescription() {
         return description;
     }
+
+    /**
+     * Return the `Condition` corresponding to the given `formatBits`
+     * @param formatBits The integer representing the condition
+     * @return The `Condition` corresponding to the given `formatBits`
+     * @throws IllegalArgumentException If the `formatBits` do not map to a valid `Condition` e
+     */
     public static Condition fromFormatBits(int formatBits) {
         for(Condition condition : values()) {
-            if(condition.bits == formatBits) {
+            if(condition.formatBits == formatBits) {
                 return condition;
             }
         }

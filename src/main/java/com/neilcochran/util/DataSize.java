@@ -1,9 +1,10 @@
 package com.neilcochran.util;
 
 /**
- * Define the various data sizes that will be worked with
+ * A enum that defines the supported data sizes (bit lengths)
  */
 public enum DataSize {
+    //TODO add DOUBLE(64) support
     WORD(32),
     HALF_WORD(16),
     BYTE(8);

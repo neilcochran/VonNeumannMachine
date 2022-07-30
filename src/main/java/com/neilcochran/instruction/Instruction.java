@@ -13,15 +13,29 @@ import lombok.Data;
  */
 @Data
 public class Instruction {
+
+    /**
+     * The bit range that encodes for the instruction condition
+     * @see com.neilcochran.instruction.field.Condition
+     */
+    public static final BitRange CONDITION_RANGE = new BitRange(28, 31);
+
+    /**
+     * The bit range that encodes for the instruction format
+     * @see com.neilcochran.instruction.field.InstructionFormat
+     */
+    public static final BitRange FORMAT_RANGE = new BitRange(25, 27);
+
     protected final int instruction;
     protected final Condition condition;
     protected final InstructionFormat instructionFormat;
-    public static final BitRange CONDITION_RANGE = new BitRange(28, 31);
-    public static final BitRange FORMAT_RANGE = new BitRange(25, 27);
+
 
     /**
-     * Takes in an instruction (int of binary data) and decodes it into the appropriate OpCode and Operand
-     * @throws IllegalArgumentException if the instruction exceeds the word size
+     * Constructs an Instruction of the given `instructionFormat` from the `instruction` integer
+     * @param instruction The integer that encodes for the given `Instruction`
+     * @param instructionFormat The `InstructionFormat` of the `Instruction`
+     * @throws IllegalArgumentException if the instruction is encoding is invalid
      */
     public Instruction(int instruction, InstructionFormat instructionFormat) {
         //Ensure the instruction does not exceed our word size
@@ -43,23 +57,27 @@ public class Instruction {
     }
 
     /**
-     * Parse the instruction and determine its InstructionFormat enum
-     * @param instruction The instruction to determine the InstructionFormat of
-     * @return The InstructionFormat field of the given instruction
+     * Parse the instruction and determine its `InstructionFormat`
+     * @param instruction The instruction to determine the `InstructionFormat` of
+     * @return The `InstructionFormat` field of the given `Instruction`
      */
     public static InstructionFormat parseInstructionFormat(int instruction) {
         return InstructionFormat.fromFormatBits(BitUtils.getBitRange(instruction, FORMAT_RANGE));
     }
 
     /**
-     * Parse the instruction and determine its Condition field
-     * @param instruction The instruction to determine the Condition field of
-     * @return The Condition field of the given instruction
+     * Parse the instruction and determine its `Condition` field
+     * @param instruction The instruction to determine the `Condition` field of
+     * @return The `Condition` field of the given instruction
      */
     public static Condition parseInstructionCondition(int instruction) {
         return Condition.fromFormatBits(BitUtils.getBitRange(instruction, CONDITION_RANGE));
     }
 
+    /**
+     * Get a binary string representation of the instruction
+     * @return A binary string representation of the instruction
+     */
     public String getBinaryString() {
         return BitUtils.getBinaryString(instruction, DataSize.WORD, true);
     }

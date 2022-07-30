@@ -7,29 +7,69 @@ import com.neilcochran.util.DataSize;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Represents the common base for instructions that perform data loading or storing operations
+ */
 @Getter
 @Setter
 public class LoadStoreInstruction extends Instruction {
 
+    /**
+     * The bit index of the sign bit which denotes if sign extension should be performed, or zero padding
+     * @see com.neilcochran.instruction.LoadStoreInstruction#signBit
+     */
     private static final int SIGN_BIT_INDEX = 24;
+
+    /**
+     * The bit index of the add/subtract flag which denotes if the offset should be added or subtracted
+     * @see com.neilcochran.instruction.LoadStoreInstruction#offsetAddSubBit
+     */
     private static final int U_BIT_INDEX = 23;
+
+    /**
+     * The bit range that encodes the `DataSize` to be loaded/stored
+     * @see com.neilcochran.instruction.LoadStoreInstruction#dataSize
+     */
     private static final BitRange DATA_SIZE_RANGE = new BitRange(21, 22);
+
+    /**
+     * The bit index of the load/store flag which denotes if the instruction is loading or storing data
+     * @see com.neilcochran.instruction.LoadStoreInstruction#loadStoreBit
+     */
     private static final int L_BIT_INDEX = 20;
+
+    /**
+     * The bit range that represents the RN register number
+     * @see com.neilcochran.instruction.LoadStoreInstruction#RN
+     */
     private static final BitRange RN_RANGE = new BitRange(16, 19);
+
+    /**
+     * The bit range that represents the RD register number
+     * @see com.neilcochran.instruction.LoadStoreInstruction#RD
+     */
     private static final BitRange RD_RANGE = new BitRange(12, 15);
 
     //indicate if we are loading (1) or storing (0)
     private final int loadStoreBit;
+
     //the data size to be loaded/stored
     private final DataSize dataSize;
+
     //indicate if the offset should be added (1) or subtracted (0)
     private final int offsetAddSubBit;
+
     //indicate signed/unsigned: sign extended (1) or zero extended (0)
     private final int signBit;
 
     protected final int RN;
     protected final int RD;
 
+    /**
+     * Constructs a new LoadStoreInstruction of the given `instructionFormat` from the `instruction` integer
+     * @param instruction The integer that encodes for the given `Instruction`
+     * @param instructionFormat The `InstructionFormat` of the `Instruction`
+     */
     public LoadStoreInstruction(int instruction, InstructionFormat instructionFormat) {
         super(instruction, instructionFormat);
         //make sure we got a valid instruction format for a LoadStoreInstruction (super() has to be first call otherwise validation would come first)

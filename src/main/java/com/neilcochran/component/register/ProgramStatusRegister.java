@@ -48,10 +48,16 @@ public class ProgramStatusRegister extends Register {
         return BitUtils.getKthBit(data, N_BIT_INDEX);
     }
 
+    /**
+     * Set the N bit to 1
+     */
     public void setNBit() {
         data = BitUtils.setKthBit(data, ProgramStatusRegister.N_BIT_INDEX);
     }
 
+    /**
+     * Set the N bit to 0
+     */
     public void clearNBit() {
         data = BitUtils.clearKthBit(data, ProgramStatusRegister.N_BIT_INDEX);
     }
@@ -64,10 +70,16 @@ public class ProgramStatusRegister extends Register {
         return BitUtils.getKthBit(data, Z_BIT_INDEX);
     }
 
+    /**
+     * Set the Z bit to 1
+     */
     public void setZBit() {
         data = BitUtils.setKthBit(data, ProgramStatusRegister.Z_BIT_INDEX);
     }
 
+    /**
+     * Set the Z bit to 0
+     */
     public void clearZBit() {
         data = BitUtils.clearKthBit(data, ProgramStatusRegister.Z_BIT_INDEX);
     }
@@ -75,19 +87,26 @@ public class ProgramStatusRegister extends Register {
     /**
      * Returns the Carry Condition (C) bit flag.
      * A carry occurs when:
-     *  if the result of an addition is greater than or equal to 2^32
-     *  if the result of a subtraction is positive or zero
-     *  as the result of an inline barrel shifter operation in a move or logical instruction.
+     * - if the result of an addition is greater than or equal to 2^32
+     * - if the result of a subtraction is positive or zero
+     * - as the result of an inline barrel shifter operation in a move or logical instruction.
+     * Special Case Note: Like ARM, this uses an "inverted carry flag" for subtraction. This means C is set to 0 if the subtraction produced unsigned underflow, and to 1 otherwise
      * @return The C flag bit value
      */
     public int getCBit() {
         return BitUtils.getKthBit(data, C_BIT_INDEX);
     }
 
+    /**
+     * Set the C bit to 1
+     */
     public void setCBit() {
         data = BitUtils.setKthBit(data, ProgramStatusRegister.C_BIT_INDEX);
     }
 
+    /**
+     * Set the C bit to 0
+     */
     public void clearCBit() {
         data = BitUtils.clearKthBit(data, ProgramStatusRegister.C_BIT_INDEX);
     }
@@ -101,10 +120,16 @@ public class ProgramStatusRegister extends Register {
         return BitUtils.getKthBit(data, V_BIT_INDEX);
     }
 
+    /**
+     * Set the V bit to 1
+     */
     public void setVBit() {
         data = BitUtils.setKthBit(data, ProgramStatusRegister.V_BIT_INDEX);
     }
 
+    /**
+     * Set the V bit to 0
+     */
     public void clearVBit() {
         data = BitUtils.clearKthBit(data, ProgramStatusRegister.V_BIT_INDEX);
     }
@@ -118,10 +143,16 @@ public class ProgramStatusRegister extends Register {
         return BitUtils.getKthBit(data, Q_BIT_INDEX);
     }
 
+    /**
+     * Set the Q bit to 1
+     */
     public void setQBit() {
         data = BitUtils.setKthBit(data, ProgramStatusRegister.Q_BIT_INDEX);
     }
 
+    /**
+     * Set the Q bit to 0
+     */
     public void clearQBit() {
         data = BitUtils.clearKthBit(data, ProgramStatusRegister.Q_BIT_INDEX);
     }

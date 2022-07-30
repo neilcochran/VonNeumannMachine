@@ -4,6 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 
+/**
+ * An enum representing all supported 4 bit OpCodes
+ */
 @AllArgsConstructor
 @Getter
 public enum OpCode {
@@ -23,8 +26,15 @@ public enum OpCode {
     MOV(0b1101),
     BIC(0b1110),
     MVN(0b1111);
+
     private final int bits;
 
+    /**
+     * Returns the `OpCode` corresponding to the given `bits`
+     * @param bits The integer representing the OpCode
+     * @return The `OpCode` corresponding to the given `bits`
+     * @throws IllegalArgumentException If the `bits` do not map to a valid `OpCode`
+     */
     public static OpCode fromBits(int bits) {
         for(OpCode opCode: values()) {
             if(opCode.getBits() == bits) {

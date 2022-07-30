@@ -8,7 +8,7 @@ import lombok.Setter;
  * Represents the Central Processing Unit (CPU) which extends the Thread class in order to be able to run in a non-blocking manner
  */
 @Getter
-@Setter //Don't use @Data since we want to call super() ourselves with a specific value (the thread name)
+@Setter
 public class CPU extends Thread {
 
     private final RegisterFile registerFile;
@@ -16,9 +16,9 @@ public class CPU extends Thread {
     private boolean halted = true;
 
     /**
-     * Creates a new CPU
-     * @param registerFile A reference to the registers
-     * @param controlUnit A reference to the Control Unit
+     * Constructs a new CPU (Central Processing Unit) to be run in a new thread
+     * @param registerFile A reference to the machine's `RegisterFile`
+     * @param controlUnit A reference to the machine's `ControlUnit`
      */
     public CPU(
             RegisterFile registerFile,
@@ -44,7 +44,7 @@ public class CPU extends Thread {
                 //increment PC
                 registerFile.incrementProgramCounter();
                 //decode & execute instruction
-                controlUnit.executeInstruction();
+                controlUnit.decodeAndExecuteInstruction();
             } catch(Exception ex) {
                 this.halted = true;
                 System.out.println("CPU Error: " + ex);
@@ -53,8 +53,7 @@ public class CPU extends Thread {
     }
 
     /**
-     * Send a signal to the CPU to halt execution at the beginning of its next cycle. Once halted the CPU thread
-     * created by calling run() will finish.
+     * Send a signal to the CPU to halt execution at the beginning of its next cycle. Once halted the CPU thread will finish.
      */
     public void halt() {
         this.halted = true;

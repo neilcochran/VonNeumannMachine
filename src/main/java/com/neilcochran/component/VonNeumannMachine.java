@@ -40,7 +40,7 @@ public class VonNeumannMachine {
     }
 
 
-    /**w
+    /**
      * Starts the CPU's Fetch -> Decode -> Execute loop thread
      */
     public void run() {
@@ -56,6 +56,11 @@ public class VonNeumannMachine {
         this.cpu.halt();
     }
 
+    /**
+     * Load an array of program data into memory
+     * @param programData The array of program data to be loaded into memory
+     * @see com.neilcochran.component.Memory#loadProgramData(int[])
+     */
     public void loadProgram(int[] programData) {
         memory.loadProgramData(programData);
     }

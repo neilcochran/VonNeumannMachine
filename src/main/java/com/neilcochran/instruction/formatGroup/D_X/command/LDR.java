@@ -5,12 +5,24 @@ import com.neilcochran.component.register.RegisterFile;
 import com.neilcochran.instruction.LoadStoreInstruction;
 import com.neilcochran.util.BitUtils;
 
+/**
+ * Represents the `LDR` command which is used to load data from memory into registers
+ */
 public class LDR extends CommandDX {
 
+    /**
+     * Constructs an LDR command from the given `LoadStoreInstruction`
+     * @param instruction The `LoadStoreInstruction` to construct the command from
+     * @param registerFile A reference to the machine's `RegisterFile`
+     * @param controlUnit A reference to the machine's `ControlUnit`
+     */
     public LDR(LoadStoreInstruction instruction, RegisterFile registerFile, ControlUnit controlUnit) {
         super(instruction, registerFile, controlUnit);
     }
 
+    /**
+     * Execute the `LDR` command to load the indicated data from memory into the target register
+     */
     @Override
     public void executeCommand() {
         var ldrInstruction = (LoadStoreInstruction) instruction;

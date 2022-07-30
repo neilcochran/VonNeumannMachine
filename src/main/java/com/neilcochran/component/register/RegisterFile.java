@@ -4,15 +4,14 @@ import lombok.Data;
 
 
 /**
- * Represents all (16) of the Register objects available to the machine as well as the PSR
+ * Represents all (16) of the Register objects available to the machine
  * This includes special use registers (Like the PC, LR) and all general use registers
  */
 @Data
 public class RegisterFile {
 
     /**
-     * The total amount of registers (Note: this excludes the PSR)
-     * @see RegisterFile#PSR
+     * The total amount of registers
      */
     private static final int TOTAL_GENERAL_REGISTERS = 16;
 
