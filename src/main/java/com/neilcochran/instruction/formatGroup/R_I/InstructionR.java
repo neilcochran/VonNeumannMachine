@@ -54,6 +54,10 @@ public class InstructionR extends OpCodeInstruction {
         return shift;
     }
 
+    /**
+     * Get the RM register number
+     * @return The RM register number
+     */
     public int getRM() {
         return RM;
     }

@@ -10,6 +10,10 @@ import java.util.Arrays;
  */
 public class Memory {
     private final int[] memory;
+
+    /**
+     * The total number of addressable bytes of memory
+     */
     public final int totalBytes;
 
     /**
