@@ -5,14 +5,10 @@ import com.neilcochran.instruction.field.InstructionFormat;
 import com.neilcochran.instruction.field.Shift;
 import com.neilcochran.util.BitRange;
 import com.neilcochran.util.BitUtils;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * Represents an Instruction of the R format group
  */
-@Getter
-@Setter
 public class InstructionR extends OpCodeInstruction {
 
     /**
@@ -48,5 +44,17 @@ public class InstructionR extends OpCodeInstruction {
     @Override
     public String toString() {
         return String.format("InstructionR(instruction=%s condition=%s OpCode=%s, RN=%d RD=%d RM=%d Shift=%s)", getBinaryString(), condition, opCode, RN, RD, RM, shift);
+    }
+
+    /**
+     * Get the instruction's Shift
+     * @return The instruction's Shift
+     */
+    public Shift getShift() {
+        return shift;
+    }
+
+    public int getRM() {
+        return RM;
     }
 }

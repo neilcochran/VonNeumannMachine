@@ -1,14 +1,10 @@
 package com.neilcochran.component;
 
 import com.neilcochran.component.register.RegisterFile;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * Represents the Central Processing Unit (CPU) which extends the Thread class in order to be able to run in a non-blocking manner
  */
-@Getter
-@Setter
 public class CPU extends Thread {
 
     private final RegisterFile registerFile;

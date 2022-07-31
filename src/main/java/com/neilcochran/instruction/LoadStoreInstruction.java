@@ -4,14 +4,10 @@ import com.neilcochran.instruction.field.InstructionFormat;
 import com.neilcochran.util.BitRange;
 import com.neilcochran.util.BitUtils;
 import com.neilcochran.util.DataSize;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * Represents the common base for instructions that perform data loading or storing operations
  */
-@Getter
-@Setter
 public class LoadStoreInstruction extends Instruction {
 
     /**
@@ -94,5 +90,53 @@ public class LoadStoreInstruction extends Instruction {
         signBit = BitUtils.getKthBit(instruction, SIGN_BIT_INDEX);
         RN = BitUtils.getBitRange(instruction, RN_RANGE);
         RD = BitUtils.getBitRange(instruction, RD_RANGE);
+    }
+
+    /**
+     * Get the load/store flag bit
+     * @return The load/store flag bit
+     */
+    public int getLoadStoreBit() {
+        return loadStoreBit;
+    }
+
+    /**
+     * Get the load/store instruction data size
+     * @return The load/store instruction data size
+     */
+    public DataSize getDataSize() {
+        return dataSize;
+    }
+
+    /**
+     * Get the offset add/subtract flag bit
+     * @return The offset add/subtract flag bit
+     */
+    public int getOffsetAddSubBit() {
+        return offsetAddSubBit;
+    }
+
+    /**
+     * Get the sign extend/zero pad flag bit
+     * @return The sign extend/zero pad flag bit
+     */
+    public int getSignBit() {
+        return signBit;
+    }
+
+    /**
+     * Get the RN register number
+     * @return The RN register number
+     */
+    public int getRN() {
+        return RN;
+    }
+
+    /**
+     * Get the RD register number
+     * @return The RD register number
+     */
+    public int getRD() {
+        return RD;
     }
 }

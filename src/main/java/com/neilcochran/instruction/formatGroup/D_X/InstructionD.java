@@ -5,14 +5,10 @@ import com.neilcochran.instruction.field.InstructionFormat;
 import com.neilcochran.instruction.field.RotateConstant;
 import com.neilcochran.util.BitRange;
 import com.neilcochran.util.BitUtils;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * Represents an Instruction of the D format group
  */
-@Getter
-@Setter
 public class InstructionD extends LoadStoreInstruction {
 
     /**
@@ -46,5 +42,13 @@ public class InstructionD extends LoadStoreInstruction {
     @Override
     public String toString() {
         return String.format("InstructionD(instruction=%s condition=%s U=%d L=%d RN=%d RD=%d rotateConstant=%s)", getBinaryString(), condition, getLoadStoreBit(), getOffsetAddSubBit(), RN, RD, rotateConstant);
+    }
+
+    /**
+     * Get the instruction's RotateConstant
+     * @return The instruction's RotateConstant
+     */
+    public RotateConstant getRotateConstant() {
+        return rotateConstant;
     }
 }

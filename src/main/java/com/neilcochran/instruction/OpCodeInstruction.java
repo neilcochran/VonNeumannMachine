@@ -4,14 +4,10 @@ import com.neilcochran.instruction.field.InstructionFormat;
 import com.neilcochran.instruction.field.OpCode;
 import com.neilcochran.util.BitRange;
 import com.neilcochran.util.BitUtils;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * Represents the common base for data processing instructions that contain OpCodes
  */
-@Getter
-@Setter
 public class OpCodeInstruction extends Instruction {
 
     /**
@@ -73,5 +69,37 @@ public class OpCodeInstruction extends Instruction {
         this.stateFlagBit = BitUtils.getKthBit(instruction, STATE_FLAG_INDEX);
         this.RN = BitUtils.getBitRange(instruction, RN_OPERAND_RANGE);
         this.RD = BitUtils.getBitRange(instruction, RD_OPERAND_RANGE);
+    }
+
+    /**
+     * Get the instruction OpCode
+     * @return The instruction OpCode
+     */
+    public OpCode getOpCode() {
+        return opCode;
+    }
+
+    /**
+     * Get the state flag bit
+     * @return The state flag bit
+     */
+    public int getStateFlagBit() {
+        return stateFlagBit;
+    }
+
+    /**
+     * Get the RN register number
+     * @return The RN register number
+     */
+    public int getRN() {
+        return RN;
+    }
+
+    /**
+     * Get the RD register number
+     * @return The RD register number
+     */
+    public int getRD() {
+        return RD;
     }
 }

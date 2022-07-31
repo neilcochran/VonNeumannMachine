@@ -6,12 +6,10 @@ import com.neilcochran.instruction.field.InstructionFormat;
 import com.neilcochran.util.BitRange;
 import com.neilcochran.util.BitUtils;
 import com.neilcochran.util.DataSize;
-import lombok.Data;
 
 /**
  * Represents the base of an Instruction from which specific InstructionFormats will extend
  */
-@Data
 public class Instruction {
 
     /**
@@ -40,7 +38,6 @@ public class Instruction {
      * The format group of the instruction
      */
     protected final InstructionFormat instructionFormat;
-
 
     /**
      * Constructs an Instruction of the given instructionFormat from the instruction integer
@@ -91,5 +88,29 @@ public class Instruction {
      */
     public String getBinaryString() {
         return BitUtils.getBinaryString(instruction, DataSize.WORD, true);
+    }
+
+    /**
+     * Get the full instruction integer
+     * @return The full instruction integer
+     */
+    public int getInstruction() {
+        return instruction;
+    }
+
+    /**
+     * Get the instruction condition
+     * @return The instruction condition
+     */
+    public Condition getCondition() {
+        return condition;
+    }
+
+    /**
+     * Get the instruction format
+     * @return The instruction format
+     */
+    public InstructionFormat getInstructionFormat() {
+        return instructionFormat;
     }
 }

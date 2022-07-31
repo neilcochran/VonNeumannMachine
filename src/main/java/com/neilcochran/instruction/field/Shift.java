@@ -2,12 +2,10 @@ package com.neilcochran.instruction.field;
 
 import com.neilcochran.util.BitRange;
 import com.neilcochran.util.BitUtils;
-import lombok.Data;
 
 /**
  * Represents a bit shift encoded in two parts: a shift type (bits [0,1]) and a shift amount (bits [2, 6])
  */
-@Data
 public class Shift {
 
     /**
@@ -34,4 +32,19 @@ public class Shift {
         this.shiftAmountBits = BitUtils.getBitRange(shiftBits, SHIFT_AMOUNT_RANGE);
     }
 
+    /**
+     * Get the ShiftType
+     * @return The ShiftType
+     */
+    public ShiftType getShiftType() {
+        return shiftType;
+    }
+
+    /**
+     * Get the shift amount
+     * @return The shift amount
+     */
+    public int getShiftAmountBits() {
+        return shiftAmountBits;
+    }
 }

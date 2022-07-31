@@ -1,11 +1,8 @@
 package com.neilcochran.component.register;
 
-import lombok.Data;
-
 /**
  * Represents a Register with a given name
  */
-@Data
 public class Register {
 
     /**
@@ -41,5 +38,37 @@ public class Register {
     public Register(String name, String alias) {
         this.name = name;
         this.alias = alias;
+    }
+
+    /**
+     * Get the register's name
+     * @return The register's name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * Get the register's alias
+     * @return The register's alias
+     */
+    public String getAlias() {
+        return alias;
+    }
+
+    /**
+     * Get the register's data
+     * @return The register's data
+     */
+    public int getData() {
+        return data;
+    }
+
+    /**
+     * Set the register's data
+     * @param data The value to be set in the register
+     */
+    public void setData(int data) {
+        this.data = data;
     }
 }

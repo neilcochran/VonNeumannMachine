@@ -1,14 +1,8 @@
 package com.neilcochran.instruction.field;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-
-
 /**
  * An enum representing all supported 4 bit OpCodes
  */
-@AllArgsConstructor
-@Getter
 public enum OpCode {
 
     //TODO add/confirm all OpCode javadoc names
@@ -96,6 +90,14 @@ public enum OpCode {
     private final int bits;
 
     /**
+     * Construct an OpCode enum with it's associated integer (bits)
+     * @param bits The backing integer for the OpCode
+     */
+    OpCode(int bits) {
+        this.bits = bits;
+    }
+
+    /**
      * Returns the OpCode corresponding to the given bits
      * @param bits The integer representing the OpCode
      * @return The OpCode corresponding to the given bits
@@ -108,5 +110,13 @@ public enum OpCode {
             }
         }
         throw new IllegalArgumentException(String.format("The bits: %s did not match any known OpCode", Integer.toBinaryString(bits)));
+    }
+
+    /**
+     * Get the OpCode's backing integer
+     * @return The OpCode's backing integer
+     */
+    public int getBits() {
+        return bits;
     }
 }

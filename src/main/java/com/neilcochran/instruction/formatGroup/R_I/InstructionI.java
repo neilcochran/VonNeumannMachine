@@ -5,14 +5,10 @@ import com.neilcochran.instruction.field.InstructionFormat;
 import com.neilcochran.instruction.field.RotateConstant;
 import com.neilcochran.util.BitRange;
 import com.neilcochran.util.BitUtils;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * Represents an Instruction of the I format group
  */
-@Getter
-@Setter
 public class InstructionI extends OpCodeInstruction {
 
     /**
@@ -46,5 +42,13 @@ public class InstructionI extends OpCodeInstruction {
     @Override
     public String toString() {
         return String.format("InstructionI(instruction=%s condition=%s OpCode=%s, RN=%d RD=%d rotateConstant=%s)", getBinaryString(), condition, opCode, RN, RD, rotateConstant);
+    }
+
+    /**
+     * Get the instruction's RotateConstant
+     * @return The instruction's RotateConstant
+     */
+    public RotateConstant getRotateConstant() {
+        return rotateConstant;
     }
 }

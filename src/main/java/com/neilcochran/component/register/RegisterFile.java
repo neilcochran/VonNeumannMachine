@@ -1,13 +1,9 @@
 package com.neilcochran.component.register;
 
-import lombok.Data;
-
-
 /**
  * Represents all (16) of the Register objects available to the machine
  * This includes special use registers (Like the PC, LR) and all general use registers
  */
-@Data
 public class RegisterFile {
 
     /**

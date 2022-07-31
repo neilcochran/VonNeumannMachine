@@ -3,12 +3,10 @@ package com.neilcochran.component;
 import com.neilcochran.component.register.ProgramStatusRegister;
 import com.neilcochran.component.register.RegisterFile;
 import com.neilcochran.util.DataSize;
-import lombok.Data;
 
 /**
  * Represents a simple 32 bit Von Neumann Machine with 16 registers
  */
-@Data
 public class VonNeumannMachine {
 
     /**

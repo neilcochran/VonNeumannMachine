@@ -4,14 +4,10 @@ import com.neilcochran.instruction.Instruction;
 import com.neilcochran.instruction.field.InstructionFormat;
 import com.neilcochran.util.BitRange;
 import com.neilcochran.util.BitUtils;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * Represents an Instruction of the B format group
  */
-@Getter
-@Setter
 public class InstructionB extends Instruction {
 
     /**
@@ -49,5 +45,21 @@ public class InstructionB extends Instruction {
     @Override
     public String toString() {
         return String.format("InstructionB(instruction=%s condition=%s linkRegisterFlagBit=%d, imm24=%d)", getBinaryString(), condition, linkRegisterFlagBit, imm24);
+    }
+
+    /**
+     * Get the link register flag bit
+     * @return The link register flag bit
+     */
+    public int getLinkRegisterFlagBit() {
+        return linkRegisterFlagBit;
+    }
+
+    /**
+     * Get the immediate 24-bit constant
+     * @return The immediate 24-bit constant
+     */
+    public int getImm24() {
+        return imm24;
     }
 }

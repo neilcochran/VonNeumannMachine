@@ -9,15 +9,23 @@ import com.neilcochran.instruction.formatGroup.R_I.command.CMP;
 import com.neilcochran.instruction.formatGroup.R_I.command.MOV;
 import com.neilcochran.instruction.formatGroup.R_I.command.MVN;
 import com.neilcochran.util.BitUtils;
-import lombok.Data;
 
 /**
  * Represents an Arithmetic Logic Unit (ALU) which performs all math and logical operations
  */
-@Data
 public class ALU {
     private final RegisterFile registerFile;
     private final ProgramStatusRegister PSR;
+
+    /**
+     * Constructs an ALU with references to the machine's registers and the program status register (PSR)
+     * @param registerFile A reference to the machine's RegisterFile
+     * @param PSR A reference to the machines program status register
+     */
+    public ALU(RegisterFile registerFile, ProgramStatusRegister PSR) {
+        this.registerFile = registerFile;
+        this.PSR = PSR;
+    }
 
     /**
      * Executes the given instruction command
