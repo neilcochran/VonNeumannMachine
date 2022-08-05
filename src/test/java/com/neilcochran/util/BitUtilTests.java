@@ -4,8 +4,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Unit tests for BitUtil's helper functions
@@ -13,63 +11,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class BitUtilTests {
 
     /**
-     * Test a valid bit length calculation
-     * @param expectedBitLength The expected bit length
-     * @param n The input integer to calculate the bit length of
+     * Test bit length calculation
+     * @param n The integer to calculate the bit length of
+     * @param expectedLength The expected bit length result
      */
-    @ParameterizedTest(name = "Calculate the bit length of {1}")
-    @CsvFileSource(resources = {"/bit-csv/validBitLengths.csv"}, numLinesToSkip = 1)
-    void testValidBitLengthCalculations(int expectedBitLength,int n) {
-        assertEquals(expectedBitLength, BitUtils.getBitLength(n));
-    }
-
-
-    /**
-     * Test passing a valid integer and max bit length to BitUtil.validateBitLength()
-     * @param maxBitLength The maximum number of bits the input number can use
-     * @param toCheck The number whose bit length will be checked
-     */
-    @ParameterizedTest(name = "Pass valid input: {1} and max bit length: {0} to BitUtil.validateBitLength()")
-    @CsvFileSource(resources = "/bit-csv/validBitLengths.csv", numLinesToSkip = 1)
-    void testValidBitLengthCheck(int maxBitLength, int toCheck) {
-        assertTrue(BitUtils.validateBitLength(toCheck, maxBitLength));
-    }
-
-    /**
-     * Test passing an invalid (too big) integer and max bit length to BitUtil.validateBitLength()
-     * @param maxBitLength The maximum number of bits the input number can use
-     * @param toCheck The number whose bit length will be checked
-     */
-    @ParameterizedTest(name = "Pass invalid (too big) input {1} and max bit length: {0} to BitUtil.validateBitLength()")
-    @CsvFileSource(resources = "/bit-csv/invalidBitLengths.csv", numLinesToSkip = 1)
-    void testInvalidBitLengthCheck(int maxBitLength, int toCheck) {
-        assertFalse(BitUtils.validateBitLength(toCheck, maxBitLength));
-    }
-
-    /**
-     * Test retrieving a valid bit by its index
-     * @param actualBitValue The actual value of the bit at the given index
-     * @param n The input integer
-     * @param bitIndex The index of the bit to retrieve
-     */
-    @ParameterizedTest(name = "Test retrieving the bit at index: {2} of {1} using BitUtil.getKthBit()")
-    @CsvFileSource(resources = "/bit-csv/validBitIndexRetrieval.csv", numLinesToSkip = 1)
-    void testValidBitRetrieval(int actualBitValue, int n, int bitIndex) {
-        assertEquals(actualBitValue, BitUtils.getKthBit(n, bitIndex));
-    }
-
-
-    /**
-     * Test retrieving a valid bit range
-     * @param actualResult The expected resulting bit range for the given input and range
-     * @param n The input integer from which the range will be extracted
-     * @param start The start index of the bit range
-     * @param end The end index of the bit range
-     */
-    @ParameterizedTest(name = "Test retrieving the bit range: [{2}, {3}] of: {1}")
-    @CsvFileSource(resources = "/bit-csv/validBitRangeRetrieval.csv", numLinesToSkip = 1)
-    void testValidBitRangeRetrieval(int actualResult, int n, int start, int end) {
-        assertEquals(actualResult, BitUtils.getBitRange(n, start, end));
+    @CsvFileSource(resources = {"/bit-csv/bitLengths.csv"}, numLinesToSkip = 1)
+    @ParameterizedTest(name = "testing bit length calculation of {0} expected length is {1}")
+    public void bitLengthTest(int n, int expectedLength) {
+        assertEquals(expectedLength, BitUtils.getBitLength(n));
     }
 }
-
