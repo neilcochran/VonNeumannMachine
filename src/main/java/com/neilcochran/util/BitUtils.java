@@ -80,7 +80,7 @@ public class BitUtils {
         return Integer.rotateRight(constant, 2 * rotate) | Integer.rotateLeft(constant, 32 - (2 * rotate));
     }
     /**
-     * Check if a bit range is valid irregardless of a target integer.
+     * Check if a bit range is valid regardless of a target integer.
      * A valid bit range is any range with a non-negative start and end index where the start is less than the end
      * @param start The index of the starting bit of the range
      * @param end The index of the ending bit of the range
