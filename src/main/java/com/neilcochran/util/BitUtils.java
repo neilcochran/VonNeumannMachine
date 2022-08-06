@@ -87,7 +87,7 @@ public class BitUtils {
      * @return true if the bit range is valid, false otherwise
      */
     public static boolean isValidBitRange(int start, int end) {
-        return start >= 0 || end >= 0 || start < end;
+        return start >= 0 && end >= 0 && start <= end;
     }
 
     /**
