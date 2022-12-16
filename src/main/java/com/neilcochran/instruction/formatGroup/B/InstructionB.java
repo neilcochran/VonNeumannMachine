@@ -17,10 +17,10 @@ public class InstructionB extends Instruction {
     private static final int L_FLAG_INDEX = 24;
 
     /**
-     * The bit range of the 12 bit immediate constant value which will be processed into a 24 bit immediate constant
+     * The bit range of the 24 bit immediate constant value
      * @see com.neilcochran.instruction.formatGroup.B.InstructionB#imm24
      */
-    private static final BitRange IMM12_RANGE = new BitRange(0, 11);
+    private static final BitRange IMM24_RANGE = new BitRange(0, 23);
 
     private final int linkRegisterFlagBit;
     private final int imm24;
@@ -35,7 +35,7 @@ public class InstructionB extends Instruction {
         linkRegisterFlagBit = BitUtils.getKthBit(instruction, L_FLAG_INDEX);
         //When this value is used it will be right shifted by 2 (so multiplied by 4) and then added to the PC
         //This means that although it is a 24bit constant is will be used as a 26bit constant (where the 2 LSBs are always 0 due to our right shifts)
-        imm24 = BitUtils.getBitRange(instruction, IMM12_RANGE);
+        imm24 = BitUtils.getBitRange(instruction, IMM24_RANGE);
     }
 
     /**
