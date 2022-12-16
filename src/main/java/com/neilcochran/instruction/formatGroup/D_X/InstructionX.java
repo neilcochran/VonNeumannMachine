@@ -43,7 +43,7 @@ public class InstructionX extends LoadStoreInstruction {
      */
     @Override
     public String toString() {
-        return String.format("InstructionD(instruction=%s condition=%s U=%d L=%d RN=%d RD=%d shift=%s RM=%d)", getBinaryString(), condition, getLoadStoreBit(), getOffsetAddSubBit(), RN, RD, shift, RM);
+        return String.format("InstructionX(instruction=%s condition=%s U=%d L=%d RN=%d RD=%d shift=%s RM=%d)", getBinaryString(), condition, getLoadStoreBit(), getOffsetAddSubBit(), RN, RD, shift, RM);
     }
 
     /**
