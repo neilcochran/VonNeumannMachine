@@ -90,26 +90,14 @@ public class Instruction {
         return BitUtils.getBinaryString(instruction, DataSize.WORD, true);
     }
 
-    /**
-     * Get the full instruction integer
-     * @return The full instruction integer
-     */
     public int getInstruction() {
         return instruction;
     }
 
-    /**
-     * Get the instruction condition
-     * @return The instruction condition
-     */
     public Condition getCondition() {
         return condition;
     }
 
-    /**
-     * Get the instruction format
-     * @return The instruction format
-     */
     public InstructionFormat getInstructionFormat() {
         return instructionFormat;
     }

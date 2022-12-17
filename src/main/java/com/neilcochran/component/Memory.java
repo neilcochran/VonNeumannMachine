@@ -129,42 +129,22 @@ public class Memory {
             return byteAddress >= 0 && byteAddress < totalBytes;
         }
 
-        /**
-         * Get the byte address
-         * @return The byte address
-         */
         public int getByteAddress() {
             return byteAddress;
         }
 
-        /**
-         * Get the relevant index in the memory array
-         * @return The relevant index in the memory array
-         */
         public int getMemoryIndex() {
             return memoryIndex;
         }
 
-        /**
-         * Get the bit offset
-         * @return The bit offset
-         */
         public int getBitOffset() {
             return bitOffset;
         }
 
-        /**
-         * Get the starting bit index
-         * @return The starting bit index
-         */
         public int getBitStartIndex() {
             return bitStartIndex;
         }
 
-        /**
-         * Get the end bit index
-         * @return The end bit index
-         */
         public int getBitEndIndex() {
             return bitEndIndex;
         }

@@ -31,10 +31,6 @@ public enum DataSize {
         this.bitLength = bitLength;
     }
 
-    /**
-     * Get the bit length of the DataSize
-     * @return The bit length of the DataSize
-     */
     public int getBitLength() {
         return bitLength;
     }

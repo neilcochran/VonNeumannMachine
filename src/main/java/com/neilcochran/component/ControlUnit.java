@@ -188,26 +188,14 @@ public class ControlUnit {
         new BR(instruction, registerFile).executeCommand();
     }
 
-    /**
-     * Returns a reference to the memoryAddressRegister
-     * @return A reference to the memoryAddressRegister
-     */
     public Register getMemoryAddressRegister() {
         return memoryAddressRegister;
     }
 
-    /**
-     * Returns a reference to the memoryDataRegister
-     * @return A reference to the memoryDataRegister
-     */
     public MemoryDataRegister getMemoryDataRegister() {
         return memoryDataRegister;
     }
 
-    /**
-     * Returns a reference to the instructionRegister
-     * @return A reference to the instructionRegister
-     */
     public Register getInstructionRegister() {
         return instructionRegister;
     }

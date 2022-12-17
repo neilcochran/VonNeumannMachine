@@ -35,10 +35,6 @@ public enum ShiftType {
         this.bits = bits;
     }
 
-    /**
-     * Get the integer bits that correspond to the ShiftType
-     * @return The integer bits that correspond to the ShiftType
-     */
     public int getBits() {
         return bits;
     }

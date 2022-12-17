@@ -93,18 +93,10 @@ public enum Condition {
         this.description = description;
     }
 
-    /**
-     * Get the integer formatBits representing the condition
-     * @return The integer formatBits representing the condition
-     */
     public int getFormatBits() {
         return formatBits;
     }
 
-    /**
-     * Get the description of the condition
-     * @return The description of the condition
-     */
     public String getDescription() {
         return description;
     }

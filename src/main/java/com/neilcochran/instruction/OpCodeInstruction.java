@@ -71,34 +71,18 @@ public class OpCodeInstruction extends Instruction {
         this.RD = BitUtils.getBitRange(instruction, RD_OPERAND_RANGE);
     }
 
-    /**
-     * Get the instruction OpCode
-     * @return The instruction OpCode
-     */
     public OpCode getOpCode() {
         return opCode;
     }
 
-    /**
-     * Get the state flag bit
-     * @return The state flag bit
-     */
     public int getStateFlagBit() {
         return stateFlagBit;
     }
 
-    /**
-     * Get the RN register number
-     * @return The RN register number
-     */
     public int getRN() {
         return RN;
     }
 
-    /**
-     * Get the RD register number
-     * @return The RD register number
-     */
     public int getRD() {
         return RD;
     }

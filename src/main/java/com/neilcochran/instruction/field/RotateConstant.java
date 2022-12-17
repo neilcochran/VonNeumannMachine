@@ -22,18 +22,10 @@ public class RotateConstant {
         this.result = BitUtils.calculateRotate(rotate, this.constant);
     }
 
-    /**
-     * Get the rotate portion of the RotateConstant
-     * @return The rotate portion of the RotateConstant
-     */
     public int getRotate() {
         return rotate;
     }
 
-    /**
-     * Get the constant portion of the RotateConstant
-     * @return The constant portion of the RotateConstant
-     */
     public int getConstant() {
         return constant;
     }

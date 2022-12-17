@@ -110,10 +110,6 @@ public enum OpCode {
         throw new IllegalArgumentException(String.format("The bits: %s did not match any known OpCode", Integer.toBinaryString(bits)));
     }
 
-    /**
-     * Get the OpCode's backing integer
-     * @return The OpCode's backing integer
-     */
     public int getBits() {
         return bits;
     }

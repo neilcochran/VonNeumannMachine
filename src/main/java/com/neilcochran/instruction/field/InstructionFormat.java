@@ -41,10 +41,6 @@ public enum InstructionFormat {
         this.formatBits = matchingFormat;
     }
 
-    /**
-     * Get the number (bits) that matches the instruction format
-     * @return The number (bits) that matches the instruction format
-     */
     public int getFormatBits() {
         return formatBits;
     }

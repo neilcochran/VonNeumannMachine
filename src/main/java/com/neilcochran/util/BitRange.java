@@ -21,34 +21,18 @@ public class BitRange {
         this.endIndex = endIndex;
     }
 
-    /**
-     * Get the start index
-     * @return The start index
-     */
     public int getStartIndex() {
         return startIndex;
     }
 
-    /**
-     * Set the start index
-     * @param startIndex The start index
-     */
     public void setStartIndex(int startIndex) {
         this.startIndex = startIndex;
     }
 
-    /**
-     * Get the end index
-     * @return The end index
-     */
     public int getEndIndex() {
         return endIndex;
     }
 
-    /**
-     * Set the end index
-     * @param endIndex The end index
-     */
     public void setEndIndex(int endIndex) {
         this.endIndex = endIndex;
     }

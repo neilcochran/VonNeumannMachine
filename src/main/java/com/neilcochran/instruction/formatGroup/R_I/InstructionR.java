@@ -46,18 +46,10 @@ public class InstructionR extends OpCodeInstruction {
         return String.format("InstructionR(instruction=%s condition=%s OpCode=%s, RN=%d RD=%d RM=%d Shift=%s)", getBinaryString(), condition, opCode, RN, RD, RM, shift);
     }
 
-    /**
-     * Get the instruction's Shift
-     * @return The instruction's Shift
-     */
     public Shift getShift() {
         return shift;
     }
 
-    /**
-     * Get the RM register number
-     * @return The RM register number
-     */
     public int getRM() {
         return RM;
     }

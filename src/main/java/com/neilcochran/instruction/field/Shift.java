@@ -32,18 +32,10 @@ public class Shift {
         this.shiftAmountBits = BitUtils.getBitRange(shiftBits, SHIFT_AMOUNT_RANGE);
     }
 
-    /**
-     * Get the ShiftType
-     * @return The ShiftType
-     */
     public ShiftType getShiftType() {
         return shiftType;
     }
 
-    /**
-     * Get the shift amount
-     * @return The shift amount
-     */
     public int getShiftAmountBits() {
         return shiftAmountBits;
     }
