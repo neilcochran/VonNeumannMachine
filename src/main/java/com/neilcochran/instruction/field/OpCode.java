@@ -5,15 +5,13 @@ package com.neilcochran.instruction.field;
  */
 public enum OpCode {
 
-    //TODO add/confirm all OpCode javadoc names
-
     /**
      * And
      */
     AND(0b0000),
 
     /**
-     * Exclusive Or ?
+     * Exclusive Or
      */
     EOR(0b0001),
 
@@ -23,7 +21,7 @@ public enum OpCode {
     SUB(0b0010),
 
     /**
-     * Reverse subtract ?
+     * Reverse Subtract
      */
     RSB(0b0011),
 
@@ -33,57 +31,57 @@ public enum OpCode {
     ADD(0b0100),
 
     /**
-     * ?
+     * Add with Carry
      */
     ADC(0b0101),
 
     /**
-     * ?
+     * Subtract with Carry
      */
     SBC(0b0110),
 
     /**
-     * ?
+     * Reverse Subtract with Carry
      */
     RSC(0b0111),
 
     /**
-     * ?
+     * Test
      */
     TST(0b1000),
 
     /**
-     * ?
+     * Test Equivalence
      */
     TEQ(0b1001),
 
     /**
-     * Compare (subtract)
+     * Compare
      */
     CMP(0b1010),
 
     /**
-     * Compare (add)
+     * Compare Negative
      */
     CMN(0b1011),
 
     /**
-     * Or ?
+     * Or
      */
     ORR(0b1100),
 
     /**
-     * Move data to a register
+     * Move
      */
     MOV(0b1101),
 
     /**
-     * ?
+     * Bit Clear
      */
     BIC(0b1110),
 
     /**
-     * Move negated data to a register
+     * Move Not
      */
     MVN(0b1111);
 
