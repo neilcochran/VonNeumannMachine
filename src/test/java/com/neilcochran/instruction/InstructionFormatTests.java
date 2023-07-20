@@ -67,6 +67,7 @@ public class InstructionFormatTests {
         //EQ, D, 1, 1, BYTE, 1, 0b1001, 0b101, 0b1000, 0b11001100
         var rawLDRInstructionD = 0b00000101110110010101100011001100;
         var instructionD = new InstructionD(rawLDRInstructionD);
+
         assertEquals(Condition.EQ, instructionD.getCondition());
         assertEquals(InstructionFormat.D, instructionD.getInstructionFormat());
         assertEquals(1, instructionD.getSignBit());
@@ -87,6 +88,7 @@ public class InstructionFormatTests {
         //NE, X, 1, 0, 0b10, 0b111, 0b10001, ARITH-RIGHT, 0b11
         var rawSTRInstructionX = 0b00010111000000100111100011000011;
         var instructionX = new InstructionX(rawSTRInstructionX);
+
         assertEquals(Condition.NE, instructionX.getCondition());
         assertEquals(InstructionFormat.X, instructionX.getInstructionFormat());
         assertEquals(1, instructionX.getSignBit());
