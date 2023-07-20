@@ -35,19 +35,11 @@ public class InstructionD extends LoadStoreInstruction {
         rotateConstant = new RotateConstant(BitUtils.getBitRange(instruction, IMMEDIATE_ROTATE_RANGE), BitUtils.getBitRange(instruction, IMMEDIATE_CONSTANT_RANGE));
     }
 
-    /**
-     * Get a string representation of the InstructionD instance
-     * @return A string representation of the InstructionD instance
-     */
     @Override
     public String toString() {
         return String.format("InstructionD(instruction=%s condition=%s U=%d L=%d RN=%d RD=%d rotateConstant=%s)", getBinaryString(), condition, getLoadStoreBit(), getOffsetAddSubBit(), RN, RD, rotateConstant);
     }
 
-    /**
-     * Get the instruction's RotateConstant
-     * @return The instruction's RotateConstant
-     */
     public RotateConstant getRotateConstant() {
         return rotateConstant;
     }

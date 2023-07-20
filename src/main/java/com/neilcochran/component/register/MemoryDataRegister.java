@@ -30,7 +30,7 @@ public class MemoryDataRegister extends Register {
      * @param signExtend A flag indicating if the value should be sign extended (true) or zero padded (false)
      */
     public void loadData(DataSize dataSize, boolean signExtend) {
-        int loadedValue = memory.loadData(memoryAddressRegister.getData(), dataSize);
+        var loadedValue = memory.loadData(memoryAddressRegister.getData(), dataSize);
         //if not loading a full word, check if we are sign extending or zero padding
         if(!DataSize.WORD.equals(dataSize)) {
             if(signExtend) {

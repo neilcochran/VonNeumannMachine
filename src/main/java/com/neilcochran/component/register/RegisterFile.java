@@ -58,48 +58,22 @@ public class RegisterFile {
         }
     }
 
-    /**
-     * A convenience method for getting a reference for the Frame Pointer (FP) register
-     * @return A reference to the Frame Pointer register
-     * @see RegisterFile#FP_REG_INDEX
-     */
     public Register getFramePointerRegister() {
         return getRegister(FP_REG_INDEX);
     }
 
-    /**
-     * A convenience method for getting a reference to the Intra Procedural Call (IP) register
-     * @return A reference to the Intra Procedural Call register
-     * @see RegisterFile#IP_REG_INDEX
-     */
     public Register getIntraProceduralCallRegister() {
         return getRegister(IP_REG_INDEX);
     }
 
-    /**
-     * A convenience method for getting a reference to the Stack Pointer (SP) register
-     * @return A reference to the Stack Pointer register
-     * @see RegisterFile#SP_REG_INDEX
-     */
     public Register getStackPointerRegister() {
         return getRegister(SP_REG_INDEX);
     }
 
-    /**
-     * A convenience method for getting a reference to the Link Register (LR)
-     * @return A reference to the Link Register
-     * @see RegisterFile#LR_REG_INDEX
-     */
     public Register getLinkRegister() {
         return getRegister(LR_REG_INDEX);
     }
 
-
-    /**
-     * A convenience method for getting a reference to the Program Counter (PC) register
-     * @return A reference to the Program Counter register
-     * @see RegisterFile#PC_REG_INDEX
-     */
     public Register getPCRegister() {
         return getRegister(PC_REG_INDEX);
     }

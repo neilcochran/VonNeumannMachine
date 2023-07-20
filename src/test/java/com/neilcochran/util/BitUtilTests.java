@@ -30,7 +30,7 @@ public class BitUtilTests {
      */
     @Test
     public void validateBitLengthTest() {
-        int n = 1024;
+        var n = 1024;
         assertTrue(BitUtils.validateBitLength(n, 11));
         assertFalse(BitUtils.validateBitLength(n, 10));
     }
@@ -40,7 +40,7 @@ public class BitUtilTests {
      */
     @Test
     public void getKthBitTest() {
-        int n = 6;
+        var n = 6;
         assertEquals(0, BitUtils.getKthBit(n, 0));
         assertEquals(1, BitUtils.getKthBit(n, 1));
         assertEquals(1, BitUtils.getKthBit(n, 2));
@@ -51,7 +51,7 @@ public class BitUtilTests {
      */
     @Test
     public void clearKthBitTest() {
-        int n = 7;
+        var n = 7;
         assertEquals(6, BitUtils.clearKthBit(n, 0));
         assertEquals(5, BitUtils.clearKthBit(n, 1));
         assertEquals(3, BitUtils.clearKthBit(n, 2));
@@ -62,7 +62,7 @@ public class BitUtilTests {
      */
     @Test
     public void setKthBitTest() {
-        int n = BitUtils.setKthBit(0, 0);
+        var n = BitUtils.setKthBit(0, 0);
         assertEquals(1, n);
         n = BitUtils.setKthBit(n, 1);
         assertEquals(3, n);
@@ -100,7 +100,7 @@ public class BitUtilTests {
      */
     @Test
     public void getBitRangeTest() {
-        int n = 15;
+        var n = 15;
         assertEquals(15, BitUtils.getBitRange(n, 0, 3));
         assertEquals(7, BitUtils.getBitRange(n, 0, 2));
         assertEquals(3, BitUtils.getBitRange(n, 0, 1));
@@ -112,7 +112,7 @@ public class BitUtilTests {
      */
     @Test
     public void getBitRangeObjectTest() {
-        int n = 15;
+        var n = 15;
         assertEquals(15, BitUtils.getBitRange(n, new BitRange(0, 3)));
         assertEquals(7, BitUtils.getBitRange(n, new BitRange(0, 2)));
         assertEquals(3, BitUtils.getBitRange(n, new BitRange(0, 1)));

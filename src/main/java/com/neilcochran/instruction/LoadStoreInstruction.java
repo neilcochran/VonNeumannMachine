@@ -83,7 +83,7 @@ public class LoadStoreInstruction extends Instruction {
         dataSize = switch (BitUtils.getBitRange(instruction, DATA_SIZE_RANGE)) {
             case 0b00 -> DataSize.WORD;
             case 0b01 -> DataSize.HALF_WORD;
-            case 0b11 -> DataSize.BYTE;
+            case 0b10 -> DataSize.BYTE;
             default -> throw new IllegalArgumentException("Invalid LoadStoreInstruction DataSize bits: " + Integer.toBinaryString(BitUtils.getBitRange(instruction, DATA_SIZE_RANGE)));
         };
         offsetAddSubBit = BitUtils.getKthBit(instruction, U_BIT_INDEX);

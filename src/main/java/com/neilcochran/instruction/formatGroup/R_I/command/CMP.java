@@ -32,7 +32,7 @@ public class CMP extends CommandRI {
         var cmpInstruction = (OpCodeInstruction) instruction;
         var operand1 = registerFile.getRegister(cmpInstruction.getRN()).getData();
         var operand2 = calculateOperand2();
-        //perform addition so PSR flags are set, but discard the result
-        ALU.add(operand1, operand2, PSR);
+        //perform subtraction so PSR flags are set, but discard the result
+        ALU.subtract(operand1, operand2, PSR);
     }
 }

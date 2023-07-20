@@ -38,27 +38,15 @@ public class InstructionB extends Instruction {
         imm24 = BitUtils.getBitRange(instruction, IMM24_RANGE);
     }
 
-    /**
-     * Get a string representation of the InstructionB instance
-     * @return A string representation of the InstructionB instance
-     */
     @Override
     public String toString() {
         return String.format("InstructionB(instruction=%s condition=%s linkRegisterFlagBit=%d, imm24=%d)", getBinaryString(), condition, linkRegisterFlagBit, imm24);
     }
 
-    /**
-     * Get the link register flag bit
-     * @return The link register flag bit
-     */
     public int getLinkRegisterFlagBit() {
         return linkRegisterFlagBit;
     }
 
-    /**
-     * Get the immediate 24-bit constant
-     * @return The immediate 24-bit constant
-     */
     public int getImm24() {
         return imm24;
     }

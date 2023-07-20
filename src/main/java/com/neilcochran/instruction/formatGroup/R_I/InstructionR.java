@@ -37,10 +37,6 @@ public class InstructionR extends OpCodeInstruction {
         this.RM = BitUtils.getBitRange(instruction, RM_OPERAND_RANGE);
     }
 
-    /**
-     * Get a string representation of the InstructionR instance
-     * @return A string representation of the InstructionR instance
-     */
     @Override
     public String toString() {
         return String.format("InstructionR(instruction=%s condition=%s OpCode=%s, RN=%d RD=%d RM=%d Shift=%s)", getBinaryString(), condition, opCode, RN, RD, RM, shift);

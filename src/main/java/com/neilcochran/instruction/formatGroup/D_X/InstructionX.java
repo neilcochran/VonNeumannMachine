@@ -37,27 +37,15 @@ public class InstructionX extends LoadStoreInstruction {
         RM = BitUtils.getBitRange(instruction, RM_RANGE);
     }
 
-    /**
-     * Get a string representation of the InstructionX instance
-     * @return A string representation of the InstructionX instance
-     */
     @Override
     public String toString() {
         return String.format("InstructionX(instruction=%s condition=%s U=%d L=%d RN=%d RD=%d shift=%s RM=%d)", getBinaryString(), condition, getLoadStoreBit(), getOffsetAddSubBit(), RN, RD, shift, RM);
     }
 
-    /**
-     * Get the instruction's Shift
-     * @return The instructions Shift
-     */
     public Shift getShift() {
         return shift;
     }
 
-    /**
-     * Get the RM register number
-     * @return The RM register number
-     */
     public int getRM() {
         return RM;
     }
